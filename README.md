@@ -8,12 +8,12 @@
 ## Project Description
 The goal of this team project is to reproduce a simplified version of the classic strategy
 game RISK. If you don’t know the game, you can play “RISK: Global Domination” as a
-free download from Steam. The map and the rules can also be found on Wikipedia.
+free download from Steam. The Map and the rules can also be found on Wikipedia.
 We will skip the initial phase where players normally take turns placing armies on
 countries, and instead we will start with a random allocation of armies. This corresponds
 to the “auto” setup in “RISK: Global Domination”.
 We will also skip the phase of drawing cards and using them to receive more armies.
-But for the rest we will stick with the official rules, and the official map and countries.
+But for the rest we will stick with the official rules, and the official Map and countries.
 The number of players ranges from 2 to 6, and the corresponding initial number of armies
 is 50, 35, 30, 25, and 20 respectively, depending on the number of players.
 The project is divided into 4 iterations, each ending with a milestone corresponding to
@@ -24,7 +24,7 @@ for iteration i+1.
 
 A text-based playable version of the game, i.e., players should be able to
 play the game via the console using the keyboard. There should be a command to print
-the state of the map (i.e., which player is in which country and with how many armies), a
+the state of the Map (i.e., which player is in which country and with how many armies), a
 command to decide which country to attack from which country, and a command to pass
 your turn to the next player. Events such as the outcome of an attack, whose turn it is to
 play, the elimination of a player, etc. should be printed to the console when applicable.

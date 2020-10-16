@@ -1,0 +1,130 @@
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+
+import java.util.Scanner;
+
+/**
+ * This main class creates and initialises all the others: it create the map of all
+ * Countries and their connections, creates the parser and starts the game.  It also evaluates and
+ * executes the commands that the parser returns.
+ */
+
+public class Game {
+    private Parser parser;
+    private Graph<Country, DefaultEdge> map = new SimpleGraph<>(DefaultEdge.class);
+    private int currentPlayer, numberOfPlayers;
+
+
+    public Game() {
+        MapUtil.createCountries(map);
+        parser = new Parser();
+    }
+
+
+    public void play() {
+        startGame();
+
+        boolean finished = false;
+        while (!finished) {
+            Command command = parser.getCommand();
+            finished = processCommand(command);
+        }
+        System.out.println("Thank you for playing.  Good bye.");
+    }
+
+    private void printCurrentPlayer() {
+        System.out.println("The current player is player-"+ currentPlayer);
+    }
+
+
+    private boolean processCommand(Command command) {
+        boolean wantToQuit = false;
+
+        if (command.isUnknown()) {
+            System.out.println("Unknown command");
+            return false;
+        }
+
+        String commandWord = command.getCommandWord();
+        switch (commandWord) {
+            case "attack":
+                attack(command);
+                break;
+            case "pass":
+                passTurn();
+                break;
+            case "map":
+                printMap();
+                break;
+            case "quit":
+                wantToQuit = true;
+                break;
+        }
+
+        return wantToQuit;
+    }
+
+    private void printMap() {
+        //print a representation of the map
+        map.vertexSet().forEach(x -> System.out.println(x));
+    }
+
+    private void passTurn() {
+        //pass the turn to the next player
+        this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 1 : this.currentPlayer +1;
+        printCurrentPlayer();
+
+    }
+
+    private void startGame() {
+        System.out.println("Welcome to RISK!");
+        System.out.println("How many players will be playing today?");
+        Scanner sc= new Scanner(System.in);
+        this.numberOfPlayers= sc.nextInt();
+        this.currentPlayer = 1;
+        System.out.println("There will be "+numberOfPlayers+" players this game!");
+        System.out.println("Your command words are:");
+        parser.showCommands();
+        printCurrentPlayer();
+    }
+
+
+    private void attack(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Who is attacking??");
+            return;
+        }
+        if (!command.hasThirdWord()) {
+            System.out.println("What country are you attacking?");
+            return;
+        }
+        if (!command.hasFourthWord()) {
+            System.out.println("How many troops are you using to attack?");
+            return;
+        }
+        String attackCountryName = command.getSecondWord();
+        String defenceCountryName = command.getThirdWord();
+        int numberOfTroopsAttacking=command.getFourthWord();
+        Country attackCountry= getCountry(attackCountryName);
+        Country defenceCountry= getCountry(defenceCountryName);
+
+
+        if(attackCountry.getPlayer()==this.currentPlayer){
+            //this is where the logic of the attack is
+        }
+    }
+
+    private Country getCountry(String CountryName) {
+        for(Country c: map.vertexSet()){
+            c.getName().equals(CountryName);
+            return c;
+        }
+            return null;
+    }
+
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.play();
+    }
+}
