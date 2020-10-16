@@ -87,6 +87,8 @@ public class Game {
         System.out.println("Your command words are:");
         parser.showCommands();
         printCurrentPlayer();
+
+        // TODO implement the automatic allocation 
     }
 
 
@@ -111,7 +113,7 @@ public class Game {
 
 
         if(attackCountry.getPlayer()==this.currentPlayer){
-            //this is where the logic of the attack is
+            // TODO implement the attack
         }
     }
 
