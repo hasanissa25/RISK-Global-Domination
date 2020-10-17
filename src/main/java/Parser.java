@@ -29,10 +29,12 @@ public class Parser
             word1 = tokenizer.next();
             if(tokenizer.hasNext()) {
                 word2 = tokenizer.next();
-                word3 = tokenizer.next();
-                word4 = tokenizer.next();
-
-
+                if(tokenizer.hasNext()) {
+                    word3 = tokenizer.next();
+                }
+                if(tokenizer.hasNext()) {
+                    word4 = tokenizer.next();
+                }
             }
         }
 

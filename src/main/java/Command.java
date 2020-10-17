@@ -4,6 +4,7 @@ public class Command
  private String commandWord;
  private String secondWord;
  private String thirdWord;
+
  private String fourthWord;
 
 
@@ -45,7 +46,6 @@ public class Command
  public int getFourthWord() {
   return Integer.valueOf(fourthWord);
  }
-
 
  public boolean hasSecondWord()
  {
