@@ -56,8 +56,8 @@ public class MapUtil {
         map.addVertex(NorthAfrica);
         Country SouthAfrica = new Country("South Africa");
         map.addVertex(SouthAfrica);
-        Country Afghanistan = new Country("Afghanistan");
-        map.addVertex(Afghanistan);
+        Country Kazakhstan = new Country("Kazakhstan");
+        map.addVertex(Kazakhstan);
         Country China = new Country("China");
         map.addVertex(China);
         Country India = new Country("India");
@@ -88,9 +88,11 @@ public class MapUtil {
         map.addVertex(NewGuinea);
         Country WesternAustralia = new Country("Western Australia");
         map.addVertex(WesternAustralia);
+
         //North AMerica
         map.addEdge(Alaska, Alberta);
         map.addEdge(Alaska, northwestTerritory);
+        map.addEdge(Alaska, Kamchatka);
         map.addEdge(Alberta, northwestTerritory);
         map.addEdge(Alberta, Ontario);
         map.addEdge(Alberta, westernUnitedStates);
@@ -123,26 +125,58 @@ public class MapUtil {
         map.addEdge(EastAfrica, NorthAfrica);
         map.addEdge(EastAfrica, SouthAfrica);
         map.addEdge(EastAfrica, MiddleEast);
-
         map.addEdge(Egypt, NorthAfrica);
         map.addEdge(Egypt, MiddleEast);
         map.addEdge(Egypt, SouthernEurope);
-
         map.addEdge(Madagascar, SouthAfrica);
-
         map.addEdge(NorthAfrica, WesternEurope);
         map.addEdge(NorthAfrica, SouthernEurope);
-
-
         //Australia
         map.addEdge(EasternAustralia, NewGuinea);
         map.addEdge(EasternAustralia, WesternAustralia);
-        map.addEdge(EasternAustralia, NewGuinea);
+        map.addEdge(WesternAustralia, NewGuinea);
         map.addEdge(Indonesia, NewGuinea);
         map.addEdge(Indonesia, WesternAustralia);
         map.addEdge(Indonesia, Siam);
-
-        //FINISH ASIA AND EURUOPE
+        //ASIA
+        map.addEdge(Kazakhstan, China);
+        map.addEdge(Kazakhstan, India);
+        map.addEdge(Kazakhstan, Ukraine);
+        map.addEdge(Kazakhstan, MiddleEast);
+        map.addEdge(Kazakhstan, Ural);
+        map.addEdge(China, India);
+        map.addEdge(China, Mongolia);
+        map.addEdge(China, Siam);
+        map.addEdge(China, Ural);
+        map.addEdge(China, Siberia);
+        map.addEdge(China, Mongolia);
+        map.addEdge(India, MiddleEast);
+        map.addEdge(India, Siam);
+        map.addEdge(Irkutsk, Mongolia);
+        map.addEdge(Irkutsk, Siberia);
+        map.addEdge(Irkutsk, Kamchatka);
+        map.addEdge(Japan, Kamchatka);
+        map.addEdge(Japan, Mongolia);
+        map.addEdge(Kamchatka, Mongolia);
+        map.addEdge(Kamchatka, Yakutsk);
+        map.addEdge(MiddleEast, Ukraine);
+        map.addEdge(MiddleEast, SouthernEurope);
+        map.addEdge(Mongolia, Siberia);
+        map.addEdge(Siberia, Ural);
+        map.addEdge(Siberia, Yakutsk);
+        map.addEdge(Ural, Ukraine);
+        //Europe
+        map.addEdge(greatBritain, Iceland);
+        map.addEdge(greatBritain, NorthernEurope);
+        map.addEdge(greatBritain, Scandinavia);
+        map.addEdge(greatBritain, WesternEurope);
+        map.addEdge(Iceland, Scandinavia);
+        map.addEdge(NorthernEurope, Scandinavia);
+        map.addEdge(NorthernEurope, SouthernEurope);
+        map.addEdge(NorthernEurope, Ukraine);
+        map.addEdge(NorthernEurope, WesternEurope);
+        map.addEdge(Scandinavia, Ukraine);
+        map.addEdge(SouthernEurope, Ukraine);
     }
 
 }

@@ -23,18 +23,31 @@ public class Game {
 
 
     public void play() {
-        startGame();
-
+        boolean startedGame = false;
+        do {
+            try {
+                startGame();
+                startedGame = true;
+            } catch (Exception exception) {
+                System.err.println("You have encountered an error. Please report it to the administrator");
+            }
+        }
+        while (!startedGame);
         boolean finished = false;
         while (!finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
+            try {
+                Command command = parser.getCommand();
+                finished = processCommand(command);
+            } catch (Exception exception) {
+                System.err.println("You have encountered an error. Please report it to the administrator");
+            }
+
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
 
     private void printCurrentPlayer() {
-        System.out.println("The current player is player-"+ currentPlayer);
+        System.out.println("The current player is player-" + currentPlayer);
     }
 
 
@@ -72,7 +85,7 @@ public class Game {
 
     private void passTurn() {
         //pass the turn to the next player
-        this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 1 : this.currentPlayer +1;
+        this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 1 : this.currentPlayer + 1;
         printCurrentPlayer();
 
     }
@@ -80,15 +93,15 @@ public class Game {
     private void startGame() {
         System.out.println("Welcome to RISK!");
         System.out.println("How many players will be playing today?");
-        Scanner sc= new Scanner(System.in);
-        this.numberOfPlayers= sc.nextInt();
+        Scanner sc = new Scanner(System.in);
+        this.numberOfPlayers = sc.nextInt();
         this.currentPlayer = 1;
-        System.out.println("There will be "+numberOfPlayers+" players this game!");
+        System.out.println("There will be " + numberOfPlayers + " players this game!");
         System.out.println("Your command words are:");
         parser.showCommands();
         printCurrentPlayer();
 
-        // TODO implement the automatic allocation 
+        // TODO implement the automatic allocation
     }
 
 
@@ -107,22 +120,22 @@ public class Game {
         }
         String attackCountryName = command.getSecondWord();
         String defenceCountryName = command.getThirdWord();
-        int numberOfTroopsAttacking=command.getFourthWord();
-        Country attackCountry= getCountry(attackCountryName);
-        Country defenceCountry= getCountry(defenceCountryName);
+        int numberOfTroopsAttacking = command.getFourthWord();
+        Country attackCountry = getCountry(attackCountryName);
+        Country defenceCountry = getCountry(defenceCountryName);
 
 
-        if(attackCountry.getPlayer()==this.currentPlayer){
+        if (attackCountry.getPlayer() == this.currentPlayer) {
             // TODO implement the attack
         }
     }
 
     private Country getCountry(String CountryName) {
-        for(Country c: map.vertexSet()){
+        for (Country c : map.vertexSet()) {
             c.getName().equals(CountryName);
             return c;
         }
-            return null;
+        return null;
     }
 
     public static void main(String[] args) {
