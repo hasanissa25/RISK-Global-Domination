@@ -2,8 +2,8 @@
 # Group 10
 
 #### Hasan [@hasanissa25](https://github.com/hasanissa25) - 100921446
-#### Temitayo Adegoke
-#### John Afolayan
+#### John Afolayan [@John-Afolayan](https://github.com/John-Afolayan)
+#### Temitayo Adegoke 
 
 ## Project Description
 The goal of this team project is to reproduce a simplified version of the classic strategy
