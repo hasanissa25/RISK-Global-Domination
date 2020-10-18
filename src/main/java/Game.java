@@ -2,6 +2,7 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -14,10 +15,10 @@ public class Game {
     private Parser parser;
     private Graph<Country, DefaultEdge> map = new SimpleGraph<>(DefaultEdge.class);
     private int currentPlayer, numberOfPlayers;
-
+    private MapUtil myMap= new MapUtil();
 
     public Game() {
-        MapUtil.createCountries(map);
+        myMap.createTheInitialMap(map);
         parser = new Parser();
     }
 
@@ -43,7 +44,7 @@ public class Game {
             }
 
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing!");
     }
 
     private void printCurrentPlayer() {
@@ -107,7 +108,7 @@ public class Game {
 
     private void attack(Command command) {
         if (!command.hasSecondWord()) {
-            System.out.println("Who is attacking??");
+            System.out.println("Which country are you attacking from?");
             return;
         }
         if (!command.hasThirdWord()) {

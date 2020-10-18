@@ -2,7 +2,7 @@ import org.jgrapht.Graph;
 
 public class MapUtil {
     
-    public static void createCountries(Graph map) {
+    public static void createTheInitialMap(Graph map) {
 
         Country Alaska = new Country("Alaska");
         map.addVertex(Alaska);
