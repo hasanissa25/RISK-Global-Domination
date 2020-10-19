@@ -18,12 +18,13 @@ import java.util.Scanner;
 public class Game {
     private Parser parser;
     private int currentPlayer = 1;
+
     private List<Player> players;
+
     private int numberOfPlayers;
     private int initialNumberOfTroops;
     private Map myMap = new Map();
     private InputStream inputStream;
-
     public Game() {
         this.myMap = new Map();
         parser = new Parser();
@@ -121,6 +122,10 @@ public class Game {
         }
     }
 
+    public List<Player> getPlayers() {
+        return players;
+    }
+
 
     private void attack(Command command) {
         if (!command.hasSecondWord()) {
@@ -194,11 +199,8 @@ public class Game {
         //im going to assign one troop from a player to a country if its empty.
         //Once all countries have 1 troop, I will randomize the allocation of the leftover troops to the countries that are owned by the player
         firstPhaseOfDeployment();
+        secondPhaseOfDeployment();
 
-    }
-
-    private int getUndeployedTroopsLeft() {
-        return players.stream().map(x -> x.getUndeployedTroops()).reduce(0, Integer::sum);
     }
 
     private void firstPhaseOfDeployment() {
@@ -214,6 +216,18 @@ public class Game {
             remainingCountries.remove(randomNumber);
             i++;
             if (i == numberOfPlayers) i = 0;
+        }
+    }
+
+    private void secondPhaseOfDeployment() {
+        //For each Player, iterate over all the countries that he owns, and randomly increment the number of troops in his countries until he has no more troops left to allocate
+        Random randomize = new Random();
+        for (int i = 0; i < players.size(); i++) {
+            while (players.get(i).getUndeployedTroops()> 0) {
+                int randomNumber = randomize.nextInt(players.get(i).getMyCountries().size());
+                players.get(i).getMyCountries().get(randomNumber).incrementNumberOfTroops();
+                players.get(i).decrementUndeployedNumberOfTroops();
+            }
         }
     }
 
