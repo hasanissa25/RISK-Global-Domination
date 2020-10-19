@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Country {
     private String name;
     private int numberOfTroops;
-    private int player;
+    private Player player;
 
     public Country(String name) {
         this.name = name;
@@ -23,19 +23,26 @@ public class Country {
     public int getNumberOfTroops() {
         return numberOfTroops;
     }
-
+    public void incrementNumberOfTroops(){
+        numberOfTroops++;
+    }
+    public void addNumberOfTroops(int i){
+        numberOfTroops+=i;
+    }
     public void setNumberOfTroops(int numberOfTroops) {
         this.numberOfTroops = numberOfTroops;
     }
 
-    public int getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(int player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
-
+    public boolean isEmpty(){
+        return this.getNumberOfTroops()==0;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,11 +60,10 @@ public class Country {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Country{");
-        sb.append("name='").append(name).append('\'');
-        sb.append(", numberOfTroops=").append(numberOfTroops);
-        sb.append(", player=").append(player);
-        sb.append('}');
+        final StringBuffer sb = new StringBuffer();
+        sb.append("Country: ").append(name).append('\'');
+        sb.append(", Number Of occupying Troops= ").append(numberOfTroops);
+        sb.append(", Owned by player: ").append(player.getPlayerNumber());
         return sb.toString();
     }
 }

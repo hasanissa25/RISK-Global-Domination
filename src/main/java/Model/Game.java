@@ -1,11 +1,13 @@
 package Model;
 
+import Game.Command;
+import Game.Parser;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
-import Game.Parser;
-import Game.Command;
 
 /**
  * This main class creates and initialises all the others: it create the map of all
@@ -15,15 +17,15 @@ import Game.Command;
 
 public class Game {
     private Parser parser;
-    private int currentPlayer=1;
+    private int currentPlayer = 1;
     private List<Player> players;
     private int numberOfPlayers;
     private int initialNumberOfTroops;
-    private Map myMap= new Map();
+    private Map myMap = new Map();
     private InputStream inputStream;
 
     public Game() {
-        this.myMap=new Map();
+        this.myMap = new Map();
         parser = new Parser();
     }
 
@@ -77,7 +79,7 @@ public class Game {
         this.numberOfPlayers = sc.nextInt();
         boolean correctNumberOfPlayers;
         do {
-            if (numberOfPlayers < 7 && numberOfPlayers>1) {
+            if (numberOfPlayers < 7 && numberOfPlayers > 1) {
                 correctNumberOfPlayers = true;
 
             } else {
@@ -87,7 +89,7 @@ public class Game {
 
             }
         } while (!correctNumberOfPlayers);
-        createPlayers(numberOfPlayers,calculateTroops(numberOfPlayers));
+        createPlayers(numberOfPlayers, calculateTroops(numberOfPlayers));
     }
 
     private int calculateTroops(int numberOfPlayers) {
@@ -114,10 +116,10 @@ public class Game {
 
     private void createPlayers(int numberOfPlayers, int initialNumberOfTroops) {
         players = new ArrayList<Player>();
-        for(int i=1; i<=numberOfPlayers;i++){
-                players.add(new Player(i,initialNumberOfTroops));
-            }
+        for (int i = 1; i <= numberOfPlayers; i++) {
+            players.add(new Player(i, initialNumberOfTroops));
         }
+    }
 
 
     private void attack(Command command) {
@@ -137,19 +139,16 @@ public class Game {
         String defenceCountryName = command.getThirdWord();
         int numberOfTroopsAttacking = command.getFourthWord();
         Country attackCountry = myMap.getCountryByName(attackCountryName);
-        if(attackCountry==null){
+        if (attackCountry == null) {
             System.out.println("The attacking country name is invalid. Please try again");
             return;
         }
         Country defenceCountry = myMap.getCountryByName(defenceCountryName);
-        if(defenceCountry==null){
+        if (defenceCountry == null) {
             System.out.println("The country you are trying to attack is invalid. Please try again");
             return;
         }
 
-        if (attackCountry.getPlayer() == this.currentPlayer) {
-            // TODO implement the attack
-        }
     }
 
     public void play() {
@@ -167,7 +166,7 @@ public class Game {
         boolean finished = false;
         while (!finished) {
             try {
-                Command command = parser.getCommand();
+                Command command = parser.getCommand(this.currentPlayer);
                 finished = processCommand(command);
             } catch (Exception exception) {
                 System.err.println("You have encountered an error. Please report it to the administrator");
@@ -182,6 +181,7 @@ public class Game {
         System.out.println("Welcome to RISK!");
         initializePlayers();
         System.out.println("There will be " + numberOfPlayers + " players this game!");
+        randomizeMap();
         System.out.println("Your command words are:");
         parser.showCommands();
         printCurrentPlayer();
@@ -189,6 +189,33 @@ public class Game {
         // TODO implement the automatic allocation
     }
 
+    private void randomizeMap() {
+        //im going to iterate over the players and assign troops until the troops left is zero
+        //im going to assign one troop from a player to a country if its empty.
+        //Once all countries have 1 troop, I will randomize the allocation of the leftover troops to the countries that are owned by the player
+        firstPhaseOfDeployment();
+
+    }
+
+    private int getUndeployedTroopsLeft() {
+        return players.stream().map(x -> x.getUndeployedTroops()).reduce(0, Integer::sum);
+    }
+
+    private void firstPhaseOfDeployment() {
+        List<Country> remainingCountries = new ArrayList<>(myMap.getAllCountries());
+        Random randomize = new Random();
+        int i = 0;
+        while (!remainingCountries.isEmpty()) {
+            int randomNumber = randomize.nextInt(remainingCountries.size());
+            remainingCountries.get(randomNumber).setPlayer(players.get(i));
+            players.get(i).decrementUndeployedNumberOfTroops();
+            remainingCountries.get(randomNumber).incrementNumberOfTroops();
+            players.get(i).getMyCountries().add(remainingCountries.get(randomNumber));
+            remainingCountries.remove(randomNumber);
+            i++;
+            if (i == numberOfPlayers) i = 0;
+        }
+    }
 
     public static void main(String[] args) {
         Game game = new Game();

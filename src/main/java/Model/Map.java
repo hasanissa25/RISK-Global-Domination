@@ -26,7 +26,7 @@ public class Map {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Map{");
+        final StringBuffer sb = new StringBuffer();
         listOfCountries.forEach(x-> sb.append(x+"\n"));
         return sb.toString();
     }
