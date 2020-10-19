@@ -1,3 +1,5 @@
+package Model;
+
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
@@ -19,7 +21,7 @@ public class Game {
     private List<Player> players;
     private int numberOfPlayers;
     private int initialNumberOfTroops;
-    private MapUtil myMap= new MapUtil();
+    private Map myMap= new Map();
 
     public Game() {
         myMap.createTheInitialMap(map);
