@@ -1,3 +1,7 @@
+package Game;
+
+import Model.Game;
+
 import java.util.Arrays;
 
 

@@ -1,12 +1,11 @@
 package Model;
 
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
-
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import Game.Parser;
+import Game.Command;
 
 /**
  * This main class creates and initialises all the others: it create the map of all
@@ -16,15 +15,15 @@ import java.util.Scanner;
 
 public class Game {
     private Parser parser;
-    private Graph<Country, DefaultEdge> map = new SimpleGraph<>(DefaultEdge.class);
     private int currentPlayer=1;
     private List<Player> players;
     private int numberOfPlayers;
     private int initialNumberOfTroops;
     private Map myMap= new Map();
+    private InputStream inputStream;
 
     public Game() {
-        myMap.createTheInitialMap(map);
+        this.myMap=new Map();
         parser = new Parser();
     }
 
@@ -33,7 +32,7 @@ public class Game {
         System.out.println("The current player is player-" + currentPlayer);
     }
 
-    private boolean processCommand(Command command) {
+    public boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         if (command.isUnknown()) {
@@ -62,7 +61,7 @@ public class Game {
 
     private void printMap() {
         //print a representation of the map
-        map.vertexSet().forEach(x -> System.out.println(x));
+        System.out.println(this.myMap);
     }
 
     private void passTurn() {
@@ -121,15 +120,6 @@ public class Game {
         }
 
 
-    private Country getCountry(String CountryName) {
-        for (Country c : map.vertexSet()) {
-           if(c.getName().equals(CountryName)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
     private void attack(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Which country are you attacking from?");
@@ -146,16 +136,14 @@ public class Game {
         String attackCountryName = command.getSecondWord();
         String defenceCountryName = command.getThirdWord();
         int numberOfTroopsAttacking = command.getFourthWord();
-        Country attackCountry = getCountry(attackCountryName);
-        System.out.println(attackCountryName);
-        System.out.println(attackCountry);
+        Country attackCountry = myMap.getCountryByName(attackCountryName);
         if(attackCountry==null){
             System.out.println("The attacking country name is invalid. Please try again");
             return;
         }
-        Country defenceCountry = getCountry(defenceCountryName);
+        Country defenceCountry = myMap.getCountryByName(defenceCountryName);
         if(defenceCountry==null){
-            System.out.println("The country you are trying to attack. Please try again");
+            System.out.println("The country you are trying to attack is invalid. Please try again");
             return;
         }
 
@@ -190,7 +178,7 @@ public class Game {
         System.out.println("Thank you for playing!");
     }
 
-    private void startGame() {
+    public void startGame() {
         System.out.println("Welcome to RISK!");
         initializePlayers();
         System.out.println("There will be " + numberOfPlayers + " players this game!");
@@ -200,6 +188,7 @@ public class Game {
 
         // TODO implement the automatic allocation
     }
+
 
     public static void main(String[] args) {
         Game game = new Game();
