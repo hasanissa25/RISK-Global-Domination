@@ -1,15 +1,38 @@
 package Model;
 
 import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Map {
-    private Graph mapGraph;
-    private List<Country> listOfCountries;
+    private Graph<Country, DefaultEdge> mapGraph;
+    private Set<Country> listOfCountries;
+
+    public Set<Country> getAllCountries(){
+        return listOfCountries;
+    }
+    public Country getCountryByName(String CountryName) {
+        for (Country c : listOfCountries) {
+            if(c.getName().equals(CountryName)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Map{");
+        listOfCountries.forEach(x-> sb.append(x+"\n"));
+        return sb.toString();
+    }
 
     public Map() {
+        this.mapGraph= new SimpleGraph<>(DefaultEdge.class);
         Country Alaska = new Country("Alaska");
         mapGraph.addVertex(Alaska);
         Country Alberta = new Country("Alberta");
@@ -94,7 +117,6 @@ public class Map {
         mapGraph.addVertex(NewGuinea);
         Country WesternAustralia = new Country("Western Australia");
         mapGraph.addVertex(WesternAustralia);
-
         //North AMerica
         mapGraph.addEdge(Alaska, Alberta);
         mapGraph.addEdge(Alaska, northwestTerritory);
@@ -183,7 +205,7 @@ public class Map {
         mapGraph.addEdge(NorthernEurope, WesternEurope);
         mapGraph.addEdge(Scandinavia, Ukraine);
         mapGraph.addEdge(SouthernEurope, Ukraine);
-        listOfCountries=new ArrayList<Country>(mapGraph.vertexSet());
-    }
+        listOfCountries=mapGraph.vertexSet();
 
+    }
 }

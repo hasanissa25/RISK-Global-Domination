@@ -1,3 +1,6 @@
+package Game;
+
+import Model.Game;
 
 public class Command
 {
@@ -58,5 +61,16 @@ public class Command
  }
 
  public boolean hasFourthWord() { return (fourthWord != null); }
+
+ @Override
+ public String toString() {
+  final StringBuilder sb = new StringBuilder("Command{");
+  sb.append("commandWord='").append(commandWord).append('\'');
+  sb.append(", secondWord='").append(secondWord).append('\'');
+  sb.append(", thirdWord='").append(thirdWord).append('\'');
+  sb.append(", fourthWord='").append(fourthWord).append('\'');
+  sb.append('}');
+  return sb.toString();
+ }
 }
 
