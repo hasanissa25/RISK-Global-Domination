@@ -23,7 +23,7 @@ public class GameTest {
         InputStream iS = new ByteArrayInputStream("2".getBytes());
         System.setIn(iS);
         game.startGame();
-        runCommand("attack Canada Taiwan 5");
+        runCommand("map");
         runCommand("attack Alaska Egypt 5");
     }
 

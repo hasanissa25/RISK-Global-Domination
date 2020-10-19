@@ -13,7 +13,7 @@ public class Parser
         reader = new Scanner(System.in);
     }
 
-    public Command getCommand()
+    public Command getCommand(int currentPlayer)
     {
         String inputLine;
         String word1 = null;
@@ -22,7 +22,7 @@ public class Parser
         String word4 = null;
 
 
-        System.out.print("> ");
+        System.out.print("Player-"+ currentPlayer+ "> ");
 
         inputLine = reader.nextLine();
 
