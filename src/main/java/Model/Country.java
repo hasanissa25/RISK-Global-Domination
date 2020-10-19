@@ -61,9 +61,9 @@ public class Country {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer();
-        sb.append("Country: ").append(name).append('\'');
+        sb.append("Country: ").append(name);
         sb.append(", Number Of occupying Troops= ").append(numberOfTroops);
-        sb.append(", Owned by player: ").append(player.getPlayerNumber());
+        sb.append(", Owned by player: ").append(player.getPlayerNumber()+"\n");
         return sb.toString();
     }
 }
