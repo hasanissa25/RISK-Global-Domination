@@ -42,7 +42,7 @@ public class Player {
         //iterate over the list of my countries, and return the neighbours of that country.
         for (Country c : myCountries) {
             for (Country cc : myMap.getNeighbours(c)) {
-               myPossibleTargets.add(cc);
+               if(!(myCountries.contains(cc))&& !(cc.getPlayer().getPlayerNumber()==playerNumber)) myPossibleTargets.add(cc);
             }
         }
     }

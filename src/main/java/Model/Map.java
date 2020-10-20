@@ -26,6 +26,7 @@ public class Map {
     public List<Country> getNeighbours(Country country){
         List<Country> neighbours = new ArrayList<Country>();
         for(DefaultEdge e: mapGraph.edgesOf(country)){
+            neighbours.add(mapGraph.getEdgeSource(e));
             neighbours.add(mapGraph.getEdgeTarget(e));
         }
         return neighbours;
