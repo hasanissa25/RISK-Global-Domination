@@ -48,7 +48,6 @@ public class Country {
         sb.append("\nname='").append(name);
         sb.append(", numberOfTroops=").append(numberOfTroops);
         sb.append(", player=").append(player == null ? "" : player.getPlayerNumber());
-        sb.append('}');
         return sb.toString();
     }
 }

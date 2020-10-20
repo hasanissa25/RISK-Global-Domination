@@ -76,7 +76,6 @@ public class Game {
     }
 
     private void initializePlayers() {
-        System.out.println("How many players will be playing today?");
         Scanner sc = new Scanner(System.in);
         this.numberOfPlayers = sc.nextInt();
         boolean correctNumberOfPlayers;
@@ -86,7 +85,7 @@ public class Game {
 
             } else {
                 correctNumberOfPlayers = false;
-                System.out.println("The number of players allowed is 2,3,4,5 or 6 players");
+                System.out.println("The number of players allowed is 2,3,4,5 or 6 players. Please try again.");
                 numberOfPlayers = sc.nextInt();
 
             }
@@ -167,15 +166,15 @@ public class Game {
 
     private void attack(Command command) {
         if (!command.hasSecondWord()) {
-            System.out.println("Which country are you attacking from?");
+            System.out.println("Which country are you attacking from? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking");
             return;
         }
         if (!command.hasThirdWord()) {
-            System.out.println("What country are you attacking?");
+            System.out.println("What country are you attacking? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking)");
             return;
         }
         if (!command.hasFourthWord()) {
-            System.out.println("How many troops are you using to attack?");
+            System.out.println("How many troops are you using to attack? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking)");
             return;
         }
         String attackCountryName = command.getSecondWord();
@@ -183,12 +182,12 @@ public class Game {
         int numberOfTroopsAttacking = command.getFourthWord();
         Country attackCountry = myMap.getCountryByName(attackCountryName);
         if (attackCountry == null) {
-            System.out.println("The attacking country name is invalid. Please try again");
+            System.out.println("The attacking country name is invalid. Please try again using a valid country name. Refer to the map command to get a list of countries");
             return;
         }
         Country defenceCountry = myMap.getCountryByName(defenceCountryName);
         if (defenceCountry == null) {
-            System.out.println("The country you are trying to attack is invalid. Please try again");
+            System.out.println("The country you are trying to attack is invalid. Please try again. Please try again using a valid country name. Refer to the map command to get a list of countries");
             return;
         }
 
@@ -196,13 +195,13 @@ public class Game {
 
     public void play() {
         boolean startedGame = false;
+        System.out.println("Welcome to Risk! How many players will be playing today? This version of risk can hold up to and including 6 players.");
         do {
             try {
                 startGame();
                 startedGame = true;
             } catch (Exception exception) {
-                System.err.println("You have encountered an error starting the game. Please report it to the administrator");
-                exception.printStackTrace();
+                System.err.println("Please enter a valid integer for the number of players. Your options are 2,3,4,5,6. ");
             }
         }
         while (!startedGame);
@@ -221,9 +220,8 @@ public class Game {
     }
 
     public void startGame() {
-        System.out.println("Welcome to RISK!");
         initializePlayers();
-        System.out.println("There will be " + numberOfPlayers + " players this game!");
+        System.out.println("There will be " + numberOfPlayers + " players this game! The current version of the game uses an automatic allocation of troops and countries to the players.");
         randomizeMap();
         System.out.println("\nYour available commands are:");
         parser.showCommands();
@@ -231,7 +229,6 @@ public class Game {
         printListOfCurrentPlayerCountries();
 
 
-        // TODO implement the automatic allocation
     }
 
     private void printListOfCurrentPlayerCountries() {
