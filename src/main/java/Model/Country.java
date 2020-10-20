@@ -37,17 +37,18 @@ public class Country {
                 getName().equals(country.getName());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getNumberOfTroops(), getPlayer());
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(getName());
+//    }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer();
-        sb.append("Country: ").append(name);
-        sb.append(", Number Of occupying Troops= ").append(numberOfTroops);
-        sb.append(", Owned by player: ").append(player.getPlayerNumber() + "\n");
+        final StringBuilder sb = new StringBuilder();
+        sb.append("\nname='").append(name);
+        sb.append(", numberOfTroops=").append(numberOfTroops);
+        sb.append(", player=").append(player == null ? "" : player.getPlayerNumber());
+        sb.append('}');
         return sb.toString();
     }
 }

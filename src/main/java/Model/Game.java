@@ -2,7 +2,7 @@ package Model;
 
 import Game.Command;
 import Game.Parser;
-
+import Game.UtilArray;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class Game {
 
 
     private void printCurrentPlayer() {
-        System.out.println("\nThe current player is player-" + currentPlayer+"\nYour curently occupied countries are:\n");
+        System.out.println("\nThe current player is player-" + currentPlayer);
     }
 
     public boolean processCommand(Command command) {
@@ -136,22 +136,22 @@ public class Game {
         secondPhaseOfDeployment();
 
     }
-
     private void firstPhaseOfDeployment() {
-        List<Country> remainingCountries = new ArrayList<>(myMap.getAllCountries());
+        Country[] remainingCountries = myMap.getAllCountries().toArray(new Country[0]);
         Random randomize = new Random();
         int i = 0;
-        while (!remainingCountries.isEmpty()) {
-            int randomNumber = randomize.nextInt(remainingCountries.size());
-            remainingCountries.get(randomNumber).setPlayer(players.get(i));
+        while (remainingCountries.length!=0) {
+            int randomNumber = randomize.nextInt(remainingCountries.length);
+            remainingCountries[randomNumber].setPlayer(players.get(i));
             players.get(i).decrementUndeployedNumberOfTroops();
-            remainingCountries.get(randomNumber).incrementNumberOfTroops();
-            players.get(i).getMyCountries().add(remainingCountries.get(randomNumber));
-            remainingCountries.remove(randomNumber);
+            remainingCountries[randomNumber].incrementNumberOfTroops();
+            players.get(i).getMyCountries().add(remainingCountries[randomNumber]);
+            remainingCountries= UtilArray.removeTheElement(remainingCountries,randomNumber);
             i++;
             if (i == numberOfPlayers) i = 0;
         }
     }
+
 
     private void secondPhaseOfDeployment() {
         //For each Player, iterate over all the countries that he owns, and randomly increment the number of troops in his countries until he has no more troops left to allocate
