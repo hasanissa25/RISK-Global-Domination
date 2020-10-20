@@ -33,15 +33,16 @@ public class Player {
         return myCountries;
     }
 
-    public List<Country> getMyPossibleTargets() {
+    public List<Country> getMyPossibleTargets(Map myMap) {
+        updateMyPossibleTargets(myMap);
         return myPossibleTargets;
     }
 
-    public void updateMyPossibleTargets() {
+    public void updateMyPossibleTargets(Map myMap) {
         //iterate over the list of my countries, and return the neighbours of that country.
         for (Country c : myCountries) {
-            for (Country cc : theMap.getNeighbours(c)) {
-                myPossibleTargets.add(cc);
+            for (Country cc : myMap.getNeighbours(c)) {
+               myPossibleTargets.add(cc);
             }
         }
     }
