@@ -50,6 +50,7 @@ public class Parser
         }
     }
     public void showCommands(){
+        System.out.println("\nYour available commands are:");
         commands.printCommands();
     }
 }
