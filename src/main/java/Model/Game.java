@@ -25,6 +25,7 @@ public class Game {
     private int initialNumberOfTroops;
     private Map myMap = new Map();
     private InputStream inputStream;
+
     public Game() {
         this.myMap = new Map();
         parser = new Parser();
@@ -32,7 +33,7 @@ public class Game {
 
 
     private void printCurrentPlayer() {
-        System.out.println("The current player is player-" + currentPlayer);
+        System.out.println("\nThe current player is player-" + currentPlayer+"\nYour curently occupied countries are:\n");
     }
 
     public boolean processCommand(Command command) {
@@ -71,7 +72,7 @@ public class Game {
         //pass the turn to the next player
         this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 1 : this.currentPlayer + 1;
         printCurrentPlayer();
-
+        printListOfCurrentPlayerCountries();
     }
 
     private void initializePlayers() {
@@ -126,6 +127,43 @@ public class Game {
         return players;
     }
 
+
+    private void randomizeMap() {
+        //im going to iterate over the players and assign troops until the troops left is zero
+        //im going to assign one troop from a player to a country if its empty.
+        //Once all countries have 1 troop, I will randomize the allocation of the leftover troops to the countries that are owned by the player
+        firstPhaseOfDeployment();
+        secondPhaseOfDeployment();
+
+    }
+
+    private void firstPhaseOfDeployment() {
+        List<Country> remainingCountries = new ArrayList<>(myMap.getAllCountries());
+        Random randomize = new Random();
+        int i = 0;
+        while (!remainingCountries.isEmpty()) {
+            int randomNumber = randomize.nextInt(remainingCountries.size());
+            remainingCountries.get(randomNumber).setPlayer(players.get(i));
+            players.get(i).decrementUndeployedNumberOfTroops();
+            remainingCountries.get(randomNumber).incrementNumberOfTroops();
+            players.get(i).getMyCountries().add(remainingCountries.get(randomNumber));
+            remainingCountries.remove(randomNumber);
+            i++;
+            if (i == numberOfPlayers) i = 0;
+        }
+    }
+
+    private void secondPhaseOfDeployment() {
+        //For each Player, iterate over all the countries that he owns, and randomly increment the number of troops in his countries until he has no more troops left to allocate
+        Random randomize = new Random();
+        for (int i = 0; i < players.size(); i++) {
+            while (players.get(i).getUndeployedTroops() > 0) {
+                int randomNumber = randomize.nextInt(players.get(i).getMyCountries().size());
+                players.get(i).getMyCountries().get(randomNumber).incrementNumberOfTroops();
+                players.get(i).decrementUndeployedNumberOfTroops();
+            }
+        }
+    }
 
     private void attack(Command command) {
         if (!command.hasSecondWord()) {
@@ -187,48 +225,17 @@ public class Game {
         initializePlayers();
         System.out.println("There will be " + numberOfPlayers + " players this game!");
         randomizeMap();
-        System.out.println("Your command words are:");
+        System.out.println("\nYour available commands are:");
         parser.showCommands();
         printCurrentPlayer();
+        printListOfCurrentPlayerCountries();
+
 
         // TODO implement the automatic allocation
     }
 
-    private void randomizeMap() {
-        //im going to iterate over the players and assign troops until the troops left is zero
-        //im going to assign one troop from a player to a country if its empty.
-        //Once all countries have 1 troop, I will randomize the allocation of the leftover troops to the countries that are owned by the player
-        firstPhaseOfDeployment();
-        secondPhaseOfDeployment();
-
-    }
-
-    private void firstPhaseOfDeployment() {
-        List<Country> remainingCountries = new ArrayList<>(myMap.getAllCountries());
-        Random randomize = new Random();
-        int i = 0;
-        while (!remainingCountries.isEmpty()) {
-            int randomNumber = randomize.nextInt(remainingCountries.size());
-            remainingCountries.get(randomNumber).setPlayer(players.get(i));
-            players.get(i).decrementUndeployedNumberOfTroops();
-            remainingCountries.get(randomNumber).incrementNumberOfTroops();
-            players.get(i).getMyCountries().add(remainingCountries.get(randomNumber));
-            remainingCountries.remove(randomNumber);
-            i++;
-            if (i == numberOfPlayers) i = 0;
-        }
-    }
-
-    private void secondPhaseOfDeployment() {
-        //For each Player, iterate over all the countries that he owns, and randomly increment the number of troops in his countries until he has no more troops left to allocate
-        Random randomize = new Random();
-        for (int i = 0; i < players.size(); i++) {
-            while (players.get(i).getUndeployedTroops()> 0) {
-                int randomNumber = randomize.nextInt(players.get(i).getMyCountries().size());
-                players.get(i).getMyCountries().get(randomNumber).incrementNumberOfTroops();
-                players.get(i).decrementUndeployedNumberOfTroops();
-            }
-        }
+    private void printListOfCurrentPlayerCountries() {
+        System.out.println(players.get(currentPlayer - 1).getMyCountries().toString());
     }
 
     public static void main(String[] args) {

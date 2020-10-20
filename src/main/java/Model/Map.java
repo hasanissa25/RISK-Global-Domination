@@ -11,7 +11,6 @@ import java.util.Set;
 public class Map {
     private Graph<Country, DefaultEdge> mapGraph;
     private Set<Country> listOfCountries;
-
     public Set<Country> getAllCountries(){
         return listOfCountries;
     }
@@ -24,6 +23,13 @@ public class Map {
         return null;
     }
 
+    public List<Country> getNeighbours(Country country){
+        List<Country> neighbours = new ArrayList<Country>();
+        for(DefaultEdge e: mapGraph.edgesOf(country)){
+            neighbours.add(mapGraph.getEdgeTarget(e));
+        }
+        return neighbours;
+    }
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer();
