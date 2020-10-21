@@ -4,7 +4,6 @@ import Game.Command;
 import Game.Parser;
 import Game.UtilArray;
 
-import javax.crypto.spec.PSource;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,7 @@ public class Game {
     private int initialNumberOfTroops;
     private Map myMap = new Map();
     private InputStream inputStream;
+    private Country attackingCountry;
 
     public Game() {
         this.myMap = new Map();
@@ -35,8 +35,10 @@ public class Game {
 
 
     private void printCurrentPlayer() {
-        System.out.println("\nThe current player is player-" + (currentPlayer+1));
+        System.out.println("\n!*-----------------------------------------------NEW TURN!-------------------------------------------------------*!");
+        System.out.println("The current player is player-" + (currentPlayer + 1)+"\n");
     }
+
     public boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
@@ -63,15 +65,23 @@ public class Game {
 
         return wantToQuit;
     }
+
     private void printMap() {
         //print a representation of the map
         System.out.println(this.myMap);
     }
+
     private void passTurn() {
         //pass the turn to the next player
-        this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 1 : this.currentPlayer + 1;
+        this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 0 : this.currentPlayer + 1;
+        newTurn();
+    }
+
+    private void newTurn() {
         printCurrentPlayer();
         printListOfCurrentPlayerCountries();
+        printListOfCurrentPlayerPossibleCountriesToAttack();
+        parser.showCommands();
     }
 
     private void initializePlayers() {
@@ -91,6 +101,7 @@ public class Game {
         } while (!correctNumberOfPlayers);
         createPlayers(numberOfPlayers, calculateTroops(numberOfPlayers));
     }
+
     private int calculateTroops(int numberOfPlayers) {
         initialNumberOfTroops = 0;
         switch (numberOfPlayers) {
@@ -112,15 +123,18 @@ public class Game {
         }
         return initialNumberOfTroops;
     }
+
     private void createPlayers(int numberOfPlayers, int initialNumberOfTroops) {
         players = new ArrayList<Player>();
         for (int i = 1; i <= numberOfPlayers; i++) {
             players.add(new Player(i, initialNumberOfTroops));
         }
     }
+
     public List<Player> getPlayers() {
         return players;
     }
+
     private void randomizeMap() {
         //im going to iterate over the players and assign troops until the troops left is zero
         //im going to assign one troop from a player to a country if its empty.
@@ -129,21 +143,23 @@ public class Game {
         secondPhaseOfDeployment();
 
     }
+
     private void firstPhaseOfDeployment() {
         Country[] remainingCountries = myMap.getAllCountries().toArray(new Country[0]);
         Random randomize = new Random();
         int i = 0;
-        while (remainingCountries.length!=0) {
+        while (remainingCountries.length != 0) {
             int randomNumber = randomize.nextInt(remainingCountries.length);
             remainingCountries[randomNumber].setPlayer(players.get(i));
             players.get(i).decrementUndeployedNumberOfTroops();
             remainingCountries[randomNumber].incrementNumberOfTroops();
             players.get(i).getMyCountries().add(remainingCountries[randomNumber]);
-            remainingCountries= UtilArray.removeTheElement(remainingCountries,randomNumber);
+            remainingCountries = UtilArray.removeTheElement(remainingCountries, randomNumber);
             i++;
             if (i == numberOfPlayers) i = 0;
         }
     }
+
     private void secondPhaseOfDeployment() {
         //For each Player, iterate over all the countries that he owns, and randomly increment the number of troops in his countries until he has no more troops left to allocate
         Random randomize = new Random();
@@ -155,38 +171,58 @@ public class Game {
             }
         }
     }
+
     private void printListOfCurrentPlayerCountries() {
-        System.out.println("\nYour currently occupied countries are:\n");
+        System.out.println("Player " + (currentPlayer + 1) + " currently occupies the following countries: ");
         System.out.println(players.get(currentPlayer).getMyCountries().toString());
     }
+
     private void printListOfCurrentPlayerPossibleCountriesToAttack() {
-        System.out.println("\nThe neighbouring countries that you can attack are:\n");
-        System.out.println(players.get(currentPlayer).getMyPossibleTargets(myMap));
+        players.get(currentPlayer).getMyPossibleTargets(myMap);
     }
+
+    public Country getAttackingCountry() {
+        return attackingCountry;
+    }
+
+    public void setAttackingCountry(Country attackingCountry) {
+        this.attackingCountry = attackingCountry;
+    }
+
+    private Country defendingCountry;
+
+
+    public Country getDefendingCountry() {
+        return defendingCountry;
+    }
+
+    public void setDefendingCountry(Country defendingCountry) {
+        this.defendingCountry = defendingCountry;
+    }
+
     private void initiateAttack(Command command) {
         if (!checkAttackCommandSyntax(command)) return;
 
         String attackCountryName = command.getSecondWord().toLowerCase();
-        Country attackCountry = myMap.getCountryByName(attackCountryName);
-        if (!checkAttackCountry(attackCountry)) {
+        setAttackingCountry(myMap.getCountryByName(attackCountryName)); ;
+        if (!checkAttackCountry(attackingCountry)) {
             return;
         }
 
         String defenceCountryName = command.getThirdWord();
-        Country defenceCountry = myMap.getCountryByName(defenceCountryName);
-        if (!checkDefenceCountry(attackCountry, defenceCountry)) {
+        setDefendingCountry(myMap.getCountryByName(defenceCountryName));
+        if (!checkDefenceCountry(attackingCountry, defendingCountry)) {
             return;
         }
 
         int numberOfTroopsAttacking = command.getFourthWord();
         if (checkNumberOfTroopsAttacking(attackCountryName, numberOfTroopsAttacking)) {
-            System.out.println("the checking of number of troops has passed all tests \n\n");
+            System.out.println("You have initiated an attack from " + attackCountryName + " using " + numberOfTroopsAttacking + " troops against " + defenceCountryName);
         }
 
-        //getNumberOfDefendingTroops(){}
+        //getNumberOfDefendingDice();
 
         //getAttackResult(){}
-
 
 
     }
@@ -205,6 +241,7 @@ public class Game {
         }
         return true;
     }
+
     private boolean checkAttackCountry(Country attackCountry) {
         if (attackCountry == null) {
             System.out.println("The attacking country name is invalid. Please try again using a valid country name. Refer to the map command to get a list of countries");
@@ -212,20 +249,21 @@ public class Game {
         }
         if (players.get(currentPlayer).getMyCountries().contains(attackCountry)) {
             return true;
-        }else {
+        } else {
             System.out.println("You do not own that country, so you can not attack with it. Please select one of your countries.");
             return false;
         }
     }
+
     private boolean checkDefenceCountry(Country attackCountry, Country defenceCountry) {
         if (defenceCountry == null) {
             System.out.println("The country you are trying to attack is invalid. Please try again using a valid country name. Refer to the map command to get a list of countries");
             return false;
         }
-        if (players.get(currentPlayer).getNeighbours(myMap,attackCountry).contains(defenceCountry)){
-            if (!attackCountry.getPlayer().equals(defenceCountry.getPlayer())){
+        if (players.get(currentPlayer).getNeighbours(myMap, attackCountry).contains(defenceCountry)) {
+            if (!attackCountry.getPlayer().equals(defenceCountry.getPlayer())) {
                 return true;
-            }else{
+            } else {
                 System.out.println("You can not attack your owned countries!");
                 return false;
             }
@@ -233,17 +271,19 @@ public class Game {
         }
 
 
-        System.out.println("The target is not one of your neighbouring countries, please select one of your neighbours.");
+        System.out.println(attackCountry + " is not directly neighbouring " + defenceCountry + ". Please make sure the two countries share a border.");
         return false;
     }
+
     private boolean checkNumberOfTroopsAttacking(String attackCountryName, int numberOfTroopsAttacking) {
-        if(players.get(currentPlayer).getACountry(attackCountryName).getNumberOfTroops()<=numberOfTroopsAttacking){
-            System.out.println("Please adjust the number of attacking troops. You must have at-least 1 troop left in the country.");
+        if (players.get(currentPlayer).getACountry(attackCountryName).getNumberOfTroops() <= numberOfTroopsAttacking) {
+            System.out.println("Please adjust the number of attacking troops. You must have at-least 1 troop left to defend your country. You can refer to the list of your countries to see how many troops you have in that country.");
             return false;
 
         }
         return true;
     }
+
     public void play() {
         boolean startedGame = false;
         System.out.println("Welcome to Risk! How many players will be playing today? This version of risk can hold up to and including 6 players.");
@@ -269,6 +309,7 @@ public class Game {
         }
         System.out.println("Thank you for playing!");
     }
+
     public void startGame() {
         initializePlayers();
         System.out.println("There will be " + numberOfPlayers + " players this game! The current version of the game uses an automatic allocation of troops and countries to the players.");
