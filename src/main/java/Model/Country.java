@@ -37,17 +37,20 @@ public class Country {
                 getName().equals(country.getName());
     }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(getName());
-//    }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("\nname='").append(name);
-        sb.append(", numberOfTroops=").append(numberOfTroops);
-        sb.append(", player=").append(player == null ? "" : player.getPlayerNumber());
+        sb.append("\nCountry: ").append(name);
+        sb.append(", Number of Troops= ").append(numberOfTroops);
+        sb.append(", Owned by player= ").append(player == null ? "" : player.getPlayerNumber());
+        return sb.toString();
+    }
+    public String toString2() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Country: ").append(name);
+        sb.append(", Number of Troops= ").append(numberOfTroops);
+        sb.append(", Owned by player= ").append(player == null ? "" : player.getPlayerNumber());
         return sb.toString();
     }
 }
