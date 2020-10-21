@@ -7,14 +7,11 @@ public class Parser
     private CommandWords commands;  // holds all valid command words
     private Scanner reader;         // source of command input
 
-    public Parser()
-    {
+    public Parser()    {
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
-
-    public Command getCommand(int currentPlayer)
-    {
+    public Command getCommand(int currentPlayer)    {
         String inputLine;
         String word1 = null;
         String word2 = null;
@@ -22,9 +19,9 @@ public class Parser
         String word4 = null;
 
 
-        System.out.print("Player-"+ currentPlayer+ "> ");
+        System.out.print("Player-"+ (currentPlayer+1)+ "> ");
 
-        inputLine = reader.nextLine();
+        inputLine = reader.nextLine().toLowerCase();
 
         Scanner tokenizer = new Scanner(inputLine);
         if(tokenizer.hasNext()) {

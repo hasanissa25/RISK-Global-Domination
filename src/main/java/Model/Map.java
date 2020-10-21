@@ -11,52 +11,53 @@ import java.util.Set;
 public class Map {
     private Graph<Country, DefaultEdge> mapGraph;
     private Set<Country> listOfCountries;
-    public Set<Country> getAllCountries(){
+
+    public Set<Country> getAllCountries() {
         return listOfCountries;
     }
     public Country getCountryByName(String CountryName) {
         for (Country c : listOfCountries) {
-            if(c.getName().equals(CountryName)) {
+            if (c.getName().toLowerCase().equals(CountryName.toLowerCase())) {
                 return c;
             }
         }
         return null;
     }
-
-    public List<Country> getNeighbours(Country country){
+    public List<Country> getCountryNeighbours(Country country) {
         List<Country> neighbours = new ArrayList<Country>();
-        for(DefaultEdge e: mapGraph.edgesOf(country)){
-            neighbours.add(mapGraph.getEdgeSource(e));
-            neighbours.add(mapGraph.getEdgeTarget(e));
+        if (listOfCountries.contains(country)) {
+            for (DefaultEdge e : mapGraph.edgesOf(country)) {
+                neighbours.add(mapGraph.getEdgeSource(e));
+                neighbours.add(mapGraph.getEdgeTarget(e));
+            }
         }
         return neighbours;
     }
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer();
-        listOfCountries.forEach(x-> sb.append(x+"\n"));
+        listOfCountries.forEach(x -> sb.append(x + "\n"));
         return sb.toString();
     }
-
     public Map() {
-        this.mapGraph= new SimpleGraph<>(DefaultEdge.class);
+        this.mapGraph = new SimpleGraph<>(DefaultEdge.class);
         Country Alaska = new Country("Alaska");
         mapGraph.addVertex(Alaska);
         Country Alberta = new Country("Alberta");
         mapGraph.addVertex(Alberta);
-        Country centralAmerica = new Country("Central America");
+        Country centralAmerica = new Country("CentralAmerica");
         mapGraph.addVertex(centralAmerica);
-        Country easternUnitedStates = new Country("Eastern United States");
+        Country easternUnitedStates = new Country("EasternUnitedStates");
         mapGraph.addVertex(easternUnitedStates);
         Country Greenland = new Country("Greenland");
         mapGraph.addVertex(Greenland);
-        Country northwestTerritory = new Country("Northwest Territory");
+        Country northwestTerritory = new Country("NorthwestTerritory");
         mapGraph.addVertex(northwestTerritory);
         Country Ontario = new Country("Ontario");
         mapGraph.addVertex(Ontario);
         Country Quebec = new Country("Quebec");
         mapGraph.addVertex(Quebec);
-        Country westernUnitedStates = new Country("Western United States");
+        Country westernUnitedStates = new Country("WesternUnitedStates");
         mapGraph.addVertex(westernUnitedStates);
         Country Argentina = new Country("Argentina");
         mapGraph.addVertex(Argentina);
@@ -66,31 +67,31 @@ public class Map {
         mapGraph.addVertex(Peru);
         Country Venezuela = new Country("Venezuela");
         mapGraph.addVertex(Venezuela);
-        Country greatBritain = new Country("Great Britain");
+        Country greatBritain = new Country("GreatBritain");
         mapGraph.addVertex(greatBritain);
         Country Iceland = new Country("Iceland");
         mapGraph.addVertex(Iceland);
-        Country NorthernEurope = new Country("Northern Europe");
+        Country NorthernEurope = new Country("NorthernEurope");
         mapGraph.addVertex(NorthernEurope);
         Country Scandinavia = new Country("Scandinavia");
         mapGraph.addVertex(Scandinavia);
-        Country SouthernEurope = new Country("Southern Europe");
+        Country SouthernEurope = new Country("SouthernEurope");
         mapGraph.addVertex(SouthernEurope);
         Country Ukraine = new Country("Ukraine");
         mapGraph.addVertex(Ukraine);
-        Country WesternEurope = new Country("Western Europe");
+        Country WesternEurope = new Country("WesternEurope");
         mapGraph.addVertex(WesternEurope);
         Country Congo = new Country("Congo");
         mapGraph.addVertex(Congo);
-        Country EastAfrica = new Country("East Africa");
+        Country EastAfrica = new Country("EastAfrica");
         mapGraph.addVertex(EastAfrica);
         Country Egypt = new Country("Egypt");
         mapGraph.addVertex(Egypt);
         Country Madagascar = new Country("Madagascar");
         mapGraph.addVertex(Madagascar);
-        Country NorthAfrica = new Country("North Africa");
+        Country NorthAfrica = new Country("NorthAfrica");
         mapGraph.addVertex(NorthAfrica);
-        Country SouthAfrica = new Country("South Africa");
+        Country SouthAfrica = new Country("SouthAfrica");
         mapGraph.addVertex(SouthAfrica);
         Country Kazakhstan = new Country("Kazakhstan");
         mapGraph.addVertex(Kazakhstan);
@@ -104,7 +105,7 @@ public class Map {
         mapGraph.addVertex(Japan);
         Country Kamchatka = new Country("Kamchatka");
         mapGraph.addVertex(Kamchatka);
-        Country MiddleEast = new Country("Middle East");
+        Country MiddleEast = new Country("MiddleEast");
         mapGraph.addVertex(MiddleEast);
         Country Mongolia = new Country("Mongolia");
         mapGraph.addVertex(Mongolia);
@@ -116,13 +117,13 @@ public class Map {
         mapGraph.addVertex(Ural);
         Country Yakutsk = new Country("Yakutsk");
         mapGraph.addVertex(Yakutsk);
-        Country EasternAustralia = new Country("Eastern Australia");
+        Country EasternAustralia = new Country("EasternAustralia");
         mapGraph.addVertex(EasternAustralia);
         Country Indonesia = new Country("Indonesia");
         mapGraph.addVertex(Indonesia);
-        Country NewGuinea = new Country("New Guinea");
+        Country NewGuinea = new Country("NewGuinea");
         mapGraph.addVertex(NewGuinea);
-        Country WesternAustralia = new Country("Western Australia");
+        Country WesternAustralia = new Country("WesternAustralia");
         mapGraph.addVertex(WesternAustralia);
         //North AMerica
         mapGraph.addEdge(Alaska, Alberta);
@@ -212,7 +213,7 @@ public class Map {
         mapGraph.addEdge(NorthernEurope, WesternEurope);
         mapGraph.addEdge(Scandinavia, Ukraine);
         mapGraph.addEdge(SouthernEurope, Ukraine);
-        listOfCountries=mapGraph.vertexSet();
+        listOfCountries = mapGraph.vertexSet();
 
     }
 }
