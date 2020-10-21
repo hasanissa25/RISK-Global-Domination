@@ -3,6 +3,8 @@ package Model;
 import Game.Command;
 import Game.Parser;
 import Game.UtilArray;
+
+import javax.crypto.spec.PSource;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.Scanner;
 
 public class Game {
     private Parser parser;
-    private int currentPlayer = 1;
+    private int currentPlayer = 0;
 
     private List<Player> players;
 
@@ -33,9 +35,8 @@ public class Game {
 
 
     private void printCurrentPlayer() {
-        System.out.println("\nThe current player is player-" + currentPlayer);
+        System.out.println("\nThe current player is player-" + (currentPlayer+1));
     }
-
     public boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
@@ -47,7 +48,7 @@ public class Game {
         String commandWord = command.getCommandWord();
         switch (commandWord) {
             case "attack":
-                attack(command);
+                initiateAttack(command);
                 break;
             case "pass":
                 passTurn();
@@ -62,12 +63,10 @@ public class Game {
 
         return wantToQuit;
     }
-
     private void printMap() {
         //print a representation of the map
         System.out.println(this.myMap);
     }
-
     private void passTurn() {
         //pass the turn to the next player
         this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 1 : this.currentPlayer + 1;
@@ -92,7 +91,6 @@ public class Game {
         } while (!correctNumberOfPlayers);
         createPlayers(numberOfPlayers, calculateTroops(numberOfPlayers));
     }
-
     private int calculateTroops(int numberOfPlayers) {
         initialNumberOfTroops = 0;
         switch (numberOfPlayers) {
@@ -114,19 +112,15 @@ public class Game {
         }
         return initialNumberOfTroops;
     }
-
     private void createPlayers(int numberOfPlayers, int initialNumberOfTroops) {
         players = new ArrayList<Player>();
         for (int i = 1; i <= numberOfPlayers; i++) {
             players.add(new Player(i, initialNumberOfTroops));
         }
     }
-
     public List<Player> getPlayers() {
         return players;
     }
-
-
     private void randomizeMap() {
         //im going to iterate over the players and assign troops until the troops left is zero
         //im going to assign one troop from a player to a country if its empty.
@@ -150,8 +144,6 @@ public class Game {
             if (i == numberOfPlayers) i = 0;
         }
     }
-
-
     private void secondPhaseOfDeployment() {
         //For each Player, iterate over all the countries that he owns, and randomly increment the number of troops in his countries until he has no more troops left to allocate
         Random randomize = new Random();
@@ -163,36 +155,95 @@ public class Game {
             }
         }
     }
+    private void printListOfCurrentPlayerCountries() {
+        System.out.println("\nYour currently occupied countries are:\n");
+        System.out.println(players.get(currentPlayer).getMyCountries().toString());
+    }
+    private void printListOfCurrentPlayerPossibleCountriesToAttack() {
+        System.out.println("\nThe neighbouring countries that you can attack are:\n");
+        System.out.println(players.get(currentPlayer).getMyPossibleTargets(myMap));
+    }
+    private void initiateAttack(Command command) {
+        if (!checkAttackCommandSyntax(command)) return;
 
-    private void attack(Command command) {
-        if (!command.hasSecondWord()) {
-            System.out.println("Which country are you attacking from? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking");
-            return;
-        }
-        if (!command.hasThirdWord()) {
-            System.out.println("What country are you attacking? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking)");
-            return;
-        }
-        if (!command.hasFourthWord()) {
-            System.out.println("How many troops are you using to attack? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking)");
-            return;
-        }
-        String attackCountryName = command.getSecondWord();
-        String defenceCountryName = command.getThirdWord();
-        int numberOfTroopsAttacking = command.getFourthWord();
+        String attackCountryName = command.getSecondWord().toLowerCase();
         Country attackCountry = myMap.getCountryByName(attackCountryName);
-        if (attackCountry == null) {
-            System.out.println("The attacking country name is invalid. Please try again using a valid country name. Refer to the map command to get a list of countries");
+        if (!checkAttackCountry(attackCountry)) {
             return;
         }
+
+        String defenceCountryName = command.getThirdWord();
         Country defenceCountry = myMap.getCountryByName(defenceCountryName);
-        if (defenceCountry == null) {
-            System.out.println("The country you are trying to attack is invalid. Please try again. Please try again using a valid country name. Refer to the map command to get a list of countries");
+        if (!checkDefenceCountry(attackCountry, defenceCountry)) {
             return;
         }
+
+        int numberOfTroopsAttacking = command.getFourthWord();
+        if (checkNumberOfTroopsAttacking(attackCountryName, numberOfTroopsAttacking)) {
+            System.out.println("the checking of number of troops has passed all tests \n\n");
+        }
+
+        //getNumberOfDefendingTroops(){}
+
+        //getAttackResult(){}
+
+
 
     }
+    private boolean checkAttackCommandSyntax(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Which country are you attacking from? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking");
+            return false;
+        }
+        if (!command.hasThirdWord()) {
+            System.out.println("What country are you attacking? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking");
+            return false;
+        }
+        if (!command.hasFourthWord()) {
+            System.out.println("How many troops are you using to attack? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking");
+            return false;
+        }
+        return true;
+    }
+    private boolean checkAttackCountry(Country attackCountry) {
+        if (attackCountry == null) {
+            System.out.println("The attacking country name is invalid. Please try again using a valid country name. Refer to the map command to get a list of countries");
+            return false;
+        }
+        if (players.get(currentPlayer).getMyCountries().contains(attackCountry)) {
+            return true;
+        }else {
+            System.out.println("You do not own that country, so you can not attack with it. Please select one of your countries.");
+            return false;
+        }
+    }
+    private boolean checkDefenceCountry(Country attackCountry, Country defenceCountry) {
+        if (defenceCountry == null) {
+            System.out.println("The country you are trying to attack is invalid. Please try again using a valid country name. Refer to the map command to get a list of countries");
+            return false;
+        }
+        if (players.get(currentPlayer).getNeighbours(myMap,attackCountry).contains(defenceCountry)){
+            if (!attackCountry.getPlayer().equals(defenceCountry.getPlayer())){
+                return true;
+            }else{
+                System.out.println("You can not attack your owned countries!");
+                return false;
+            }
 
+        }
+
+
+        System.out.println("The target is not one of your neighbouring countries, please select one of your neighbours.");
+        return false;
+    }
+    private boolean checkNumberOfTroopsAttacking(String attackCountryName, int numberOfTroopsAttacking) {
+        if(players.get(currentPlayer).getACountry(attackCountryName).getNumberOfTroops()<=numberOfTroopsAttacking){
+            System.out.println("Please adjust the number of attacking troops. You must have at-least 1 troop left in the country.");
+            return false;
+
+        }
+        return true;
+    }
     public void play() {
         boolean startedGame = false;
         System.out.println("Welcome to Risk! How many players will be playing today? This version of risk can hold up to and including 6 players.");
@@ -218,7 +269,6 @@ public class Game {
         }
         System.out.println("Thank you for playing!");
     }
-
     public void startGame() {
         initializePlayers();
         System.out.println("There will be " + numberOfPlayers + " players this game! The current version of the game uses an automatic allocation of troops and countries to the players.");
