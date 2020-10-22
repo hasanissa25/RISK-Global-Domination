@@ -36,7 +36,7 @@ public class Game {
 
     private void printCurrentPlayer() {
         System.out.println("\n!*-----------------------------------------------NEW TURN!-------------------------------------------------------*!");
-        System.out.println("The current player is player-" + (currentPlayer + 1)+"\n");
+        System.out.println("The current player is player-" + (currentPlayer + 1) + "\n");
     }
 
     public boolean processCommand(Command command) {
@@ -204,7 +204,8 @@ public class Game {
         if (!checkAttackCommandSyntax(command)) return;
 
         String attackCountryName = command.getSecondWord().toLowerCase();
-        setAttackingCountry(myMap.getCountryByName(attackCountryName)); ;
+        setAttackingCountry(myMap.getCountryByName(attackCountryName));
+        ;
         if (!checkAttackCountry(attackingCountry)) {
             return;
         }
@@ -217,15 +218,132 @@ public class Game {
 
         int numberOfTroopsAttacking = command.getFourthWord();
         if (checkNumberOfTroopsAttacking(attackCountryName, numberOfTroopsAttacking)) {
-            System.out.println("You have initiated an attack from " + attackCountryName + " using " + numberOfTroopsAttacking + " troops against " + defenceCountryName);
+            System.out.println("\n********************************Deploying Troops!********************************\n You have initiated an attack from " + attackCountryName + " using " + numberOfTroopsAttacking + " troop(s) against " + defenceCountryName + " who has " + getDefendingCountry().getNumberOfTroops() + " troop(s)!");
+            attackAlgorithm(numberOfTroopsAttacking, getDefendingCountry().getNumberOfTroops());
+
+        }
+    }
+
+    private void attackAlgorithm(int numberOfTroopsAttacking, int numberOfTroopsDefending) {
+        List<Integer> attackersDiceResults = new ArrayList<>();
+        List<Integer> defendersDiceResults = new ArrayList<>();
+        List<Integer> troopsLost = new ArrayList<>();
+        int currentNumberOfAttackingTroops = numberOfTroopsAttacking;
+        int currentNumberOfDefendingTroops = numberOfTroopsDefending;
+        System.out.println("\n*******************************In attack algorithm!*******************************");
+        System.out.println("The number of troops attacking is = " + currentNumberOfAttackingTroops + "\nThe number of troops defending is = " + currentNumberOfDefendingTroops);
+        while (currentNumberOfAttackingTroops > 0 && currentNumberOfDefendingTroops > 0) {
+            if (currentNumberOfAttackingTroops >= 3) {
+                System.out.println("The current number of attacking troops is >= 3, therefore they get to use 3 dice!");
+                attackersDiceResults = rollDice(3);
+                if (currentNumberOfDefendingTroops == 1) {
+                    System.out.println("The current number of defending troops is 1, so they get to use 1 dice.");
+                    defendersDiceResults = rollDice(1);
+                } else {
+                    System.out.println("The current number of defending troops = 2, so they get to use 2 dice.");
+                    defendersDiceResults = rollDice(2);
+                }
+                troopsLost = checkOutcomeOfBattle(attackersDiceResults, defendersDiceResults);
+                currentNumberOfAttackingTroops = currentNumberOfAttackingTroops - troopsLost.get(0);
+                attackingCountry.setNumberOfTroops(attackingCountry.getNumberOfTroops()-troopsLost.get(0));
+                currentNumberOfDefendingTroops = currentNumberOfDefendingTroops - troopsLost.get(1);
+                defendingCountry.setNumberOfTroops(defendingCountry.getNumberOfTroops()-troopsLost.get(1));
+
+                System.out.println("Attacker lost " + troopsLost.get(0)+" troops and the Defender lost "+troopsLost.get(1) );
+                System.out.println("The Attackers current number of attacking troops left is " + currentNumberOfAttackingTroops);
+                System.out.println("The Defenders current number of defending troops left is " + currentNumberOfDefendingTroops);
+            }
+            if (currentNumberOfAttackingTroops > 0 && currentNumberOfAttackingTroops < 3) {
+                attackersDiceResults = rollDice(currentNumberOfAttackingTroops);
+                if (currentNumberOfDefendingTroops == 1) {
+                    defendersDiceResults = rollDice(1);
+                } else {
+                    defendersDiceResults = rollDice(2);
+                }
+                troopsLost = checkOutcomeOfBattle(attackersDiceResults, defendersDiceResults);
+                currentNumberOfAttackingTroops = currentNumberOfAttackingTroops - troopsLost.get(0);
+                attackingCountry.setNumberOfTroops(attackingCountry.getNumberOfTroops()-troopsLost.get(0));
+                currentNumberOfDefendingTroops = currentNumberOfDefendingTroops - troopsLost.get(1);
+                defendingCountry.setNumberOfTroops(defendingCountry.getNumberOfTroops()-troopsLost.get(1));
+
+                System.out.println("Attacker lost " + troopsLost.get(0)+" troops and the Defender lost "+troopsLost.get(1) );
+                System.out.println("The Attackers current number of attacking troops left is " + currentNumberOfAttackingTroops);
+                System.out.println("The Defenders current number of defending troops left is " + currentNumberOfDefendingTroops);
+            }
+        }
+        if (currentNumberOfAttackingTroops <= 0) {
+            System.out.println("\nSadly, you have lost the attack :(");
+            System.out.println(attackingCountry.getName() + " now has " + attackingCountry.getNumberOfTroops() + " troop(s) left in the country");
+            System.out.println(defendingCountry.getName() + " now has " + defendingCountry.getNumberOfTroops() + " troop(s) left in the country");
+
+        }
+        if (currentNumberOfDefendingTroops <= 0) {
+            System.out.println("\nCongratulations! You have won the attack!");
+            System.out.println(attackingCountry.getName() + " now has " + attackingCountry.getNumberOfTroops() + " troop(s) left in the country");
+            System.out.println(defendingCountry.getName() + " now has " + defendingCountry.getNumberOfTroops() + " troop(s) left in the country");
+
+        }
+    }
+
+    private List<Integer> checkOutcomeOfBattle(List<Integer> attackersDiceResults, List<Integer> defendersDiceResults) {
+        List<Integer> troopsLost = new ArrayList<>();
+        int troopsLostFromAttacker = 0;
+        int troopsLostFromDefender = 0;
+        int highestAttackRoll = 0;
+        int secondHighestAttackRoll = 0;
+        int highestDefenceRoll = 0;
+        int secondHighestDefenceRoll = 0;
+        System.out.println("\n******************************In Battle!******************************");
+        System.out.println("The attackers dice roll :" + attackersDiceResults);
+        System.out.println("The defenders dice roll :" + defendersDiceResults);
+
+        for (Integer i : attackersDiceResults) {
+            if (i.intValue() >= highestAttackRoll) {
+                secondHighestAttackRoll = highestAttackRoll;
+                highestAttackRoll = i.intValue();
+            }
+            if (i.intValue() > secondHighestAttackRoll && i.intValue() != highestAttackRoll)
+                secondHighestAttackRoll = i.intValue();
+            System.out.println("Checking dice; Highest attack roll is = " + highestAttackRoll + " Second highest attack roll is = " + secondHighestAttackRoll);
+        }
+        for (Integer i : defendersDiceResults) {
+            if (i.intValue() >= highestDefenceRoll) {
+                secondHighestDefenceRoll = highestDefenceRoll;
+                highestDefenceRoll = i.intValue();
+            }
+            if (i.intValue() > secondHighestDefenceRoll && i.intValue() != highestDefenceRoll)
+                secondHighestDefenceRoll = i.intValue();
+            System.out.println("Checking dice; Highest defence roll is = " + highestDefenceRoll + " Second highest defence roll is = " + secondHighestDefenceRoll);
         }
 
-        //getNumberOfDefendingDice();
+        if (highestAttackRoll <= highestDefenceRoll) {
+            troopsLostFromAttacker++;
+        } else {
+            troopsLostFromDefender++;
+        }
 
-        //getAttackResult(){}
+        if (secondHighestAttackRoll <= secondHighestDefenceRoll && secondHighestAttackRoll != 0 && secondHighestDefenceRoll != 0) {
+            troopsLostFromAttacker++;
+        }
+        if (secondHighestAttackRoll > secondHighestDefenceRoll && secondHighestAttackRoll != 0 && secondHighestDefenceRoll != 0) {
+            troopsLostFromDefender++;
+        }
 
-
+        troopsLost.add(troopsLostFromAttacker);
+        troopsLost.add(troopsLostFromDefender);
+        return troopsLost;
     }
+
+    private List<Integer> rollDice(Integer numberOfDiceToRoll) {
+        List<Integer> diceRolls = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < numberOfDiceToRoll; i++) {
+            int diceRoll = random.nextInt(6) + 1;
+            diceRolls.add(diceRoll);
+        }
+        return diceRolls;
+    }
+
     private boolean checkAttackCommandSyntax(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Which country are you attacking from? Please enter the attack command as such: attack MyCountry TargetCountry #ofTroopsAttacking");

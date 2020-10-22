@@ -5,12 +5,14 @@ import java.util.Objects;
 
 public class Country {
     private String name;
-    private int numberOfTroops;
-    private Player player;
 
+    private int numberOfTroops;
+
+    private Player player;
     public Country(String name) {
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
@@ -19,6 +21,9 @@ public class Country {
     }
     public void incrementNumberOfTroops() {
         numberOfTroops++;
+    }
+    public void setNumberOfTroops(int numberOfTroops) {
+        this.numberOfTroops = numberOfTroops;
     }
     public Player getPlayer() {
         return player;
