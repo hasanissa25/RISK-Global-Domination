@@ -1,10 +1,15 @@
-package Game;// Java program to remove an element
-// from a specific index from an array
+package Game;
 
 import Model.Country;
 
 import java.util.Arrays;
-
+/**
+ * @author      Hasan Issa
+ *
+ * Java program to remove an element from a specific index from an array.
+ * In our situation, it handles removing a country from an array.
+ *
+ */
 public class UtilArray {
 
     // Function to remove the element

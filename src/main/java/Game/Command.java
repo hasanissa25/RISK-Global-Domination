@@ -1,7 +1,11 @@
 package Game;
 
-import Model.Game;
-
+/**
+ * @author      Hasan Issa
+ *
+ * This class takes a string of 4 words, and coverts it into a command.
+ *
+ */
 public class Command
 {
  private String commandWord;
@@ -19,7 +23,15 @@ public class Command
 
  }
 
+
  public String getCommandWord() {
+/**
+ * @author      Hasan Issa
+ *
+ * @param commandWord This is the word that dictates what type of action will be taken due to this command.
+ *                    commandWords include Attack,Map,Quit, and Passturn
+ *
+ */
   return commandWord;
  }
  public void setCommandWord(String commandWord) {

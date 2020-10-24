@@ -10,10 +10,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+
 /**
- * This main class creates and initialises all the others: it create the map of all
- * Countries and their connections, creates the parser and starts the game.  It also evaluates and
- * executes the commands that the parser returns.
+ * @author Hasan Issa
+ * <p>
+ * This main class creates and initialises all the others. This class acts the Controller.
+ * It create the map of all Countries and their neighbours.
+ * It creates the parser and starts the game.
+ * It also evaluates and executes the commands that the parser returns.
  */
 
 public class Game {
@@ -40,6 +44,7 @@ public class Game {
     }
 
     public boolean processCommand(Command command) {
+
         boolean wantToQuit = false;
 
         if (command.isUnknown()) {
@@ -67,12 +72,22 @@ public class Game {
     }
 
     private void printMap() {
-        //print a representation of the map
+        /**
+         * @author Hasan Issa
+         *
+         * Print a representation of the map
+         *
+         */
         System.out.println(this.myMap);
     }
 
     private void passTurn() {
-        //pass the turn to the next player
+        /**
+         * @author Hasan Issa
+         *
+         * Pass the turn to the next player
+         *
+         */
         this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 0 : this.currentPlayer + 1;
         newTurn();
     }
@@ -85,6 +100,13 @@ public class Game {
     }
 
     private void initializePlayers() {
+        /**
+         * @author Hasan Issa
+         *
+         * Ask the user for the number of players that will be playing, and then calls calculateTroops() to
+         * determine how many troops each player will get.
+         *
+         */
         Scanner sc = new Scanner(System.in);
         this.numberOfPlayers = sc.nextInt();
         boolean correctNumberOfPlayers;
@@ -136,9 +158,14 @@ public class Game {
     }
 
     private void randomizeMap() {
-        //im going to iterate over the players and assign troops until the troops left is zero
-        //im going to assign one troop from a player to a country if its empty.
-        //Once all countries have 1 troop, I will randomize the allocation of the leftover troops to the countries that are owned by the player
+        /**
+         * @author Hasan Issa
+         *
+         * Iterate over each Country and assign them 1 troop from a random player. Iterate until each country has 1 troop.
+         * Once all countries have 1 troop, randomize the allocation of the leftover troops. Only 1 player is allowed in a country.
+         * Once all players have all their troops allocated, finish.
+         *
+         */
         firstPhaseOfDeployment();
         secondPhaseOfDeployment();
 
@@ -161,7 +188,7 @@ public class Game {
     }
 
     private void secondPhaseOfDeployment() {
-        //For each Player, iterate over all the countries that he owns, and randomly increment the number of troops in his countries until he has no more troops left to allocate
+        //For each Player, iterate over all the countries that they own, and randomly increment the number of troops in their countries until they have no more troops left to allocate
         Random randomize = new Random();
         for (int i = 0; i < players.size(); i++) {
             while (players.get(i).getUndeployedTroops() > 0) {
@@ -201,6 +228,13 @@ public class Game {
     }
 
     private void initiateAttack(Command command) {
+        /**
+         * @author Hasan Issa
+         *
+         * Checks the syntax of the command passed, and makes sure it is Attack followed by AttackingCountry DefendingCountry #OfTroopsAttacking
+         * Ensures that the AttackingCountry is owned by the current player, the DefendingCountry is a neighbour of his, and that he has atleast 1 troop left in the country
+         *
+         */
         if (!checkAttackCommandSyntax(command)) return;
 
         String attackCountryName = command.getSecondWord().toLowerCase();
@@ -225,6 +259,17 @@ public class Game {
     }
 
     private void attackAlgorithm(int numberOfTroopsAttacking, int numberOfTroopsDefending) {
+        /**
+         * @author Hasan Issa
+         *
+         * Rolls dice based on the number of troops attacking and defending
+         * Checks the highest attack dice with the highest defence dice, the higher number wins. A tie is a Defender win.
+         * Checks the second highest attack dice with the second highest defence dice, the higher number wins. A tie is a Defender win.
+         * Decrements the number of troops for the loser side.
+         * If the attacker has no troops left, he loses the attack.
+         * If the defender has no troops left, the attacker wins the attack.
+         *
+         */
         List<Integer> attackersDiceResults = new ArrayList<>();
         List<Integer> defendersDiceResults = new ArrayList<>();
         List<Integer> troopsLost = new ArrayList<>();
@@ -245,11 +290,11 @@ public class Game {
                 }
                 troopsLost = checkOutcomeOfBattle(attackersDiceResults, defendersDiceResults);
                 currentNumberOfAttackingTroops = currentNumberOfAttackingTroops - troopsLost.get(0);
-                attackingCountry.setNumberOfTroops(attackingCountry.getNumberOfTroops()-troopsLost.get(0));
+                attackingCountry.setNumberOfTroops(attackingCountry.getNumberOfTroops() - troopsLost.get(0));
                 currentNumberOfDefendingTroops = currentNumberOfDefendingTroops - troopsLost.get(1);
-                defendingCountry.setNumberOfTroops(defendingCountry.getNumberOfTroops()-troopsLost.get(1));
+                defendingCountry.setNumberOfTroops(defendingCountry.getNumberOfTroops() - troopsLost.get(1));
 
-                System.out.println("Attacker lost " + troopsLost.get(0)+" troops and the Defender lost "+troopsLost.get(1) );
+                System.out.println("Attacker lost " + troopsLost.get(0) + " troops and the Defender lost " + troopsLost.get(1));
                 System.out.println("The Attackers current number of attacking troops left is " + currentNumberOfAttackingTroops);
                 System.out.println("The Defenders current number of defending troops left is " + currentNumberOfDefendingTroops);
             }
@@ -262,11 +307,11 @@ public class Game {
                 }
                 troopsLost = checkOutcomeOfBattle(attackersDiceResults, defendersDiceResults);
                 currentNumberOfAttackingTroops = currentNumberOfAttackingTroops - troopsLost.get(0);
-                attackingCountry.setNumberOfTroops(attackingCountry.getNumberOfTroops()-troopsLost.get(0));
+                attackingCountry.setNumberOfTroops(attackingCountry.getNumberOfTroops() - troopsLost.get(0));
                 currentNumberOfDefendingTroops = currentNumberOfDefendingTroops - troopsLost.get(1);
-                defendingCountry.setNumberOfTroops(defendingCountry.getNumberOfTroops()-troopsLost.get(1));
+                defendingCountry.setNumberOfTroops(defendingCountry.getNumberOfTroops() - troopsLost.get(1));
 
-                System.out.println("Attacker lost " + troopsLost.get(0)+" troops and the Defender lost "+troopsLost.get(1) );
+                System.out.println("Attacker lost " + troopsLost.get(0) + " troops and the Defender lost " + troopsLost.get(1));
                 System.out.println("The Attackers current number of attacking troops left is " + currentNumberOfAttackingTroops);
                 System.out.println("The Defenders current number of defending troops left is " + currentNumberOfDefendingTroops);
             }
@@ -403,6 +448,12 @@ public class Game {
     }
 
     public void play() {
+        /**
+         * @author Hasan Issa
+         *
+         * The main loop of the game. Takes user input until the user inputs Quit.
+         *
+         */
         boolean startedGame = false;
         System.out.println("Welcome to Risk! How many players will be playing today? This version of risk can hold up to and including 6 players.");
         do {

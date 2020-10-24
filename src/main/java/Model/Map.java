@@ -7,7 +7,13 @@ import org.jgrapht.graph.SimpleGraph;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
+/**
+ * @author      Hasan Issa
+ *
+ * This is the Map object of our Risk world, which we represent as a Graph<Country, DefaultEdge>.
+ * Every Country is a Vertex, which has neighbouring countries connected to its Edges.
+ *
+ */
 public class Map {
     private Graph<Country, DefaultEdge> mapGraph;
     private Set<Country> listOfCountries;
