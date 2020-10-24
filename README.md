@@ -42,6 +42,7 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 ## Documentation 
 
 ### UML Class Diagram
+![UML Class Diagram](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/UML.jpg)
 
 ### Sequence Diagram
 ![Initialize Sequence Diagram ](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/InitializeSequence.jpeg)
