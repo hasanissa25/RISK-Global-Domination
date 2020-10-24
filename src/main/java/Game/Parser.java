@@ -1,7 +1,12 @@
 package Game;
 
 import java.util.Scanner;
-
+/**
+ * @author      Hasan Issa
+ *
+ * This class handles the gathering of user input, and turns it into a Command.
+ *
+ */
 public class Parser
 {
     private CommandWords commands;  // holds all valid command words
@@ -12,6 +17,12 @@ public class Parser
         reader = new Scanner(System.in);
     }
     public Command getCommand(int currentPlayer)    {
+        /**
+         * @author      Hasan Issa
+         *
+         * This method handles the user input.
+         *
+         */
         String inputLine;
         String word1 = null;
         String word2 = null;
