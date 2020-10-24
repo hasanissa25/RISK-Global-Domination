@@ -60,4 +60,4 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 
 ### The roadmap ahead.
 
-## User manuals
+### User manuals
