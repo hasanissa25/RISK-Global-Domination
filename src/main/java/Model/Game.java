@@ -320,14 +320,39 @@ public class Game {
             System.out.println("\nSadly, you have lost the attack :(");
             System.out.println(attackingCountry.getName() + " now has " + attackingCountry.getNumberOfTroops() + " troop(s) left in the country");
             System.out.println(defendingCountry.getName() + " now has " + defendingCountry.getNumberOfTroops() + " troop(s) left in the country");
-
+            attackingCountry.getPlayer().setTotalNumberOftroops(attackingCountry.getPlayer().getTotalNumberOftroops()- (numberOfTroopsAttacking-currentNumberOfAttackingTroops));
+            System.out.println("Player "+attackingCountry.getPlayer().getPlayerNumber()+" has " + attackingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
+            defendingCountry.getPlayer().setTotalNumberOftroops(defendingCountry.getPlayer().getTotalNumberOftroops()- (numberOfTroopsDefending-currentNumberOfDefendingTroops));
+            System.out.println("Player "+defendingCountry.getPlayer().getPlayerNumber()+" has " + defendingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
+            newTurn();
+            if(attackingCountry.getPlayer().getTotalNumberOftroops()==0){
+                players.remove(attackingCountry.getPlayer());
+                System.out.println("Player "+attackingCountry.getPlayer().getPlayerNumber()+" has been removed from the game.");
+            }
+            if(defendingCountry.getPlayer().getTotalNumberOftroops()==0){
+                players.remove(defendingCountry.getPlayer());
+                System.out.println("Player "+defendingCountry.getPlayer().getPlayerNumber()+" has been removed from the game.");
+            }
         }
         if (currentNumberOfDefendingTroops <= 0) {
             System.out.println("\nCongratulations! You have won the attack!");
             System.out.println(attackingCountry.getName() + " now has " + attackingCountry.getNumberOfTroops() + " troop(s) left in the country");
             System.out.println(defendingCountry.getName() + " now has " + defendingCountry.getNumberOfTroops() + " troop(s) left in the country");
-
+            attackingCountry.getPlayer().setTotalNumberOftroops(attackingCountry.getPlayer().getTotalNumberOftroops()- (numberOfTroopsAttacking-currentNumberOfAttackingTroops));
+            System.out.println("Player "+attackingCountry.getPlayer().getPlayerNumber()+" has " + attackingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
+            defendingCountry.getPlayer().setTotalNumberOftroops(defendingCountry.getPlayer().getTotalNumberOftroops()- (numberOfTroopsDefending-currentNumberOfDefendingTroops));
+            System.out.println("Player "+defendingCountry.getPlayer().getPlayerNumber()+" has " + defendingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
+            newTurn();
+            if(attackingCountry.getPlayer().getTotalNumberOftroops()==0){
+                players.remove(attackingCountry.getPlayer());
+                System.out.println("Player "+attackingCountry.getPlayer().getPlayerNumber()+" has been removed from the game.");
+            }
+            if(defendingCountry.getPlayer().getTotalNumberOftroops()==0){
+                players.remove(defendingCountry.getPlayer());
+                System.out.println("Player "+defendingCountry.getPlayer().getPlayerNumber()+" has been removed from the game.");
+            }
         }
+
     }
 
     private List<Integer> checkOutcomeOfBattle(List<Integer> attackersDiceResults, List<Integer> defendersDiceResults) {

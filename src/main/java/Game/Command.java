@@ -29,7 +29,7 @@ public class Command
  * @author      Hasan Issa
  *
  * @param commandWord This is the word that dictates what type of action will be taken due to this command.
- *                    commandWords include Attack,Map,Quit, and Passturn
+ *                    commandWords include Attack,Map,Quit, and Pass
  *
  */
   return commandWord;

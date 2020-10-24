@@ -16,12 +16,23 @@ public class Player {
     private List<Country> myPossibleTargets;
     private Map theMap;
 
+    private int totalNumberOftroops;
+
     public Player(int playerID, int startingNumberOfTroops) {
         this.playerNumber = playerID;
         this.undeployedTroops = startingNumberOfTroops;
         this.myCountries = new ArrayList<>();
         this.myPossibleTargets = new ArrayList<>();
+        this.totalNumberOftroops=startingNumberOfTroops;
     }
+    public int getTotalNumberOftroops() {
+        return totalNumberOftroops;
+    }
+
+    public void setTotalNumberOftroops(int totalNumberOftroops) {
+        this.totalNumberOftroops = totalNumberOftroops;
+    }
+
 
     public int getPlayerNumber() {
         return playerNumber;
