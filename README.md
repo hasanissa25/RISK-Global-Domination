@@ -70,7 +70,32 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 * Represented as Graph<Country, DefaultEdge>. This allows us to have an easier time manipulating countries, and their neighbouring countries.
 ** Every Country is a Vertex, which has neighbouring countries connected to its Edges.
 
+-Player
+* Part of the model.  
+* Represents the players of the game.
+* The player knows the countries they currently own. 
+* The player knows the possible targets they can choose to attack, based on their countries neighbours.
+* The player knows how many troops they have to deploy for next milestones when players start receiving troops throughout the game.
 
+-Command
+* A string of 4 words, which is converted into a command for internal use.
+* The first word is a Command Word that dictates what type of action will be taken due to this command.
+
+-CommandWord
+* Commands that could be passed to the game to dectate a specific action.
+* Command Words include Attack,Map,Quit, and Passturn.
+* Attac: Initiate an attack from one country to its neighbour, using a specified number of troops.
+* Map: Returns a Risk world representation, showing all countries, the player that owns them, and the number of troops in that country.
+* Quit: Exits the game
+* Passturn: Pass the turn from the current player to the next player.
+
+-Parser
+* This class handles the gathering of user input, and turns it into a Command.
+* Ensures the user is following proper syntax when entering commands.
+
+-UtilArray
+* A Java program to remove an element from a specific index from an array.
+* In our situation, it handles removing a country from an array.
 
 ## The Readme
 
@@ -81,5 +106,9 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 ### The known issues 
 
 ### The roadmap ahead.
+
+-We started preparing for the next milestones through using easily maintainable code.
+* The player knows how many troops they have to deploy for next milestones when players start receiving troops throughout the game.
+
 
 ### User manuals
