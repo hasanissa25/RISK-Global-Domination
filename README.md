@@ -49,6 +49,28 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 ![Attack Sequence Diagram ](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/AttackSequence.jpeg)
 
 ### Detailed Description of Design
+-Game is the main loop of the program.
+* The Controller
+* Creates and initialises all the other classes.
+* Takes in the number of players, and handles the random allocation of Player(and their troops) to Country.
+* Creates the map of all Countries and their neighbours.
+* Creates the parser and starts the game.
+* Processes and executes the commands that the parser returns.
+* Includes the Attack Algorithm to decide which country wins in battle.
+
+-Country 
+* Part of the model.
+* Represents the countries in our Risk map.
+* Knows the occupying player.
+* Knows the number of currently occupying troops.
+
+-Map
+* Part of the model.
+* This is the Map representation of our Risk world. 
+* Represented as Graph<Country, DefaultEdge>. This allows us to have an easier time manipulating countries, and their neighbouring countries.
+** Every Country is a Vertex, which has neighbouring countries connected to its Edges.
+
+
 
 ## The Readme
 
