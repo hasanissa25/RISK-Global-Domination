@@ -131,7 +131,7 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 * The attacking aglorithm can choose how many troops are attacking, and how many troops are defending. This makes it easy to set up the attack in waves, in order to allow the user to choose to back out of a battle, instead of having his army eliminated.
 * Since we have access to the defending country, we can grab its associated player, and prompt them to enter how many troops they would like to defend with.
 
-### User manuals
+### User Manual
 1. Run the JarFile
 2. When promted, enter the integer number of players that will be playing the game; 2,3,4,5 or 6 players. : 6
 3. Read the output to see the countries you own, and the neighbouring countries you can attack.
