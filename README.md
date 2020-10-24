@@ -49,7 +49,8 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 ![Attack Sequence Diagram ](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/AttackSequence.jpeg)
 
 ### Detailed Description of Design
-- Game is the main loop of the program.
+#### Game
+* Main loop of the program.
 * The Controller
 * Creates and initialises all the other classes.
 * Takes in the number of players, and handles the random allocation of Player(and their troops) to Country.
@@ -58,30 +59,30 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 * Processes and executes the commands that the parser returns.
 * Includes the Attack Algorithm to decide which country wins in battle.
 
-- Country 
+#### Country 
 * Part of the model.
 * Represents the countries in our Risk map.
 * Knows the occupying player.
 * Knows the number of currently occupying troops.
 
-- Map
+#### Map
 * Part of the model.
 * This is the Map representation of our Risk world. 
 * Represented as Graph<Country, DefaultEdge>. This allows us to have an easier time manipulating countries, and their neighbouring countries.
 ** Every Country is a Vertex, which has neighbouring countries connected to its Edges.
 
-- Player
+#### Player
 * Part of the model.  
 * Represents the players of the game.
 * The player knows the countries they currently own. 
 * The player knows the possible targets they can choose to attack, based on their countries neighbours.
 * The player knows how many troops they have to deploy for next milestones when players start receiving troops throughout the game.
 
-- Command
+#### Command
 * A string of 4 words, which is converted into a command for internal use.
 * The first word is a Command Word that dictates what type of action will be taken due to this command.
 
-- CommandWord
+#### CommandWord
 * Commands that could be passed to the game to dectate a specific action.
 * Command Words include Attack,Map,Quit, and Pass.
 * Attac: Initiate an attack from one country to its neighbour, using a specified number of troops.
@@ -89,11 +90,11 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 * Quit: Exits the game
 * Pass: Pass the turn from the current player to the next player.
 
-- Parser
+#### Parser
 * This class handles the gathering of user input, and turns it into a Command.
 * Ensures the user is following proper syntax when entering commands.
  
-- UtilArray
+#### UtilArray
 * A Java program to remove an element from a specific index from an array.
 * In our situation, it handles removing a country from an array.
 
