@@ -39,25 +39,25 @@ initial design and implementation for the Model part of the MVC. Do not worry ab
 any GUI yet.
 Deliverables: readme file + code (source + executable in a jar file) + UML diagrams + documentation, all in one zip file.
 
-## UML Class Diagram
+## Documentation 
 
-## Sequence Diagram
+### UML Class Diagram
+
+### Sequence Diagram
 ![Initialize Sequence Diagram ](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/InitializeSequence.jpeg)
 
 ![Attack Sequence Diagram ](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/AttackSequence.jpeg)
 
-## Detailed Description of Design
+### Detailed Description of Design
 
-## The rest of the deliverables
+## The Readme
 
-## Changes that were made since the previous deliverable 
+### The rest of the deliverables
 
-## The known issues 
+### Changes that were made since the previous deliverable 
 
-## The roadmap ahead.
+### The known issues 
 
-## Documentation 
-
-## Design decisions made
+### The roadmap ahead.
 
 ## User manuals
