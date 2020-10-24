@@ -102,7 +102,7 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 ### The rest of the deliverbles
 * A UML Class diagram showing the full program and the associations between classes.
 * A UML Sequence Diagram showing the two most important scenarios: Attack Command, and Initialize game. 
-* The Source code, and a runnable Jar file.
+* The Source code, and a runnable Jar file, including the JavaDoc
 * Documentation
 * Readme file.
 
