@@ -3,7 +3,8 @@
 
 #### Hasan [@hasanissa25](https://github.com/hasanissa25) - 100921446
 #### John Afolayan [@John-Afolayan](https://github.com/John-Afolayan)
-#### Temitayo Adegoke 
+#### Temitayo Adegoke [@tayothegamer](https://github.com/tayothegamer)
+
 
 ## Project Kanban
 https://github.com/hasanissa25/SYSC3110-Risk-Group10/projects/1?add_cards_query=is%3Aopen
@@ -41,6 +42,8 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 ## UML Class Diagram
 
 ## Sequence Diagram
+
+## Detailed Description of Design
 
 ## The rest of the deliverables
 
