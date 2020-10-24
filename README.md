@@ -136,7 +136,7 @@ Deliverables: readme file + code (source + executable in a jar file) + UML diagr
 2. When promted, enter the integer number of players that will be playing the game; 2,3,4,5 or 6 players. : 6
 3. Read the output to see the countries you own, and the neighbouring countries you can attack.
 4. Your options are Attack, Map, Pass, Quit
-  * Attack: To attack a country, enter : Attack AttackingCountry TheTargetCountry NumberOfTroops. i.e; Attack Peru Venezuela 2. Ensure that you have 1 remaining troop in the country to defend.
+  * Attack: To attack a country, enter : Attack AttackingCountry TheTargetCountry NumberOfTroops. i.e; Attack Peru Venezuela 2. Ensure that you have 1 remaining troop in the country to defend. Ensure you own the country you are attacking from. Ensure the country you want to target is neighbouring the country you are attacking from.
   * Map: Returns the current list of countries in the game, the players that own them, and the number of troops they have in that country.
   * Pass: Passes the turn from you to the next player.
   * Quit: Exit the game.
