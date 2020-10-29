@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * @author      Hasan Issa
  *
- * This is the Map object of our Risk world, which we represent as a Graph<Country, DefaultEdge>.
+ * This is the Map object of our Risk world, which we represent as a Graph
  * Every Country is a Vertex, which has neighbouring countries connected to its Edges.
  *
  */
