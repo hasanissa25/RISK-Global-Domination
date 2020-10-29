@@ -19,7 +19,6 @@ import java.util.Scanner;
  * It creates the parser and starts the game.
  * It also evaluates and executes the commands that the parser returns.
  */
-
 public class Game {
     private Parser parser;
     private int currentPlayer = 0;
@@ -70,24 +69,15 @@ public class Game {
 
         return wantToQuit;
     }
-
+    /**
+     *  Print a representation of the map
+     *  @author Hasan Issa
+     */
     private void printMap() {
-        /**
-         * @author Hasan Issa
-         *
-         * Print a representation of the map
-         *
-         */
         System.out.println(this.myMap);
     }
 
     private void passTurn() {
-        /**
-         * @author Hasan Issa
-         *
-         * Pass the turn to the next player
-         *
-         */
         this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 0 : this.currentPlayer + 1;
         newTurn();
     }
