@@ -3,6 +3,7 @@ package Model;
 import Game.Command;
 import Game.Parser;
 import Game.UtilArray;
+import View.View;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -21,11 +22,15 @@ import java.util.Scanner;
  */
 public class Game {
     private Parser parser;
+
     private int currentPlayer = 0;
 
     private List<Player> players;
 
+    private View viewer;
+
     private int numberOfPlayers;
+
     private int initialNumberOfTroops;
     private Map myMap = new Map();
     private InputStream inputStream;
@@ -35,7 +40,6 @@ public class Game {
         this.myMap = new Map();
         parser = new Parser();
     }
-
 
     private void printCurrentPlayer() {
         System.out.println("\n!*-----------------------------------------------NEW TURN!-------------------------------------------------------*!");
@@ -69,9 +73,11 @@ public class Game {
 
         return wantToQuit;
     }
+
     /**
-     *  Print a representation of the map
-     *  @author Hasan Issa
+     * Print a representation of the map
+     *
+     * @author Hasan Issa
      */
     private void printMap() {
         System.out.println(this.myMap);
@@ -187,6 +193,10 @@ public class Game {
                 players.get(i).decrementUndeployedNumberOfTroops();
             }
         }
+    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
     }
 
     private void printListOfCurrentPlayerCountries() {
@@ -310,36 +320,36 @@ public class Game {
             System.out.println("\nSadly, you have lost the attack :(");
             System.out.println(attackingCountry.getName() + " now has " + attackingCountry.getNumberOfTroops() + " troop(s) left in the country");
             System.out.println(defendingCountry.getName() + " now has " + defendingCountry.getNumberOfTroops() + " troop(s) left in the country");
-            attackingCountry.getPlayer().setTotalNumberOftroops(attackingCountry.getPlayer().getTotalNumberOftroops()- (numberOfTroopsAttacking-currentNumberOfAttackingTroops));
-            System.out.println("Player "+attackingCountry.getPlayer().getPlayerNumber()+" has " + attackingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
-            defendingCountry.getPlayer().setTotalNumberOftroops(defendingCountry.getPlayer().getTotalNumberOftroops()- (numberOfTroopsDefending-currentNumberOfDefendingTroops));
-            System.out.println("Player "+defendingCountry.getPlayer().getPlayerNumber()+" has " + defendingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
+            attackingCountry.getPlayer().setTotalNumberOftroops(attackingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsAttacking - currentNumberOfAttackingTroops));
+            System.out.println("Player " + attackingCountry.getPlayer().getPlayerNumber() + " has " + attackingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
+            defendingCountry.getPlayer().setTotalNumberOftroops(defendingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsDefending - currentNumberOfDefendingTroops));
+            System.out.println("Player " + defendingCountry.getPlayer().getPlayerNumber() + " has " + defendingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
             newTurn();
-            if(attackingCountry.getPlayer().getTotalNumberOftroops()==0){
+            if (attackingCountry.getPlayer().getTotalNumberOftroops() == 0) {
                 players.remove(attackingCountry.getPlayer());
-                System.out.println("Player "+attackingCountry.getPlayer().getPlayerNumber()+" has been removed from the game.");
+                System.out.println("Player " + attackingCountry.getPlayer().getPlayerNumber() + " has been removed from the game.");
             }
-            if(defendingCountry.getPlayer().getTotalNumberOftroops()==0){
+            if (defendingCountry.getPlayer().getTotalNumberOftroops() == 0) {
                 players.remove(defendingCountry.getPlayer());
-                System.out.println("Player "+defendingCountry.getPlayer().getPlayerNumber()+" has been removed from the game.");
+                System.out.println("Player " + defendingCountry.getPlayer().getPlayerNumber() + " has been removed from the game.");
             }
         }
         if (currentNumberOfDefendingTroops <= 0) {
             System.out.println("\nCongratulations! You have won the attack!");
             System.out.println(attackingCountry.getName() + " now has " + attackingCountry.getNumberOfTroops() + " troop(s) left in the country");
             System.out.println(defendingCountry.getName() + " now has " + defendingCountry.getNumberOfTroops() + " troop(s) left in the country");
-            attackingCountry.getPlayer().setTotalNumberOftroops(attackingCountry.getPlayer().getTotalNumberOftroops()- (numberOfTroopsAttacking-currentNumberOfAttackingTroops));
-            System.out.println("Player "+attackingCountry.getPlayer().getPlayerNumber()+" has " + attackingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
-            defendingCountry.getPlayer().setTotalNumberOftroops(defendingCountry.getPlayer().getTotalNumberOftroops()- (numberOfTroopsDefending-currentNumberOfDefendingTroops));
-            System.out.println("Player "+defendingCountry.getPlayer().getPlayerNumber()+" has " + defendingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
+            attackingCountry.getPlayer().setTotalNumberOftroops(attackingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsAttacking - currentNumberOfAttackingTroops));
+            System.out.println("Player " + attackingCountry.getPlayer().getPlayerNumber() + " has " + attackingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
+            defendingCountry.getPlayer().setTotalNumberOftroops(defendingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsDefending - currentNumberOfDefendingTroops));
+            System.out.println("Player " + defendingCountry.getPlayer().getPlayerNumber() + " has " + defendingCountry.getPlayer().getTotalNumberOftroops() + " total troops remaining");
             newTurn();
-            if(attackingCountry.getPlayer().getTotalNumberOftroops()==0){
+            if (attackingCountry.getPlayer().getTotalNumberOftroops() == 0) {
                 players.remove(attackingCountry.getPlayer());
-                System.out.println("Player "+attackingCountry.getPlayer().getPlayerNumber()+" has been removed from the game.");
+                System.out.println("Player " + attackingCountry.getPlayer().getPlayerNumber() + " has been removed from the game.");
             }
-            if(defendingCountry.getPlayer().getTotalNumberOftroops()==0){
+            if (defendingCountry.getPlayer().getTotalNumberOftroops() == 0) {
                 players.remove(defendingCountry.getPlayer());
-                System.out.println("Player "+defendingCountry.getPlayer().getPlayerNumber()+" has been removed from the game.");
+                System.out.println("Player " + defendingCountry.getPlayer().getPlayerNumber() + " has been removed from the game.");
             }
         }
 
@@ -462,6 +472,14 @@ public class Game {
         return true;
     }
 
+    public void setViewer(View viewer) {
+        this.viewer = viewer;
+    }
+
+    private void updateViewer() {
+        this.viewer.handleChangeEvent(this);
+    }
+
     public void play() {
         /**
          * @author Hasan Issa
@@ -498,16 +516,8 @@ public class Game {
         initializePlayers();
         System.out.println("There will be " + numberOfPlayers + " players this game! The current version of the game uses an automatic allocation of troops and countries to the players.");
         randomizeMap();
-        System.out.println("\nYour available commands are:");
-        parser.showCommands();
-        printCurrentPlayer();
-        printListOfCurrentPlayerCountries();
+        newTurn();
 
-
-    }
-
-    private void printListOfCurrentPlayerCountries() {
-        System.out.println(players.get(currentPlayer - 1).getMyCountries().toString());
     }
 
     public static void main(String[] args) {
