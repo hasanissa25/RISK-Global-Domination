@@ -16,13 +16,15 @@ public class CircleButton extends JButton{
 
     private boolean mouseOver = false;
     private boolean mousePressed = false;
+    private final static int WIDTH = 20;
+    private final static int HEIGHT = 20;
 
-    public CircleButton(String text){
+    public CircleButton(String text, int x, int y){
         super(text);
         setOpaque(false);
         setFocusPainted(false);
         setBorderPainted(false);
-
+        setBounds(x, y,WIDTH, HEIGHT);
         MouseAdapter mouseListener = new MouseAdapter(){
 
             @Override
@@ -61,7 +63,6 @@ public class CircleButton extends JButton{
         int diameter = Math.min(getWidth(), getHeight());
         return diameter;
     }
-
     @Override
     public Dimension getPreferredSize(){
         FontMetrics metrics = getGraphics().getFontMetrics(getFont());
