@@ -41,9 +41,8 @@ public class Game {
         parser = new Parser();
     }
 
-    private void printCurrentPlayer() {
-        System.out.println("\n!*-----------------------------------------------NEW TURN!-------------------------------------------------------*!");
-        System.out.println("The current player is player-" + (currentPlayer + 1) + "\n");
+    public int printCurrentPlayer() {
+        return (currentPlayer+1);
     }
 
     public boolean processCommand(Command command) {
@@ -83,19 +82,19 @@ public class Game {
         System.out.println(this.myMap);
     }
 
-    private void passTurn() {
-        this.currentPlayer = (this.currentPlayer == this.numberOfPlayers) ? 0 : this.currentPlayer + 1;
-        newTurn();
+    public void passTurn() {
+        this.currentPlayer = (this.currentPlayer == (this.numberOfPlayers-1)) ? 0 : this.currentPlayer + 1;
+       // newTurn();
     }
 
     private void newTurn() {
-        printCurrentPlayer();
+        System.out.println(printCurrentPlayer());
         printListOfCurrentPlayerCountries();
         printListOfCurrentPlayerPossibleCountriesToAttack();
         parser.showCommands();
     }
 
-    private void initializePlayers() {
+    public void initializePlayers(int numberOfPlayers) {
         /**
          * @author Hasan Issa
          *
@@ -103,24 +102,12 @@ public class Game {
          * determine how many troops each player will get.
          *
          */
-        Scanner sc = new Scanner(System.in);
-        this.numberOfPlayers = sc.nextInt();
-        boolean correctNumberOfPlayers;
-        do {
-            if (numberOfPlayers < 7 && numberOfPlayers > 1) {
-                correctNumberOfPlayers = true;
-
-            } else {
-                correctNumberOfPlayers = false;
-                System.out.println("The number of players allowed is 2,3,4,5 or 6 players. Please try again.");
-                numberOfPlayers = sc.nextInt();
-
-            }
-        } while (!correctNumberOfPlayers);
+        this.numberOfPlayers=numberOfPlayers;
         createPlayers(numberOfPlayers, calculateTroops(numberOfPlayers));
+        System.out.println("There are currently "+numberOfPlayers+" players in the game and "+calculateTroops(numberOfPlayers)+" Troops per player" );
     }
 
-    private int calculateTroops(int numberOfPlayers) {
+    public int calculateTroops(int numberOfPlayers) {
         initialNumberOfTroops = 0;
         switch (numberOfPlayers) {
             case 2:
@@ -513,11 +500,14 @@ public class Game {
     }
 
     public void startGame() {
-        initializePlayers();
         System.out.println("There will be " + numberOfPlayers + " players this game! The current version of the game uses an automatic allocation of troops and countries to the players.");
         randomizeMap();
         newTurn();
 
+    }
+
+    public void quitGame() {
+        System.exit(0);
     }
 
     public static void main(String[] args) {

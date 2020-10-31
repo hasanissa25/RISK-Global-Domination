@@ -22,7 +22,14 @@ public class Command
   this.fourthWord = fourthWord;
 
  }
+ public Command(String firstWord)
+ {
+  commandWord = firstWord;
+  this.secondWord = null;
+  this.thirdWord = null;
+  this.fourthWord = null;
 
+ }
 
  public String getCommandWord() {
 /**

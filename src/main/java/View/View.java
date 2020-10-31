@@ -12,7 +12,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class View extends JFrame {
-    JButton newGameButton, attackButton, passTurnButton,quitButton;
+    JButton newGameButton;
+
+
+
+    JButton attackButton;
+    JButton passTurnButton;
+    JButton quitButton;
     JTextArea feedbackArea;
 
     public View(){
@@ -83,6 +89,31 @@ public class View extends JFrame {
 
     public void setFeedbackArea(String feedbackAreaText) {
         this.feedbackArea.append(feedbackAreaText);
+    }
+
+    public JTextArea getFeedbackArea() {
+        return feedbackArea;
+    }
+    public JButton getNewGameButton() {
+        return newGameButton;
+    }
+    public int numberOfPlayersRequest() {
+        Integer[] choices = new Integer[]{2,3,4,5,6};
+        int choice = askUser(choices);
+        System.out.println("The number of players selected: " + choice);
+        return choice;
+
+    }
+    static int askUser(Integer[] choices){
+        Integer s = (Integer) JOptionPane.showInputDialog(
+                null,
+                "How many players are playing today?",
+                "Select number of players!",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                choices,
+                choices[0]);
+        return s;
     }
 
     /*
