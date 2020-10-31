@@ -7,16 +7,12 @@ import Game.GameEvent;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class View extends JFrame {
@@ -25,9 +21,9 @@ public class View extends JFrame {
     JButton attackButton;
     JButton passTurnButton;
     JButton quitButton;
+    ArrayList<JButton> listOfButtons;
     JTextArea feedbackArea;
     JButton moveButton;
-    JLabel mouseXYLabel;
     Map<String,CircleButton> mapOfButtons = new HashMap<>();
     CircleButton alaska;
     CircleButton alberta;
@@ -92,18 +88,6 @@ public class View extends JFrame {
         JLayeredPane jLayeredPane = new JLayeredPane();
         jLayeredPane.setSize(1150, 750);
         mapPanel mapPanel = new mapPanel();
-        mapPanel.addMouseMotionListener(new MouseMotionListener() {
-
-            @Override
-            public void mouseDragged(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                mouseXYLabel.setText("X: " + e.getX() + ", Y: " + e.getY());
-            }
-        });
         jLayeredPane.add(mapPanel, JLayeredPane.DEFAULT_LAYER);
 
         JPanel countryPanel = new JPanel();
@@ -166,7 +150,13 @@ public class View extends JFrame {
         passTurnButton = new JButton("PassTurn");
         quitButton = new JButton("QuitGame");
         moveButton = new JButton("Move");
-
+        attackButton.setEnabled(false);
+        passTurnButton.setEnabled(false);
+        moveButton.setEnabled(false);
+        listOfButtons= new ArrayList<JButton>();
+        listOfButtons.add(attackButton);
+        listOfButtons.add(passTurnButton);
+        listOfButtons.add(moveButton);
         feedbackArea = new JTextArea("Welcome to Risk! Please press New Game in order to start!\n");
         feedbackArea.setRows(4);
         JScrollPane feedbackAreaScrollPane = new JScrollPane(feedbackArea);
@@ -180,9 +170,7 @@ public class View extends JFrame {
         centerPanel.add(attackButton,BorderLayout.CENTER);
         centerPanel.add(moveButton,BorderLayout.EAST);
         menuPanel.add(passTurnButton, BorderLayout.EAST);
-        //menuPanel.add(quitButton, BorderLayout.SOUTH);
-        mouseXYLabel = new JLabel("X: , Y: ");
-        menuPanel.add(mouseXYLabel, BorderLayout.SOUTH);
+        menuPanel.add(quitButton, BorderLayout.SOUTH);
         root.add(menuPanel, BorderLayout.SOUTH);
 
         //Initialization of the frame
@@ -291,7 +279,6 @@ public class View extends JFrame {
 
 
     }
-
     public static void main(String[] args) {
 
         Game gameModel = new Game();
@@ -307,11 +294,20 @@ public class View extends JFrame {
         this.passTurnButton.addActionListener(gameController);
         this.quitButton.addActionListener(gameController);
         this.newGameButton.addActionListener(gameController);
+        this.moveButton.addActionListener(gameController);
+
     }
 
     public void handleGameStartEvent(GameEvent game) {
         initializeCountries(game.getGameMap(),game.getNumberOfPlayers());
+        unlockButtons();
 
+    }
+
+    private void unlockButtons() {
+        for(JButton button: listOfButtons){
+            button.setEnabled(true);
+        }
     }
 
     private void initializeCountries(Model.Map map, int numberOfTroops) {
