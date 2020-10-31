@@ -2,12 +2,12 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
- * @author      Hasan Issa
- *
+ * @author Hasan Issa
+ * <p>
  * This is the player object denoted by a playerNumber. The player knows the countries they own, and the possible targets they can choose to attack.
  * They know how many troops they have to deploy for later on milestones when players start receiving troops throughout the game.
- *
  */
 public class Player {
     private int playerNumber;
@@ -23,8 +23,9 @@ public class Player {
         this.undeployedTroops = startingNumberOfTroops;
         this.myCountries = new ArrayList<>();
         this.myPossibleTargets = new ArrayList<>();
-        this.totalNumberOftroops=startingNumberOfTroops;
+        this.totalNumberOftroops = startingNumberOfTroops;
     }
+
     public int getTotalNumberOftroops() {
         return totalNumberOftroops;
     }

@@ -12,17 +12,17 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class View extends JFrame {
+    Game gameModel;
     JButton newGameButton;
-
-
-
     JButton attackButton;
     JButton passTurnButton;
     JButton quitButton;
     JTextArea feedbackArea;
+    CircleButton alaska= new CircleButton("30");
 
-    public View(){
+    public View(Game gameModel){
         Initialize();
+        this.gameModel=gameModel;
     }
 
     public void Initialize() {
@@ -37,6 +37,14 @@ public class View extends JFrame {
         jLayeredPane.setSize(1150, 750);
         mapPanel mapPanel = new mapPanel();
         jLayeredPane.add(mapPanel, JLayeredPane.DEFAULT_LAYER);
+
+        JPanel countryPanel = new JPanel();
+        countryPanel.setSize(1150,750);
+        countryPanel.setOpaque(false);
+        countryPanel.setLayout(null);
+        countryPanel.add(alaska).setBounds(60,80,20,20);
+        jLayeredPane.add(countryPanel,JLayeredPane.POPUP_LAYER);
+
         root.add(jLayeredPane, BorderLayout.CENTER);
 
         //Menu Panel will have the set of commands that a user can choose from in order to play the game
@@ -69,7 +77,7 @@ public class View extends JFrame {
     public static void main(String[] args) {
 
         Game gameModel = new Game();
-        View gameView = new View();
+        View gameView = new View(gameModel);
         Controller gameController = new Controller(gameModel,gameView);
         gameView.initialize(gameController);
 
@@ -115,6 +123,12 @@ public class View extends JFrame {
                 choices[0]);
         return s;
     }
+
+
+    public void assignPlayerCountries() {
+        //For each player, go through my country buttons, and assign them a button based on the country name and the button name
+    }
+
 
     /*
      * The map panel is the Image of the Risk world that we will be overlaying the components over.
