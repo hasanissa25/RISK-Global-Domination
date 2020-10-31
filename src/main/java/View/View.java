@@ -39,6 +39,43 @@ public class View extends JFrame {
     CircleButton greenland;
     CircleButton easternunitedstates;
 
+    CircleButton Argentina;
+    CircleButton Brazil;
+    CircleButton Peru;
+    CircleButton Venezuela;
+    CircleButton EasternAustralia;
+    CircleButton Indonesia;
+    CircleButton NewGuinea;
+    CircleButton WesternAustralia;
+
+    CircleButton Kazakhstan;
+    CircleButton China;
+    CircleButton India;
+    CircleButton Irkutsk;
+    CircleButton Japan;
+    CircleButton Kamchatka;
+    CircleButton MiddleEast;
+    CircleButton Mongolia;
+    CircleButton Siam;
+    CircleButton Siberia;
+    CircleButton Ural;
+    CircleButton Yakutsk;
+
+    CircleButton GreatBritain;
+    CircleButton Iceland;
+    CircleButton NorthernEurope;
+    CircleButton Scandinavia;
+    CircleButton SouthernEurope;
+    CircleButton Ukraine;
+    CircleButton WesternEurope;
+
+    CircleButton Congo;
+    CircleButton EastAfrica;
+    CircleButton Egypt;
+    CircleButton Madagascar;
+    CircleButton NorthAfrica;
+    CircleButton SouthAfrica;
+
     public View(Game gameModel){
         Initialize();
         this.gameModel=gameModel;
@@ -83,6 +120,39 @@ public class View extends JFrame {
         countryPanel.add(Quebec);
         countryPanel.add(greenland);
         countryPanel.add(easternunitedstates);
+        countryPanel.add(Argentina);
+        countryPanel.add(Brazil);
+        countryPanel.add(Peru);
+        countryPanel.add(Venezuela);
+        countryPanel.add(EasternAustralia);
+        countryPanel.add(Indonesia);
+        countryPanel.add(NewGuinea);
+        countryPanel.add(WesternAustralia);
+        countryPanel.add(Kazakhstan);
+        countryPanel.add(China);
+        countryPanel.add(India);
+        countryPanel.add(Irkutsk);
+        countryPanel.add(Japan);
+        countryPanel.add(Kamchatka);
+        countryPanel.add(MiddleEast);
+        countryPanel.add(Mongolia);
+        countryPanel.add(Siam);
+        countryPanel.add(Siberia);
+        countryPanel.add(Ural);
+        countryPanel.add(Yakutsk);
+        countryPanel.add(GreatBritain);
+        countryPanel.add(Iceland);
+        countryPanel.add(NorthernEurope);
+        countryPanel.add(Scandinavia);
+        countryPanel.add(SouthernEurope);
+        countryPanel.add(Ukraine);
+        countryPanel.add(WesternEurope);
+        countryPanel.add(Congo);
+        countryPanel.add(EastAfrica);
+        countryPanel.add(Egypt);
+        countryPanel.add(Madagascar);
+        countryPanel.add(NorthAfrica);
+        countryPanel.add(SouthAfrica);
 
         jLayeredPane.add(countryPanel,JLayeredPane.POPUP_LAYER);
 
@@ -134,6 +204,43 @@ public class View extends JFrame {
         greenland= new CircleButton("", 378, 52);
         easternunitedstates= new CircleButton("", 247, 221);
 
+        Argentina= new CircleButton("", 266, 500);
+        Brazil= new CircleButton("", 335, 405);
+        Peru= new CircleButton("", 230, 405);
+        Venezuela= new CircleButton("", 260, 320);
+
+        EasternAustralia= new CircleButton("", 1044, 520);
+        Indonesia= new CircleButton("", 913, 439);
+        NewGuinea= new CircleButton("", 1003, 415);
+        WesternAustralia= new CircleButton("", 952, 520);
+
+        Kazakhstan= new CircleButton("", 745, 222);
+        China= new CircleButton("", 861, 260);
+        India= new CircleButton("", 799, 310);
+        Irkutsk= new CircleButton("", 882, 145);
+        Japan= new CircleButton("", 1000, 210);
+        Kamchatka= new CircleButton("", 969, 101);
+        MiddleEast= new CircleButton("", 676, 308);
+        Mongolia= new CircleButton("", 899, 195);
+        Siam= new CircleButton("", 896, 344);
+        Siberia= new CircleButton("", 817, 108);
+        Ural= new CircleButton("", 755, 141);
+        Yakutsk= new CircleButton("", 896, 73);
+
+        GreatBritain= new CircleButton("", 451, 181);
+        Iceland= new CircleButton("", 467, 119);
+        NorthernEurope= new CircleButton("", 544, 194);
+        Scandinavia= new CircleButton("", 556, 110);
+        SouthernEurope= new CircleButton("", 557, 256);
+        Ukraine= new CircleButton("", 645, 167);
+        WesternEurope= new CircleButton("", 465, 264);
+
+        Congo= new CircleButton("", 590, 443);
+        EastAfrica= new CircleButton("", 650, 417);
+        Egypt= new CircleButton("", 578, 339);
+        Madagascar= new CircleButton("", 695, 521);
+        NorthAfrica= new CircleButton("", 489, 365);
+        SouthAfrica= new CircleButton("", 590, 521);
 
         mapOfButtons.put("Alaska", alaska);
         mapOfButtons.put("Alberta", alberta);
@@ -144,6 +251,43 @@ public class View extends JFrame {
         mapOfButtons.put("Quebec",Quebec);
         mapOfButtons.put("Greenland",greenland);
         mapOfButtons.put("EasternUnitedStates",easternunitedstates);
+        mapOfButtons.put("Argentina",Argentina);
+        mapOfButtons.put("Brazil",Brazil);
+        mapOfButtons.put("Peru",Peru);
+        mapOfButtons.put("Venezuela",Venezuela);
+
+        mapOfButtons.put("EasternAustralia",EasternAustralia);
+        mapOfButtons.put("Indonesia",Indonesia);
+        mapOfButtons.put("NewGuinea",NewGuinea);
+        mapOfButtons.put("WesternAustralia",WesternAustralia);
+
+        mapOfButtons.put("Kazakhstan",Kazakhstan);
+        mapOfButtons.put("China",China);
+        mapOfButtons.put("India",India);
+        mapOfButtons.put("Irkutsk",Irkutsk);
+        mapOfButtons.put("Japan",Japan);
+        mapOfButtons.put("Kamchatka",Kamchatka);
+        mapOfButtons.put("MiddleEast",MiddleEast);
+        mapOfButtons.put("Mongolia",Mongolia);
+        mapOfButtons.put("Siam",Siam);
+        mapOfButtons.put("Siberia",Siberia);
+        mapOfButtons.put("Ural",Ural);
+        mapOfButtons.put("Yakutsk",Yakutsk);
+
+        mapOfButtons.put("GreatBritain",GreatBritain);
+        mapOfButtons.put("Iceland",Iceland);
+        mapOfButtons.put("NorthernEurope",NorthernEurope);
+        mapOfButtons.put("Scandinavia",Scandinavia);
+        mapOfButtons.put("SouthernEurope",SouthernEurope);
+        mapOfButtons.put("Ukraine",Ukraine);
+        mapOfButtons.put("WesternEurope",WesternEurope);
+
+        mapOfButtons.put("Congo",Congo);
+        mapOfButtons.put("EastAfrica",EastAfrica);
+        mapOfButtons.put("Egypt",Egypt);
+        mapOfButtons.put("Madagascar",Madagascar);
+        mapOfButtons.put("NorthAfrica",NorthAfrica);
+        mapOfButtons.put("SouthAfrica",SouthAfrica);
 
 
     }
@@ -155,7 +299,6 @@ public class View extends JFrame {
         gameModel.setViewer(gameView);
         Controller gameController = new Controller(gameModel,gameView);
         gameView.initialize(gameController);
-
 
     }
 
