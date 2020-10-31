@@ -3,13 +3,13 @@ package Model;
 import Game.Command;
 import Game.Parser;
 import Game.UtilArray;
+import Game.GameEvent;
 import View.View;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 
 /**
@@ -20,18 +20,16 @@ import java.util.Scanner;
  * It creates the parser and starts the game.
  * It also evaluates and executes the commands that the parser returns.
  */
-public class Game {
+public class Game{
     private Parser parser;
-
     private int currentPlayer = 0;
-
     private List<Player> players;
-
     private View viewer;
-
     private int numberOfPlayers;
-
     private int initialNumberOfTroops;
+
+
+
     private Map myMap = new Map();
     private InputStream inputStream;
     private Country attackingCountry;
@@ -42,7 +40,7 @@ public class Game {
     }
 
     public int printCurrentPlayer() {
-        return (currentPlayer+1);
+        return (currentPlayer + 1);
     }
 
     public boolean processCommand(Command command) {
@@ -82,9 +80,13 @@ public class Game {
         System.out.println(this.myMap);
     }
 
+    public Map getMyMap() {
+        return myMap;
+    }
+
     public void passTurn() {
-        this.currentPlayer = (this.currentPlayer == (this.numberOfPlayers-1)) ? 0 : this.currentPlayer + 1;
-       // newTurn();
+        this.currentPlayer = (this.currentPlayer == (this.numberOfPlayers - 1)) ? 0 : this.currentPlayer + 1;
+        // newTurn();
     }
 
     private void newTurn() {
@@ -102,9 +104,11 @@ public class Game {
          * determine how many troops each player will get.
          *
          */
-        this.numberOfPlayers=numberOfPlayers;
+        this.numberOfPlayers = numberOfPlayers;
         createPlayers(numberOfPlayers, calculateTroops(numberOfPlayers));
-        System.out.println("There are currently "+numberOfPlayers+" players in the game and "+calculateTroops(numberOfPlayers)+" Troops per player" );
+        System.out.println("There are currently " + numberOfPlayers + " players in the game and " + calculateTroops(numberOfPlayers) + " Troops per player");
+        randomizeMap();
+        viewer.handleGameStartEvent(new GameEvent(this,myMap, numberOfPlayers));
     }
 
     public int calculateTroops(int numberOfPlayers) {
@@ -185,7 +189,9 @@ public class Game {
     public int getCurrentPlayer() {
         return currentPlayer;
     }
-
+    public int getInitialNumberOfTroops() {
+        return initialNumberOfTroops;
+    }
     private void printListOfCurrentPlayerCountries() {
         System.out.println("Player " + (currentPlayer + 1) + " currently occupies the following countries: ");
         System.out.println(players.get(currentPlayer).getMyCountries().toString());
@@ -464,7 +470,7 @@ public class Game {
     }
 
     private void updateViewer() {
-        this.viewer.handleChangeEvent(this);
+        this.viewer.handleGameStartEvent(new GameEvent(this));
     }
 
     public void play() {
