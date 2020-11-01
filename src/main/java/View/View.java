@@ -1,8 +1,10 @@
 package View;
 
 import Controller.Controller;
+import Model.Country;
 import Model.Game;
 import Game.GameEvent;
+import javafx.scene.shape.Circle;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,6 +12,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,20 +24,20 @@ public class View extends JFrame {
     JButton attackButton;
     JButton passTurnButton;
     JButton quitButton;
-    ArrayList<JButton> listOfButtons;
+    ArrayList<JButton> listOfCommandButtons;
+    ArrayList<CircleButton> listOfCountryButtons;
     JTextArea feedbackArea;
     JButton moveButton;
     Map<String,CircleButton> mapOfButtons = new HashMap<>();
     CircleButton alaska;
     CircleButton alberta;
     CircleButton centralAmerica;
-    CircleButton NorthwestTerritory;
-    CircleButton WesternUnitedStates;
-    CircleButton  Ontario;
-    CircleButton Quebec;
-    CircleButton greenland;
     CircleButton easternunitedstates;
-
+    CircleButton greenland;
+    CircleButton NorthwestTerritory;
+    CircleButton Ontario;
+    CircleButton Quebec;
+    CircleButton WesternUnitedStates;
     CircleButton Argentina;
     CircleButton Brazil;
     CircleButton Peru;
@@ -43,7 +46,6 @@ public class View extends JFrame {
     CircleButton Indonesia;
     CircleButton NewGuinea;
     CircleButton WesternAustralia;
-
     CircleButton Kazakhstan;
     CircleButton China;
     CircleButton India;
@@ -56,7 +58,6 @@ public class View extends JFrame {
     CircleButton Siberia;
     CircleButton Ural;
     CircleButton Yakutsk;
-
     CircleButton GreatBritain;
     CircleButton Iceland;
     CircleButton NorthernEurope;
@@ -64,7 +65,6 @@ public class View extends JFrame {
     CircleButton SouthernEurope;
     CircleButton Ukraine;
     CircleButton WesternEurope;
-
     CircleButton Congo;
     CircleButton EastAfrica;
     CircleButton Egypt;
@@ -137,11 +137,51 @@ public class View extends JFrame {
         countryPanel.add(Madagascar);
         countryPanel.add(NorthAfrica);
         countryPanel.add(SouthAfrica);
-
         jLayeredPane.add(countryPanel,JLayeredPane.POPUP_LAYER);
-
         root.add(jLayeredPane, BorderLayout.CENTER);
-
+        listOfCountryButtons= new ArrayList<CircleButton>();
+        listOfCountryButtons.add(alaska);
+        listOfCountryButtons.add(alberta);
+        listOfCountryButtons.add(centralAmerica);
+        listOfCountryButtons.add(NorthwestTerritory);
+        listOfCountryButtons.add(WesternUnitedStates);
+        listOfCountryButtons.add(Ontario);
+        listOfCountryButtons.add(Quebec);
+        listOfCountryButtons.add(greenland);
+        listOfCountryButtons.add(easternunitedstates);
+        listOfCountryButtons.add(Argentina);
+        listOfCountryButtons.add(Brazil);
+        listOfCountryButtons.add(Peru);
+        listOfCountryButtons.add(Venezuela);
+        listOfCountryButtons.add(EasternAustralia);
+        listOfCountryButtons.add(Indonesia);
+        listOfCountryButtons.add(NewGuinea);
+        listOfCountryButtons.add(WesternAustralia);
+        listOfCountryButtons.add(Kazakhstan);
+        listOfCountryButtons.add(China);
+        listOfCountryButtons.add(India);
+        listOfCountryButtons.add(Irkutsk);
+        listOfCountryButtons.add(Japan);
+        listOfCountryButtons.add(Kamchatka);
+        listOfCountryButtons.add(MiddleEast);
+        listOfCountryButtons.add(Mongolia);
+        listOfCountryButtons.add(Siam);
+        listOfCountryButtons.add(Siberia);
+        listOfCountryButtons.add(Ural);
+        listOfCountryButtons.add(Yakutsk);
+        listOfCountryButtons.add(GreatBritain);
+        listOfCountryButtons.add(Iceland);
+        listOfCountryButtons.add(NorthernEurope);
+        listOfCountryButtons.add(Scandinavia);
+        listOfCountryButtons.add(SouthernEurope);
+        listOfCountryButtons.add(Ukraine);
+        listOfCountryButtons.add(WesternEurope);
+        listOfCountryButtons.add(Congo);
+        listOfCountryButtons.add(EastAfrica);
+        listOfCountryButtons.add(Madagascar);
+        listOfCountryButtons.add(NorthAfrica);
+        listOfCountryButtons.add(SouthAfrica);
+        listOfCountryButtons.add(Egypt);
         //Menu Panel will have the set of commands that a user can choose from in order to play the game
         JPanel menuPanel = new JPanel();
         //Creating the buttons and adding actionlistener to them
@@ -153,10 +193,14 @@ public class View extends JFrame {
         attackButton.setEnabled(false);
         passTurnButton.setEnabled(false);
         moveButton.setEnabled(false);
-        listOfButtons= new ArrayList<JButton>();
-        listOfButtons.add(attackButton);
-        listOfButtons.add(passTurnButton);
-        listOfButtons.add(moveButton);
+        listOfCommandButtons = new ArrayList<JButton>();
+        listOfCommandButtons.add(attackButton);
+        listOfCommandButtons.add(passTurnButton);
+        listOfCommandButtons.add(moveButton);
+        listOfCommandButtons.add(quitButton);
+        listOfCommandButtons.add(newGameButton);
+
+
         feedbackArea = new JTextArea("Welcome to Risk! Please press New Game in order to start!\n");
         feedbackArea.setRows(4);
         JScrollPane feedbackAreaScrollPane = new JScrollPane(feedbackArea);
@@ -182,7 +226,7 @@ public class View extends JFrame {
     }
 
     private void countryView() {
-        alaska= new CircleButton("", 60, 80);
+        alaska= new CircleButton("alaska", 60, 80);
         alberta= new CircleButton("", 156, 131);
         centralAmerica= new CircleButton("", 180, 287);
         NorthwestTerritory= new CircleButton("", 173, 85);
@@ -286,15 +330,17 @@ public class View extends JFrame {
         gameModel.setViewer(gameView);
         Controller gameController = new Controller(gameModel,gameView);
         gameView.initialize(gameController);
+        gameModel.printListOfCurrentPlayerCountries();
 
     }
 
     private void initialize(Controller gameController) {
-        this.attackButton.addActionListener(gameController);
-        this.passTurnButton.addActionListener(gameController);
-        this.quitButton.addActionListener(gameController);
-        this.newGameButton.addActionListener(gameController);
-        this.moveButton.addActionListener(gameController);
+        for(JButton button: listOfCommandButtons){
+            button.addActionListener(gameController);
+        }
+        for(CircleButton button: listOfCountryButtons){
+            button.addActionListener(gameController);
+        }
 
     }
 
@@ -305,7 +351,7 @@ public class View extends JFrame {
     }
 
     private void unlockButtons() {
-        for(JButton button: listOfButtons){
+        for(JButton button: listOfCommandButtons){
             button.setEnabled(true);
         }
     }
@@ -348,9 +394,25 @@ public class View extends JFrame {
         return s;
     }
 
+    public JButton getAttackButton() {
+        return attackButton;
+    }
+    public Map<String, CircleButton> getMapOfButtons() {
+        return mapOfButtons;
+    }
 
     public void assignPlayerCountries() {
-        //For each player, go through my country buttons, and assign them a button based on the country name and the button name
+        //get the current player countries/buttons, turn them green
+        //get the list of my countries
+        ArrayList<Country> currentPlayersCountries = new ArrayList<Country>(gameModel.getPlayers().get(gameModel.getCurrentPlayer()).getMyCountries());
+        //compare the list of my countries, with the list of buttons, and find out which buttons are mine
+        mapOfButtons.forEach((key,value) -> value.setColor(Color.WHITE));
+        mapOfButtons.forEach((key,value) -> value.setBackground(Color.WHITE));
+        currentPlayersCountries.forEach(country -> {
+            mapOfButtons.get(country.getName()).setColor(Color.GREEN);
+            mapOfButtons.get(country.getName()).setBackground(Color.GREEN);
+        });
+
     }
 
 

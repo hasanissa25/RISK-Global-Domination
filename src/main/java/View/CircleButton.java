@@ -18,6 +18,9 @@ public class CircleButton extends JButton{
     private boolean mousePressed = false;
     private final static int WIDTH = 20;
     private final static int HEIGHT = 20;
+    Color color= Color.white;
+
+
 
     public CircleButton(String text, int x, int y){
         super(text);
@@ -75,7 +78,10 @@ public class CircleButton extends JButton{
         int radius = getDiameter()/2;
         return Point2D.distance(x, y, getWidth()/2, getHeight()/2) < radius;
     }
-
+    public void setColor(Color color) {
+        this.color = color;
+        this.repaint(0);
+    }
     @Override
     public void paintComponent(Graphics g){
 
@@ -86,7 +92,7 @@ public class CircleButton extends JButton{
             g.setColor(Color.LIGHT_GRAY);
         }
         else{
-            g.setColor(Color.WHITE);
+            g.setColor(color);
         }
         g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
 

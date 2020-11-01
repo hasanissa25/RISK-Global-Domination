@@ -108,6 +108,7 @@ public class Game{
         createPlayers(numberOfPlayers, calculateTroops(numberOfPlayers));
         System.out.println("There are currently " + numberOfPlayers + " players in the game and " + calculateTroops(numberOfPlayers) + " Troops per player");
         randomizeMap();
+        players.get(currentPlayer).getMyPossibleTargets(myMap);
         viewer.handleGameStartEvent(new GameEvent(this,myMap, numberOfPlayers));
     }
 
@@ -163,14 +164,25 @@ public class Game{
         Random randomize = new Random();
         int i = 0;
         while (remainingCountries.length != 0) {
+            System.out.println("You have entered the while loop!");
             int randomNumber = randomize.nextInt(remainingCountries.length);
+            System.out.println("Setting "+remainingCountries[randomNumber]+ "to player "+players.get(i).getPlayerNumber() );
+
             remainingCountries[randomNumber].setPlayer(players.get(i));
             players.get(i).decrementUndeployedNumberOfTroops();
             remainingCountries[randomNumber].incrementNumberOfTroops();
-            players.get(i).getMyCountries().add(remainingCountries[randomNumber]);
             remainingCountries = UtilArray.removeTheElement(remainingCountries, randomNumber);
             i++;
             if (i == numberOfPlayers) i = 0;
+        }
+        for(Player player: players){
+            for(Country country: myMap.getAllCountries()){
+                if(country.getPlayer().equals(player)){
+                    player.getMyCountries().add(country);
+                    System.out.println("Currently adding "+country.getName()+" to player "+player.getPlayerNumber());
+                    System.out.println("Player "+player.getPlayerNumber()+" current list of countries is :"+ player.getMyCountries());
+                }
+            }
         }
     }
 
@@ -192,7 +204,7 @@ public class Game{
     public int getInitialNumberOfTroops() {
         return initialNumberOfTroops;
     }
-    private void printListOfCurrentPlayerCountries() {
+    public void printListOfCurrentPlayerCountries() {
         System.out.println("Player " + (currentPlayer + 1) + " currently occupies the following countries: ");
         System.out.println(players.get(currentPlayer).getMyCountries().toString());
     }
@@ -220,7 +232,7 @@ public class Game{
         this.defendingCountry = defendingCountry;
     }
 
-    private void initiateAttack(Command command) {
+    public void initiateAttack(Command command) {
         /**
          * @author Hasan Issa
          *
@@ -473,13 +485,8 @@ public class Game{
         this.viewer.handleGameStartEvent(new GameEvent(this));
     }
 
-    public void play() {
-        /**
-         * @author Hasan Issa
-         *
-         * The main loop of the game. Takes user input until the user inputs Quit.
-         *
-         */
+   /* public void play() {
+
         boolean startedGame = false;
         System.out.println("Welcome to Risk! How many players will be playing today? This version of risk can hold up to and including 6 players.");
         do {
@@ -503,7 +510,7 @@ public class Game{
 
         }
         System.out.println("Thank you for playing!");
-    }
+    }*/
 
     public void startGame() {
         System.out.println("There will be " + numberOfPlayers + " players this game! The current version of the game uses an automatic allocation of troops and countries to the players.");
@@ -518,6 +525,6 @@ public class Game{
 
     public static void main(String[] args) {
         Game game = new Game();
-        game.play();
+        //game.play();
     }
 }
