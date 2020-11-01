@@ -1,9 +1,9 @@
 package Model;
 
 import Game.Command;
+import Game.GameEvent;
 import Game.Parser;
 import Game.UtilArray;
-import Game.GameEvent;
 import View.View;
 
 import java.io.InputStream;
@@ -20,16 +20,14 @@ import java.util.Random;
  * It creates the parser and starts the game.
  * It also evaluates and executes the commands that the parser returns.
  */
-public class Game{
+public class Game {
     private Parser parser;
     private int currentPlayer = 0;
     private List<Player> players;
     private View viewer;
     private int numberOfPlayers;
     private int initialNumberOfTroops;
-
-
-
+    public String result;
     private Map myMap = new Map();
     private InputStream inputStream;
     private Country attackingCountry;
@@ -109,7 +107,7 @@ public class Game{
         System.out.println("There are currently " + numberOfPlayers + " players in the game and " + calculateTroops(numberOfPlayers) + " Troops per player");
         randomizeMap();
         players.get(currentPlayer).getMyPossibleTargets(myMap);
-        viewer.handleGameStartEvent(new GameEvent(this,myMap, numberOfPlayers));
+        viewer.handleGameStartEvent(new GameEvent(this, myMap, numberOfPlayers));
     }
 
     public int calculateTroops(int numberOfPlayers) {
@@ -144,7 +142,9 @@ public class Game{
     public List<Player> getPlayers() {
         return players;
     }
-
+    public String getResult() {
+        return result;
+    }
     private void randomizeMap() {
         /**
          * @author Hasan Issa
@@ -166,7 +166,7 @@ public class Game{
         while (remainingCountries.length != 0) {
             System.out.println("You have entered the while loop!");
             int randomNumber = randomize.nextInt(remainingCountries.length);
-            System.out.println("Setting "+remainingCountries[randomNumber]+ "to player "+players.get(i).getPlayerNumber() );
+            System.out.println("Setting " + remainingCountries[randomNumber] + "to player " + players.get(i).getPlayerNumber());
 
             remainingCountries[randomNumber].setPlayer(players.get(i));
             players.get(i).decrementUndeployedNumberOfTroops();
@@ -175,12 +175,12 @@ public class Game{
             i++;
             if (i == numberOfPlayers) i = 0;
         }
-        for(Player player: players){
-            for(Country country: myMap.getAllCountries()){
-                if(country.getPlayer().equals(player)){
+        for (Player player : players) {
+            for (Country country : myMap.getAllCountries()) {
+                if (country.getPlayer().equals(player)) {
                     player.getMyCountries().add(country);
-                    System.out.println("Currently adding "+country.getName()+" to player "+player.getPlayerNumber());
-                    System.out.println("Player "+player.getPlayerNumber()+" current list of countries is :"+ player.getMyCountries());
+                    System.out.println("Currently adding " + country.getName() + " to player " + player.getPlayerNumber());
+                    System.out.println("Player " + player.getPlayerNumber() + " current list of countries is :" + player.getMyCountries());
                 }
             }
         }
@@ -201,9 +201,11 @@ public class Game{
     public int getCurrentPlayer() {
         return currentPlayer;
     }
+
     public int getInitialNumberOfTroops() {
         return initialNumberOfTroops;
     }
+
     public void printListOfCurrentPlayerCountries() {
         System.out.println("Player " + (currentPlayer + 1) + " currently occupies the following countries: ");
         System.out.println(players.get(currentPlayer).getMyCountries().toString());
@@ -261,9 +263,10 @@ public class Game{
             attackAlgorithm(numberOfTroopsAttacking, getDefendingCountry().getNumberOfTroops());
 
         }
+        viewer.updateView();
     }
 
-    private void attackAlgorithm(int numberOfTroopsAttacking, int numberOfTroopsDefending) {
+    private String attackAlgorithm(int numberOfTroopsAttacking, int numberOfTroopsDefending) {
         /**
          * @author Hasan Issa
          *
@@ -322,7 +325,7 @@ public class Game{
             }
         }
         if (currentNumberOfAttackingTroops <= 0) {
-            System.out.println("\nSadly, you have lost the attack :(");
+            this.result = "Sadly, you have lost the attack.\n";
             System.out.println(attackingCountry.getName() + " now has " + attackingCountry.getNumberOfTroops() + " troop(s) left in the country");
             System.out.println(defendingCountry.getName() + " now has " + defendingCountry.getNumberOfTroops() + " troop(s) left in the country");
             attackingCountry.getPlayer().setTotalNumberOftroops(attackingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsAttacking - currentNumberOfAttackingTroops));
@@ -340,7 +343,7 @@ public class Game{
             }
         }
         if (currentNumberOfDefendingTroops <= 0) {
-            System.out.println("\nCongratulations! You have won the attack!");
+            this.result = "Congratulations! You have won the attack!\n";
             System.out.println(attackingCountry.getName() + " now has " + attackingCountry.getNumberOfTroops() + " troop(s) left in the country");
             System.out.println(defendingCountry.getName() + " now has " + defendingCountry.getNumberOfTroops() + " troop(s) left in the country");
             attackingCountry.getPlayer().setTotalNumberOftroops(attackingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsAttacking - currentNumberOfAttackingTroops));
@@ -357,7 +360,7 @@ public class Game{
                 System.out.println("Player " + defendingCountry.getPlayer().getPlayerNumber() + " has been removed from the game.");
             }
         }
-
+        return result;
     }
 
     private List<Integer> checkOutcomeOfBattle(List<Integer> attackersDiceResults, List<Integer> defendersDiceResults) {

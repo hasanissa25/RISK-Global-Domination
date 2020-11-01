@@ -226,7 +226,7 @@ public class View extends JFrame {
     }
 
     private void countryView() {
-        alaska= new CircleButton("alaska", 60, 80);
+        alaska= new CircleButton("", 60, 80);
         alberta= new CircleButton("", 156, 131);
         centralAmerica= new CircleButton("", 180, 287);
         NorthwestTerritory= new CircleButton("", 173, 85);
@@ -345,7 +345,7 @@ public class View extends JFrame {
     }
 
     public void handleGameStartEvent(GameEvent game) {
-        initializeCountries(game.getGameMap(),game.getNumberOfPlayers());
+        initializeCountries(game.getGameMap());
         unlockButtons();
 
     }
@@ -356,7 +356,7 @@ public class View extends JFrame {
         }
     }
 
-    private void initializeCountries(Model.Map map, int numberOfTroops) {
+    private void initializeCountries(Model.Map map) {
         map.getAllCountries().forEach(country -> {
             CircleButton b=  mapOfButtons.get(country.getName());
             if(b!=null) {
@@ -378,7 +378,6 @@ public class View extends JFrame {
     public int numberOfPlayersRequest() {
         Integer[] choices = new Integer[]{2,3,4,5,6};
         int choice = askUser(choices);
-        System.out.println("The number of players selected: " + choice);
         return choice;
 
     }
@@ -413,6 +412,10 @@ public class View extends JFrame {
             mapOfButtons.get(country.getName()).setBackground(Color.GREEN);
         });
 
+    }
+
+    public void updateView() {
+        initializeCountries(gameModel.getMyMap());
     }
 
 

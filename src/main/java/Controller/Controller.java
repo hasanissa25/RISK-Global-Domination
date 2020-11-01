@@ -1,11 +1,15 @@
 package Controller;
 
+import Game.Command;
 import Model.Game;
 import View.CircleButton;
 import View.View;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Controller implements ActionListener {
@@ -15,6 +19,8 @@ public class Controller implements ActionListener {
     boolean attackingCountrySetFlag = false;
     String attackingCountry = "";
     String targetedCountry = "";
+    int numberOfTroops;
+    boolean requestNumberOfTroopsFlag = false;
 
     public Controller(Game gameModel, View gameView) {
         this.gameModel = gameModel;
@@ -36,7 +42,6 @@ public class Controller implements ActionListener {
                 if (attackInitiatedFlag) {
                     gameView.setFeedbackArea("Please click a country that belongs to you (Highlighted in Green), to initiate an attack from it. \n");
                     goToTheBottomOfTextField();
-
                 } else
                     gameView.setFeedbackArea("Attack has been called! Please Select one of your countries (Highlighted in Green), that you would like to initiate an attack from.\n");
                 goToTheBottomOfTextField();
@@ -72,49 +77,67 @@ public class Controller implements ActionListener {
                             } else {
                                 gameView.setFeedbackArea("You may only initiate attacks from your owned countries highlighted in green!\n");
                                 goToTheBottomOfTextField();
-                                this.attackingCountry="";
-                                attackInitiatedFlag=false;
+                                this.attackingCountry = "";
+                                attackInitiatedFlag = false;
                                 break;
                             }
                         }
                     }
                     break;
-
-                    //Command attackCommand = new Command("attack",secondWord,thirdWord,fourthWord);
-                    //gameModel.initiateAttack(attackCommand);
                 }
 
                 if (attackingCountrySetFlag) {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
                         if (entry.getValue().equals(e.getSource())) {
-                            System.out.println("Attacking country is "+attackingCountry+ "The country you want to target is : "+entry.getKey());
-                            if (gameModel.getMyMap().areNeighbours(attackingCountry,entry.getKey()) & !(gameModel.getMyMap().ownedBySamePlayer(attackingCountry,entry.getKey()))) {
+                            System.out.println("Attacking country is " + attackingCountry + "The country you want to target is : " + entry.getKey());
+                            if (gameModel.getMyMap().areNeighbours(attackingCountry, entry.getKey()) & !(gameModel.getMyMap().ownedBySamePlayer(attackingCountry, entry.getKey()))) {
                                 this.targetedCountry = entry.getKey();
                                 gameView.setFeedbackArea("You are initiating an attack from " + attackingCountry + " which is targeting " + targetedCountry + " !\n");
                                 goToTheBottomOfTextField();
-                                attackingCountrySetFlag=false;
-                                attackInitiatedFlag=false;
+                                attackingCountrySetFlag = false;
+                                attackInitiatedFlag = false;
+                                requestNumberOfTroopsFlag = true;
                                 break;
-                            } else{
+                            } else {
                                 gameView.setFeedbackArea("You may only attack countries that are directly neighbouring the attacking country that do not belong to you!\n");
-                                this.attackingCountry="";
-                                this.targetedCountry="";
-                                attackingCountrySetFlag=false;
-                                attackInitiatedFlag=false;
+                                this.attackingCountry = "";
+                                this.targetedCountry = "";
+                                attackingCountrySetFlag = false;
+                                attackInitiatedFlag = false;
                                 goToTheBottomOfTextField();
                                 break;
                             }
                         }
                     }
-                    break;
                 }
-                if (!gameView.getAttackButton().isEnabled()) {
-                    gameView.setFeedbackArea("Please press New Game first!\n");
-                    goToTheBottomOfTextField();
-                } else {
-                    gameView.setFeedbackArea("Please press the Attack button, then click on one of your countries (Highlighted in Green), then click on the country you want to attack.\n");
-                    goToTheBottomOfTextField();
+                if (requestNumberOfTroopsFlag) {
+                    List<Integer> optionList = new ArrayList<Integer>();
+                    int numberOfTroops = gameModel.getMyMap().getCountryByName(attackingCountry).getNumberOfTroops();
+                    if (numberOfTroops == 1 || numberOfTroops==0) {
+                        gameView.setFeedbackArea("You do not have enough troops in this country to initiate an attack!\n");
+                        break;
+                    }
+                    for (int i = 1; i < numberOfTroops; i++) {
+                        optionList.add(i);
+                    }
+                    Object[] options = optionList.toArray();
+                    Object value = JOptionPane.showInputDialog(null,
+                            "How many troops would you like to attack with?",
+                            "Choose a number of troops to attack with",
+                            JOptionPane.QUESTION_MESSAGE,
+                            null,
+                            options,
+                            options[0]);
+                    this.numberOfTroops = (Integer) value;
+                    requestNumberOfTroopsFlag=false;
                 }
+                gameView.setFeedbackArea("Attacking country: " + attackingCountry + ", Target country: " + targetedCountry + ", Number of troops: " + numberOfTroops + ".\n");
+                goToTheBottomOfTextField();
+                Command attackCommand = new Command("attack", attackingCountry, targetedCountry, Integer.toString(numberOfTroops));
+                gameModel.initiateAttack(attackCommand);
+                gameView.setFeedbackArea("Result: "+gameModel.getResult()+"\n");
+                goToTheBottomOfTextField();
+
         }
     }
 
