@@ -50,6 +50,12 @@ public class Player {
     public List<Country> getMyCountries() {
         return myCountries;
     }
+    public boolean isOneOfMyCountries(String countryName){
+        for (Country country: myCountries) {
+            if (country.getName().equals(countryName)) return true;
+        }
+        return false;
+    }
 
     public Country getACountry(String country) {
         Country theCountry = null;
@@ -60,8 +66,9 @@ public class Player {
         return theCountry;
     }
 
-    public void getMyPossibleTargets(Map myMap) {
+    public List<Country> getMyPossibleTargets(Map myMap) {
         updateMyPossibleTargets(myMap);
+        return myPossibleTargets;
     }
 
     public List<Country> getNeighbours(Map myMap, Country country) {

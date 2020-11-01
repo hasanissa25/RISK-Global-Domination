@@ -39,6 +39,14 @@ public class Map {
         }
         return neighbours;
     }
+    public boolean areNeighbours(String firtCountryName,String secondCountryName){
+        if(getCountryNeighbours(getCountryByName(firtCountryName)).contains(getCountryByName(secondCountryName))) return true;
+        else return false;
+    }
+    public boolean ownedBySamePlayer(String firstCountry, String secondCountry){
+        if(getCountryByName(firstCountry).getPlayer()==getCountryByName(secondCountry).getPlayer())   return true;
+        else return false;
+    }
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer();
