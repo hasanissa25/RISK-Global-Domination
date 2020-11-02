@@ -17,10 +17,11 @@ public class Controller implements ActionListener {
     Game gameModel;
     boolean attackInitiatedFlag = false;
     boolean attackingCountrySetFlag = false;
+    boolean requestNumberOfTroopsFlag = false;
+    boolean attackCommandFlag = false;
     String attackingCountry = "";
     String targetedCountry = "";
     int numberOfTroops;
-    boolean requestNumberOfTroopsFlag = false;
 
     public Controller(Game gameModel, View gameView) {
         this.gameModel = gameModel;
@@ -130,14 +131,16 @@ public class Controller implements ActionListener {
                             options[0]);
                     this.numberOfTroops = (Integer) value;
                     requestNumberOfTroopsFlag=false;
+                    attackCommandFlag= true;
                 }
-                gameView.setFeedbackArea("Attacking country: " + attackingCountry + ", Target country: " + targetedCountry + ", Number of troops: " + numberOfTroops + ".\n");
-                goToTheBottomOfTextField();
-                Command attackCommand = new Command("attack", attackingCountry, targetedCountry, Integer.toString(numberOfTroops));
-                gameModel.initiateAttack(attackCommand);
-                gameView.setFeedbackArea("Result: "+gameModel.getResult()+"\n");
-                goToTheBottomOfTextField();
-
+                if(attackCommandFlag){
+                    gameView.setFeedbackArea("Attacking country: " + attackingCountry + ", Target country: " + targetedCountry + ", Number of troops: " + numberOfTroops + ".\n");
+                    goToTheBottomOfTextField();
+                    Command attackCommand = new Command("attack", attackingCountry, targetedCountry, Integer.toString(numberOfTroops));
+                    gameModel.initiateAttack(attackCommand);
+                    gameView.setFeedbackArea("Result: "+gameModel.getResult()+"\n");
+                    attackCommandFlag=false;
+                }
         }
     }
 
