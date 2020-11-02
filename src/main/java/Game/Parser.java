@@ -29,9 +29,6 @@ public class Parser
         String word3 = null;
         String word4 = null;
 
-
-        System.out.print("Player-"+ (currentPlayer+1)+ "> ");
-
         inputLine = reader.nextLine().toLowerCase();
 
         Scanner tokenizer = new Scanner(inputLine);
@@ -58,7 +55,6 @@ public class Parser
         }
     }
     public void showCommands(){
-        System.out.println("\nYour available commands are:");
         commands.printCommands();
     }
 }

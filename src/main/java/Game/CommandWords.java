@@ -18,7 +18,6 @@ public class CommandWords
             "map","attack", "pass","quit"
     };
     public void printCommands(){
-        System.out.println(Arrays.deepToString(validCommands));
     }
 
     public CommandWords()

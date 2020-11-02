@@ -78,11 +78,9 @@ public class Player {
     public void updateMyPossibleTargets(Map myMap) {
         //iterate over the list of my countries, and return the neighbours of that country.
         for (Country c : myCountries) {
-            System.out.println("\nFrom " + c.getName() + " you can choose to attack one of these countries:\n");
             for (Country cc : myMap.getCountryNeighbours(c)) {
                 if (!(myCountries.contains(cc)) && !(cc.getPlayer().getPlayerNumber() == playerNumber)) {
                     myPossibleTargets.add(cc);
-                    System.out.println(cc.toString2());
                 }
             }
         }

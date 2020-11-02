@@ -90,7 +90,6 @@ public class Controller implements ActionListener {
                 if (attackingCountrySetFlag) {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
                         if (entry.getValue().equals(e.getSource())) {
-                            System.out.println("Attacking country is " + attackingCountry + "The country you want to target is : " + entry.getKey());
                             if (gameModel.getMyMap().areNeighbours(attackingCountry, entry.getKey()) & !(gameModel.getMyMap().ownedBySamePlayer(attackingCountry, entry.getKey()))) {
                                 this.targetedCountry = entry.getKey();
                                 gameView.setFeedbackArea("You are initiating an attack from " + attackingCountry + " which is targeting " + targetedCountry + " !\n");
