@@ -4,7 +4,6 @@ import Controller.Controller;
 import Model.Country;
 import Model.Game;
 import Game.GameEvent;
-import javafx.scene.shape.Circle;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,7 +11,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -345,7 +343,7 @@ public class View extends JFrame {
     }
 
     public void handleGameStartEvent(GameEvent game) {
-        initializeCountries(game.getGameMap());
+        updateCountriesTroops(game.getGameMap());
         unlockButtons();
 
     }
@@ -356,7 +354,7 @@ public class View extends JFrame {
         }
     }
 
-    private void initializeCountries(Model.Map map) {
+    private void updateCountriesTroops(Model.Map map) {
         map.getAllCountries().forEach(country -> {
             CircleButton b=  mapOfButtons.get(country.getName());
             if(b!=null) {
@@ -415,7 +413,7 @@ public class View extends JFrame {
     }
 
     public void updateView() {
-        initializeCountries(gameModel.getMyMap());
+        updateCountriesTroops(gameModel.getMyMap());
     }
 
 

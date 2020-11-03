@@ -438,8 +438,8 @@ public class Game {
         this.viewer.handleGameStartEvent(new GameEvent(this));
     }
 
-    public void startGame() {
-        randomizeMap();
+    public void startGame(int numberOfPlayers) {
+        initializePlayers(numberOfPlayers);
         newTurn();
 
     }
