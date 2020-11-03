@@ -210,6 +210,7 @@ public class Map {
         mapGraph.addEdge(Irkutsk, Mongolia);
         mapGraph.addEdge(Irkutsk, Siberia);
         mapGraph.addEdge(Irkutsk, Kamchatka);
+        mapGraph.addEdge(Irkutsk, Yakutsk);
         mapGraph.addEdge(Japan, Kamchatka);
         mapGraph.addEdge(Japan, Mongolia);
         mapGraph.addEdge(Kamchatka, Mongolia);
@@ -230,6 +231,7 @@ public class Map {
         mapGraph.addEdge(NorthernEurope, SouthernEurope);
         mapGraph.addEdge(NorthernEurope, Ukraine);
         mapGraph.addEdge(NorthernEurope, WesternEurope);
+        mapGraph.addEdge(SouthernEurope, WesternEurope);
         mapGraph.addEdge(Scandinavia, Ukraine);
         mapGraph.addEdge(SouthernEurope, Ukraine);
         listOfCountries = mapGraph.vertexSet();
