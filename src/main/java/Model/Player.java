@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Hasan Issa
@@ -71,8 +72,21 @@ public class Player {
         return myPossibleTargets;
     }
 
+    public List<Country> getMyPossibleTargets2() {
+        return this.myPossibleTargets;
+    }
+
     public List<Country> getNeighbours(Map myMap, Country country) {
         return myMap.getCountryNeighbours(country);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Player{");
+        sb.append("playerNumber=").append(playerNumber);
+        sb.append(", totalNumberOftroops=").append(totalNumberOftroops);
+        sb.append('}');
+        return sb.toString();
     }
 
     public void updateMyPossibleTargets(Map myMap) {
@@ -86,4 +100,19 @@ public class Player {
         }
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return getPlayerNumber() == player.getPlayerNumber() &&
+                getUndeployedTroops() == player.getUndeployedTroops() &&
+                getTotalNumberOftroops() == player.getTotalNumberOftroops() &&
+                Objects.equals(getMyCountries(), player.getMyCountries()) &&
+                Objects.equals(myPossibleTargets, player.myPossibleTargets) &&
+                Objects.equals(theMap, player.theMap);
+    }
+
+
 }

@@ -34,10 +34,11 @@ public class Controller implements ActionListener {
         switch (e.getActionCommand()) {
             case "NewGame":
                 int numberOfPlayers = gameView.numberOfPlayersRequest();
+                gameModel.setRandomlyAllocateTroopsOnGameStart(true);
                 gameModel.initializePlayers(numberOfPlayers);
-                gameView.setFeedbackArea("A game has been started with " + numberOfPlayers + " players.\nEach player is allocated " + gameModel.calculateTroops(numberOfPlayers) + " initial troops that will be randomly assigned." + "\nCurrently turn of: Player " + gameModel.printCurrentPlayer() + ". Your countries are shown in green!\n");
+                gameView.unlockButtons();
+                gameView.setFeedbackArea("A game has been started with " + numberOfPlayers + " players.\nEach player is allocated " + gameModel.calculateTroops(numberOfPlayers) + " initial troops that will be randomly assigned." + "\nCurrently turn of: Player " + gameModel.getCurrentPlayer().getPlayerNumber() + ". Your countries are shown in green!\n");
                 gameView.getNewGameButton().setEnabled(false);
-                gameView.assignPlayerCountries();
                 break;
             case "Attack":
                 if (attackInitiatedFlag) {
@@ -51,9 +52,8 @@ public class Controller implements ActionListener {
             case "PassTurn":
                 gameView.setFeedbackArea("Pass Turn has been called\n");
                 gameModel.passTurn();
-                gameView.setFeedbackArea("Current turn of: Player " + (gameModel.printCurrentPlayer()) + " Your countries are show in green!\n");
+                gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in green!\n");
                 goToTheBottomOfTextField();
-                gameView.assignPlayerCountries();
                 break;
             case "Move":
                 gameView.setFeedbackArea("Move has been called! This feature is not implemented yet!\n");
@@ -68,7 +68,7 @@ public class Controller implements ActionListener {
                 if (attackInitiatedFlag) {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
                         if (entry.getValue().equals(e.getSource())) {
-                            if (gameModel.getPlayers().get(gameModel.getCurrentPlayer()).isOneOfMyCountries(entry.getKey())) {
+                            if (gameModel.getCurrentPlayer().isOneOfMyCountries(entry.getKey())) {
                                 this.attackingCountry = entry.getKey();
                                 gameView.setFeedbackArea("You are initiating an attack from " + attackingCountry + "! Please choose the neighbouring country you want to target.\n");
                                 goToTheBottomOfTextField();
@@ -113,7 +113,7 @@ public class Controller implements ActionListener {
                 if (requestNumberOfTroopsFlag) {
                     List<Integer> optionList = new ArrayList<Integer>();
                     int numberOfTroops = gameModel.getMyMap().getCountryByName(attackingCountry).getNumberOfTroops();
-                    if (numberOfTroops == 1 || numberOfTroops==0) {
+                    if (numberOfTroops == 1 || numberOfTroops == 0) {
                         gameView.setFeedbackArea("You do not have enough troops in this country to initiate an attack!\n");
                         break;
                     }
@@ -129,16 +129,16 @@ public class Controller implements ActionListener {
                             options,
                             options[0]);
                     this.numberOfTroops = (Integer) value;
-                    requestNumberOfTroopsFlag=false;
-                    attackCommandFlag= true;
+                    requestNumberOfTroopsFlag = false;
+                    attackCommandFlag = true;
                 }
-                if(attackCommandFlag){
+                if (attackCommandFlag) {
                     gameView.setFeedbackArea("Attacking country: " + attackingCountry + ", Target country: " + targetedCountry + ", Number of troops: " + numberOfTroops + ".\n");
                     goToTheBottomOfTextField();
                     Command attackCommand = new Command("attack", attackingCountry, targetedCountry, Integer.toString(numberOfTroops));
                     gameModel.initiateAttack(attackCommand);
-                    gameView.setFeedbackArea("Result: "+gameModel.getResult()+"\n");
-                    attackCommandFlag=false;
+                    gameView.setFeedbackArea("Result: " + gameModel.getResult() + "\n");
+                    attackCommandFlag = false;
                 }
         }
     }

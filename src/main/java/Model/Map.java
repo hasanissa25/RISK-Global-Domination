@@ -33,10 +33,15 @@ public class Map {
         List<Country> neighbours = new ArrayList<Country>();
         if (listOfCountries.contains(country)) {
             for (DefaultEdge e : mapGraph.edgesOf(country)) {
-                neighbours.add(mapGraph.getEdgeSource(e));
-                neighbours.add(mapGraph.getEdgeTarget(e));
+                if(!mapGraph.getEdgeSource(e).equals(country)) {
+                    neighbours.add(mapGraph.getEdgeSource(e));
+                }
+                if(!mapGraph.getEdgeTarget(e).equals(country)) {
+                    neighbours.add(mapGraph.getEdgeTarget(e));
+                }
             }
         }
+        neighbours.remove(country);
         return neighbours;
     }
     public boolean areNeighbours(String firtCountryName,String secondCountryName){

@@ -41,25 +41,17 @@ public class Country {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Country country = (Country) o;
-        return getNumberOfTroops() == country.getNumberOfTroops() &&
-                getPlayer() == country.getPlayer() &&
-                getName().equals(country.getName());
+        return getName().equals(country.getName()) &&
+                getPlayer().equals(country.getPlayer());
     }
-
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("\nCountry: ").append(name);
         sb.append(", Number of Troops= ").append(numberOfTroops);
-        sb.append(", Owned by player= ").append(player == null ? "" : player.getPlayerNumber());
+        sb.append(", Owned by player= ").append(player == null ? "" : player);
         return sb.toString();
     }
-    public String toString2() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Country: ").append(name);
-        sb.append(", Number of Troops= ").append(numberOfTroops);
-        sb.append(", Owned by player= ").append(player == null ? "" : player.getPlayerNumber());
-        return sb.toString();
-    }
+
 }

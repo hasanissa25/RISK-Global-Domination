@@ -5,6 +5,7 @@ import Game.GameEvent;
 import Game.Parser;
 import Game.UtilArray;
 import View.View;
+import com.sun.tools.internal.xjc.model.Model;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -21,59 +22,36 @@ import java.util.Random;
  * It also evaluates and executes the commands that the parser returns.
  */
 public class Game {
+    public String result;
     private Parser parser;
-    private int currentPlayer = 0;
+    private Player currentPlayer;
+    private int currentPlayerIndex;
     private List<Player> players;
-    private View viewer;
+    private ModelUpdateListener viewer;
     private int numberOfPlayers;
     private int initialNumberOfTroops;
-    public String result;
     private Map myMap = new Map();
     private InputStream inputStream;
     private Country attackingCountry;
+    private Country defendingCountry;
+    private boolean randomlyAllocateTroopsOnGameStart = false;
 
     public Game() {
         this.myMap = new Map();
         parser = new Parser();
+        this.currentPlayerIndex = 0;
     }
 
-    public int printCurrentPlayer() {
-        return (currentPlayer + 1);
+    public static void main(String[] args) {
+        Game game = new Game();
     }
 
-    public boolean processCommand(Command command) {
-
-        boolean wantToQuit = false;
-
-        if (command.isUnknown()) {
-            return false;
-        }
-
-        String commandWord = command.getCommandWord();
-        switch (commandWord) {
-            case "attack":
-                initiateAttack(command);
-                break;
-            case "pass":
-                passTurn();
-                break;
-            case "map":
-                printMap();
-                break;
-            case "quit":
-                wantToQuit = true;
-                break;
-        }
-
-        return wantToQuit;
+    public boolean isRandomlyAllocateTroopsOnGameStart() {
+        return randomlyAllocateTroopsOnGameStart;
     }
 
-    /**
-     * Print a representation of the map
-     *
-     * @author Hasan Issa
-     */
-    private void printMap() {
+    public void setRandomlyAllocateTroopsOnGameStart(boolean randomlyAllocateTroopsOnGameStart) {
+        this.randomlyAllocateTroopsOnGameStart = randomlyAllocateTroopsOnGameStart;
     }
 
     public Map getMyMap() {
@@ -81,14 +59,14 @@ public class Game {
     }
 
     public void passTurn() {
-        this.currentPlayer = (this.currentPlayer == (this.numberOfPlayers - 1)) ? 0 : this.currentPlayer + 1;
-        // newTurn();
+        this.currentPlayerIndex = (this.currentPlayerIndex == (this.numberOfPlayers - 1)) ? 0 : this.currentPlayerIndex + 1;
+        this.currentPlayer = this.players.get(this.currentPlayerIndex);
+        update();
     }
 
     private void newTurn() {
-        printListOfCurrentPlayerCountries();
-        printListOfCurrentPlayerPossibleCountriesToAttack();
-        parser.showCommands();
+        this.getCurrentPlayer().getMyPossibleTargets(myMap);
+        //printListOfCurrentPlayerPossibleCountriesToAttack();
     }
 
     public void initializePlayers(int numberOfPlayers) {
@@ -101,9 +79,17 @@ public class Game {
          */
         this.numberOfPlayers = numberOfPlayers;
         createPlayers(numberOfPlayers, calculateTroops(numberOfPlayers));
-        randomizeMap();
-        players.get(currentPlayer).getMyPossibleTargets(myMap);
-        viewer.handleGameStartEvent(new GameEvent(this, myMap, numberOfPlayers));
+        this.currentPlayer = players.get(0);
+        if(randomlyAllocateTroopsOnGameStart)
+            randomizeMap();
+        this.getCurrentPlayer().getMyPossibleTargets(myMap);
+        //viewer.handleGameStartEvent(new GameEvent(this, myMap, numberOfPlayers));
+        update();
+    }
+
+    private void update() {
+        if(this.viewer != null)
+            this.viewer.modelUpdated();
     }
 
     public int calculateTroops(int numberOfPlayers) {
@@ -192,7 +178,7 @@ public class Game {
         }
     }
 
-    public int getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -200,11 +186,8 @@ public class Game {
         return initialNumberOfTroops;
     }
 
-    public void printListOfCurrentPlayerCountries() {
-    }
-
     private void printListOfCurrentPlayerPossibleCountriesToAttack() {
-        players.get(currentPlayer).getMyPossibleTargets(myMap);
+        this.getCurrentPlayer().getMyPossibleTargets(myMap);
     }
 
     public Country getAttackingCountry() {
@@ -215,9 +198,6 @@ public class Game {
         this.attackingCountry = attackingCountry;
     }
 
-    private Country defendingCountry;
-
-
     public Country getDefendingCountry() {
         return defendingCountry;
     }
@@ -226,27 +206,32 @@ public class Game {
         this.defendingCountry = defendingCountry;
     }
 
-    public void initiateAttack(Command command) {
-        /**
-         * @author Hasan Issa
-         *
-         * Checks the syntax of the command passed, and makes sure it is Attack followed by AttackingCountry DefendingCountry #OfTroopsAttacking
-         * Ensures that the AttackingCountry is owned by the current player, the DefendingCountry is a neighbour of his, and that he has atleast 1 troop left in the country
-         *
-         */
-        if (!checkAttackCommandSyntax(command)) return;
+    /**
+     * Checks the syntax of the command passed, and makes sure it is Attack followed by AttackingCountry DefendingCountry #OfTroopsAttacking
+     * Ensures that the AttackingCountry is owned by the current player, the DefendingCountry is a neighbour of his, and that he has atleast 1 troop left in the country
+     *
+     * @author Hasan Issa
+     */
+    public boolean initiateAttack(Command command) {
+
+        if (!checkAttackCommandSyntax(command)) {
+            System.out.println("Attack syntax error ");
+            return false;
+        }
 
         String attackCountryName = command.getSecondWord().toLowerCase();
         setAttackingCountry(myMap.getCountryByName(attackCountryName));
         ;
         if (!checkAttackCountry(attackingCountry)) {
-            return;
+            System.out.println("Check attack failed");
+            return false;
         }
 
         String defenceCountryName = command.getThirdWord();
         setDefendingCountry(myMap.getCountryByName(defenceCountryName));
         if (!checkDefenceCountry(attackingCountry, defendingCountry)) {
-            return;
+            System.out.println("Check defence failed");
+            return false;
         }
 
         int numberOfTroopsAttacking = command.getFourthWord();
@@ -254,7 +239,8 @@ public class Game {
             attackAlgorithm(numberOfTroopsAttacking, getDefendingCountry().getNumberOfTroops());
 
         }
-        viewer.updateView();
+        update();
+        return true;
     }
 
     private String attackAlgorithm(int numberOfTroopsAttacking, int numberOfTroopsDefending) {
@@ -309,10 +295,10 @@ public class Game {
             newTurn();
             if (attackingCountry.getPlayer().getTotalNumberOftroops() == 0) {
                 players.remove(attackingCountry.getPlayer());
-                }
+            }
             if (defendingCountry.getPlayer().getTotalNumberOftroops() == 0) {
                 players.remove(defendingCountry.getPlayer());
-                }
+            }
         }
         if (currentNumberOfDefendingTroops <= 0) {
             this.result = "Congratulations! You have won the attack!\n";
@@ -400,7 +386,7 @@ public class Game {
         if (attackCountry == null) {
             return false;
         }
-        if (players.get(currentPlayer).getMyCountries().contains(attackCountry)) {
+        if (this.getCurrentPlayer().getMyCountries().contains(attackCountry)) {
             return true;
         } else {
             return false;
@@ -411,7 +397,7 @@ public class Game {
         if (defenceCountry == null) {
             return false;
         }
-        if (players.get(currentPlayer).getNeighbours(myMap, attackCountry).contains(defenceCountry)) {
+        if (this.getCurrentPlayer().getNeighbours(myMap, attackCountry).contains(defenceCountry)) {
             if (!attackCountry.getPlayer().equals(defenceCountry.getPlayer())) {
                 return true;
             } else {
@@ -423,19 +409,20 @@ public class Game {
     }
 
     private boolean checkNumberOfTroopsAttacking(String attackCountryName, int numberOfTroopsAttacking) {
-        if (players.get(currentPlayer).getACountry(attackCountryName).getNumberOfTroops() <= numberOfTroopsAttacking) {
+        if (this.getCurrentPlayer().getACountry(attackCountryName).getNumberOfTroops() <= numberOfTroopsAttacking) {
             return false;
 
         }
         return true;
     }
 
-    public void setViewer(View viewer) {
+    public void setViewer(ModelUpdateListener viewer) {
         this.viewer = viewer;
     }
 
+    @Deprecated
     private void updateViewer() {
-        this.viewer.handleGameStartEvent(new GameEvent(this));
+        //this.viewer.handleGameStartEvent(new GameEvent(this));
     }
 
     public void startGame(int numberOfPlayers) {
@@ -448,7 +435,5 @@ public class Game {
         System.exit(0);
     }
 
-    public static void main(String[] args) {
-        Game game = new Game();
-    }
+
 }
