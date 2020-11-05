@@ -11,7 +11,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author      Hasan Issa
+ *
+ * This is the Controller which takes user inputs, and transforms it into commands onto the Model
+ */
 public class Controller implements ActionListener {
     View gameView;
     Game gameModel;
@@ -31,6 +35,20 @@ public class Controller implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        /*
+        When an action is performed on the view, the controller handles it, based on the specific type of action.
+        NewGame: Initialize the model with the provided number of players, and create the map, starting a new game
+
+        Attack: Begin formulating the attack command, asking the user for the Attacking country, the target country, and the numer of troops attacking.
+        Attack is done using state based algorithm, where the current state is determined by the level of input provided by the user. If the user has selected the attack button,
+        they are in the attack initiated state, and the game is waiting for the attacking country to be selected, in order to enter the attacking country state.
+        When the user selects the attacking country, the game is now in the wait for target country to be selected state. Then its the choose number of troops state.
+        The controller then passes the model an attack command.
+
+        PassTurn: Pass the turn from current player, to the next player in line
+        Move: To be implemented next milestone
+        QuitGame:Exit out the game
+         */
         switch (e.getActionCommand()) {
             case "NewGame":
                 int numberOfPlayers = gameView.numberOfPlayersRequest();
