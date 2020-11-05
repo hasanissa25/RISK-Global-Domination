@@ -18,6 +18,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * @author      Hasan Issa
+ *
+ * This is view of the game, where all the user input is provided to be sent to the controller.
+ * The view is composed of multiple layers. The Bottom layer, (Default layer) is a picture of a risk board, which then has another layer on top of it, of the countries.
+ * The countries are represented as buttons, which have a controller to handle on click events.
+ * Each button has the number of troops represented on them.
+ * The current players countries, are highlighted in green, during their turn.
+ *
+ */
 public class View extends JFrame implements ModelUpdateListener {
     Game gameModel;
     JButton newGameButton;

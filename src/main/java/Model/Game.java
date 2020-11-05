@@ -13,10 +13,9 @@ import java.util.Random;
 /**
  * @author Hasan Issa
  * <p>
- * This main class creates and initialises all the others. This class acts the Controller.
- * It create the map of all Countries and their neighbours.
- * It creates the parser and starts the game.
- * It also evaluates and executes the commands that the parser returns.
+ * This main class creates and initialises all the others. This class is the model of the game.
+ * It contains the map of all Countries and their neighbours.
+ * It has viewers who are notified and updated, when the model has made changes.
  */
 public class Game {
     public String result;
@@ -28,7 +27,6 @@ public class Game {
     private int numberOfPlayers;
     private int initialNumberOfTroops;
     private Map myMap = new Map();
-    private InputStream inputStream;
     private Country attackingCountry;
     private int countryInitialNumberOfTroops;
     private Country defendingCountry;
@@ -44,9 +42,6 @@ public class Game {
         Game game = new Game();
     }
 
-    public boolean isRandomlyAllocateTroopsOnGameStart() {
-        return randomlyAllocateTroopsOnGameStart;
-    }
 
     public void setRandomlyAllocateTroopsOnGameStart(boolean randomlyAllocateTroopsOnGameStart) {
         this.randomlyAllocateTroopsOnGameStart = randomlyAllocateTroopsOnGameStart;
@@ -80,7 +75,6 @@ public class Game {
         if (randomlyAllocateTroopsOnGameStart)
             randomizeMap();
         this.getCurrentPlayer().getMyPossibleTargets(myMap);
-        //viewer.handleGameStartEvent(new GameEvent(this, myMap, numberOfPlayers));
         update();
     }
 
@@ -181,10 +175,6 @@ public class Game {
 
     public int getInitialNumberOfTroops() {
         return initialNumberOfTroops;
-    }
-
-    private void printListOfCurrentPlayerPossibleCountriesToAttack() {
-        this.getCurrentPlayer().getMyPossibleTargets(myMap);
     }
 
     public Country getAttackingCountry() {
@@ -427,10 +417,6 @@ public class Game {
         this.viewer = viewer;
     }
 
-    @Deprecated
-    private void updateViewer() {
-        //this.viewer.handleGameStartEvent(new GameEvent(this));
-    }
 
     public void startGame(int numberOfPlayers) {
         initializePlayers(numberOfPlayers);
