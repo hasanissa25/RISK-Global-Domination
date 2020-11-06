@@ -68,7 +68,7 @@ Countries.
 * Part of the model.
 * This is the Map representation of our Risk world. 
 * Represented as Graph<Country, DefaultEdge>. This allows us to have an easier time manipulating countries, and their neighbouring countries.
-** Every Country is a Vertex, which has neighbouring countries connected to its Edges.
+ * Every Country is a Vertex, which has neighbouring countries connected to its Edges.
 
 #### Player
 * Part of the model.  
@@ -108,31 +108,31 @@ Countries.
 
 ## The changes that were made since the previous deliverable:
 * Implemented MVC
-** Our Model package includes Country, Map, Player, and Game.
-*** The model contains all the data that we will be working with. The model has views which listen to its changes, and update themselves accordingly. 
-** Added a controller called Controller.
-*** The controller is the brain of our project. It takes the user input from the view, translates it into commands, and sends them to the model. The model makes changes based on the request from the controller(Request from the user through the view), and calls update on all the views that are listening to it. 
-** Added a view called View
-*** The view is the actual visual feel/look representation of our model. When the model is changed, the views represent those changes visually for the user to see and decide on his next action. The view does not change the model, but it changes its representation of the model. 
+ * Our Model package includes Country, Map, Player, and Game.
+  * The model contains all the data that we will be working with. The model has views which listen to its changes, and update themselves accordingly. 
+ * Added a controller called Controller.
+  * The controller is the brain of our project. It takes the user input from the view, translates it into commands, and sends them to the model. The model makes changes based on the request from the controller(Request from the user through the view), and calls update on all the views that are listening to it. 
+ * Added a view called View
+  * The view is the actual visual feel/look representation of our model. When the model is changed, the views represent those changes visually for the user to see and decide on his next action. The view does not change the model, but it changes its representation of the model. 
 
 ### The known issues 
 * Issues that have been handled from Milestone 1:
-** We assume the attacking player always uses the maximum number of troops during the subsequent waves.(3 troops)
-** We assume the attacking player does not move to the country after the battle for the first milestone.
-** Currently, you can attack countries with 0 troops, as we have no implemented the Move function yet until the next milestones. That is when we will move into the country.
+ * We assume the attacking player always uses the maximum number of troops during the subsequent waves.(3 troops)
+ * We assume the attacking player does not move to the country after the battle for the first milestone.
+ * Currently, you can attack countries with 0 troops, as we have no implemented the Move function yet until the next milestones. That is when we will move into the country.
 * Issues that are yet to be handled from Milestone 1:
-** We assume that defending players always use the maximum number of troops to defend their country every-time. (2 troops).
+ * We assume that defending players always use the maximum number of troops to defend their country every-time. (2 troops).
 * New issues that came with Milestone 2:
-** Currently, after a successful attack, the attacker automatically takes over the defeated territory, and the surviving troops move over. The attacker does not have a choice in how many troops to move over, as the Move function has not been implemented yet, until Milestone 3.
+ * Currently, after a successful attack, the attacker automatically takes over the defeated territory, and the surviving troops move over. The attacker does not have a choice in how many troops to move over, as the Move function has not been implemented yet, until Milestone 3.
 
 ### The roadmap ahead.
 * Tasks that we previously set that were accomplished this milestone:
-** Transform the console version into an interactive GUI.
-** Modify the attacking strategy:
-*** Currently, the attacking algorithm automatically takes care of the battle after the player initiates the attack, until they or the defending player run out of troops. We would like to have the attacking player get to choose whether or not they would like to continue their attack after the first wave of 3 or less troops have finished the battle.
+ * Transform the console version into an interactive GUI.
+ * Modify the attacking strategy:
+  * Currently, the attacking algorithm automatically takes care of the battle after the player initiates the attack, until they or the defending player run out of troops. We would like to have the attacking player get to choose whether or not they would like to continue their attack after the first wave of 3 or less troops have finished the battle.
 * Tasks that need to be accomplished by next milestone:
-** Add the Move algorithm to allow players to move troops from one country to another before or after a battle.
-** Add the ability to create custom maps.
+ * Add the Move algorithm to allow players to move troops from one country to another before or after a battle.
+ * Add the ability to create custom maps.
 
 ### User Manual
 * Run the JarFile, or run the View.View class.
