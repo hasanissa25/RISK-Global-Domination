@@ -24,7 +24,7 @@ is 50, 35, 30, 25, and 20 respectively, depending on the number of players.
 ## Documentation 
 
 ### UML Class Diagram
-![UML Class Diagram](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/UML.jpg)
+![UML Class Diagram](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/Milestone2UML.jpg)
 
 ### Sequence Diagram
 ![Initialize Sequence Diagram ](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/InitializeSequence.jpeg)
@@ -32,15 +32,31 @@ is 50, 35, 30, 25, and 20 respectively, depending on the number of players.
 ![Attack Sequence Diagram ](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/AttackSequence.jpeg)
 
 ### Detailed Description of Design
+
 #### Game
-* Main loop of the program.
-* The Controller
-* Creates and initialises all the other classes.
-* Takes in the number of players, and handles the random allocation of Player(and their troops) to Country.
+* The Model
+* Takes an Attack Command, and passes it to the Attack Algorithm
+method.
+* Handles the random allocation of Players (and their troops) to
+Countries.
 * Creates the map of all Countries and their neighbours.
-* Creates the parser and starts the game.
-* Processes and executes the commands that the parser returns.
-* Includes the Attack Algorithm to decide which country wins in battle.
+* Has the countries, and the players in the current game.
+* Calls update on its listeners (Views) that are subscribed to it
+
+#### View
+* The visual representation of the Model. The actual look of the game.
+* Shows the game map
+* Shows the current players countries
+* Shows the number of troops in each country ◦ Shows the result of an attack
+* Handles the update method invoked by the model, and updates it self, to refect those changes, in-order for the user to see the results of his actions.
+* Has buttons that the user can click, that invoke actions on the action listeners for those specifc buttons.
+* Has a text area, that shows results of attacks such as number of troops lost, and the winner and loser of a battle.
+
+#### Controller
+* Listens to user inputs (Mouse clicks) on the view, translates them into actions to be taken by the model
+* Handles New game button click from the view, informing the model.
+* Handles Attack button click from the view, informing the model.
+* Handles Pass turn button click from the view, informing the model. • Handles Quit button click from the view, informing the model.
 
 #### Country 
 * Part of the model.
@@ -86,42 +102,57 @@ is 50, 35, 30, 25, and 20 respectively, depending on the number of players.
 ### The rest of the deliverbles
 * A UML Class diagram showing the full program and the associations between classes.
 * A UML Sequence Diagram showing the two most important scenarios: Attack Command, and Initialize game. 
-* The Source code, and a runnable Jar file, including the JavaDoc
+* The Source code, and a runnable Jar file, including the JavaDoc, and JUnit tests
 * Documentation
 * Readme file.
 
-### Changes that were made since the previous deliverable 
-- N/A
+## The changes that were made since the previous deliverable:
+* Implemented MVC
+** Our Model package includes Country, Map, Player, and Game.
+*** The model contains all the data that we will be working with. The model has views which listen to its changes, and update themselves accordingly. 
+** Added a controller called Controller.
+*** The controller is the brain of our project. It takes the user input from the view, translates it into commands, and sends them to the model. The model makes changes based on the request from the controller(Request from the user through the view), and calls update on all the views that are listening to it. 
+** Added a view called View
+*** The view is the actual visual feel/look representation of our model. When the model is changed, the views represent those changes visually for the user to see and decide on his next action. The view does not change the model, but it changes its representation of the model. 
 
 ### The known issues 
-- We have made some assumptions for the first milestone.
-* We assume that defending players always use the maximum number of troops to defend their country everytime. (2 troops).
-* We assume the attacking player always uses the maximum number of troops during the subsequent waves.(3 troops)
-* We assume the attacking player does not move to the country after the battle for the first milestone.
+* Issues that have been handled from Milestone 1:
+** We assume the attacking player always uses the maximum number of troops during the subsequent waves.(3 troops)
+** We assume the attacking player does not move to the country after the battle for the first milestone.
+** Currently, you can attack countries with 0 troops, as we have no implemented the Move function yet until the next milestones. That is when we will move into the country.
+* Issues that are yet to be handled from Milestone 1:
+** We assume that defending players always use the maximum number of troops to defend their country every-time. (2 troops).
+* New issues that came with Milestone 2:
+** Currently, after a successful attack, the attacker automatically takes over the defeated territory, and the surviving troops move over. The attacker does not have a choice in how many troops to move over, as the Move function has not been implemented yet, until Milestone 3.
 
 ### The roadmap ahead.
-
-- Transform the console version into an interactive GUI.
-- Modify the attacking strategy:
-* Currently, the attacking algorithm automatically takes care of the battle after the player initiates the attack, until they or the defending player run out of troops. We would like to have the attacking player get to choose whether or not they would like to continue their attack after the first wave of 3 or less troops have finished the battle.
-- Modify the defending strategy:
-* Currently, the defending country automatically uses the maximum number of troops to defend. (2 troops), until the battle is over, with no player input from the defending country owner. We would prefer if the defending player gets to respond to an attack, and choose the number of troops they would like to defend with.
-- Add the Move algorithm to allow players to move troops from one country to another before or after a battle.
-- Add the ability to create custome maps.
-
-- We started preparing for the next milestones through using easily maintainable code.
-* The player knows how many troops they have to deploy for next milestones when players start receiving troops throughout the game.
-* Seperation of concers; the controller and models are in seperate classes, making it easier to add in a view class, in order to implement the GUI.
-* The attacking aglorithm can choose how many troops are attacking, and how many troops are defending. This makes it easy to set up the attack in waves, in order to allow the user to choose to back out of a battle, instead of having his army eliminated.
-* Since we have access to the defending country, we can grab its associated player, and prompt them to enter how many troops they would like to defend with.
+* Tasks that we previously set that were accomplished this milestone:
+** Transform the console version into an interactive GUI.
+** Modify the attacking strategy:
+*** Currently, the attacking algorithm automatically takes care of the battle after the player initiates the attack, until they or the defending player run out of troops. We would like to have the attacking player get to choose whether or not they would like to continue their attack after the first wave of 3 or less troops have finished the battle.
+* Tasks that need to be accomplished by next milestone:
+** Add the Move algorithm to allow players to move troops from one country to another before or after a battle.
+** Add the ability to create custom maps.
 
 ### User Manual
-	1.	Run the JarFile
-	2.	When prompted, enter the integer number of players that will be playing the game; 2,3,4,5 or 6 players. : 6
-	3.	Read the output to see the countries you own, and the neighbouring countries you can attack.
-	4.	Your options are Attack, Map, Pass, Quit
-	•	Attack: To attack a country, enter : Attack AttackingCountry TheTargetCountry NumberOfTroops. i.e; Attack Peru Venezuela 2. Ensure that you have 1 remaining troop in the country to defend. Ensure you own the country you are attacking from. Ensure the country you want to target is neighbouring the country you are attacking from.
-	•	Map: Returns the current list of countries in the game, the players that own them, and the number of troops they have in that country.
-	•	Pass: Passes the turn from you to the next player.
-	•	Quit: Exit the game.
-	5.	If you choose to attack, the game will walk you through your dice rolls, the outcome of each wave of battle, and the result of the battle.
+* Run the JarFile, or run the View.View class.
+* Press NewGame at the bottom left.
+* Select the number of players from the drop down menu
+* The current players countries are highlighted in green, and the number of troops in each country is shown on the country.
+* Your options are Attack, PassTurn, QuitGame
+* Attack: To attack a country:
+* Press the Attack button
+* Press on one of the countries you own to select the attacking country (The countries you may attack with are highlighted in green)
+* Press on one of the countries, that are directly neighbouring the country you would like to attack from, in order to initiate an attack on them. (You may not attack your countries highlighted in green)
+* Select the number of troops you would like to attack with.
+* You may not attack with a country that only has 1 troop(You always must have 1 troop left to defend!)
+* The result of the attack will be in the text field at the bottom.
+* If you won the attack, the troops that survived the attack, will now move over to the country you have just defeated, and that country will now be highlighted green, as it was added to your conquered countries.
+* Pass: Passes the turn from you to the next player. 
+* Press the PassTurn button at the bottom right.
+* Quit: Exit the game.
+* Press the QuitGame button at the bottom.
+
+### JUnit Tests
+* Clone the project from GitHub as a Maven project: https://github.com/hasanissa25/SYSC3110-Risk-Group10.git
+* Run the ModelTesting.java class.
