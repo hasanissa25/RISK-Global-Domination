@@ -135,15 +135,25 @@ Countries.
 
 ### User Manual
 * Run the JarFile, or run the View.View class.
+![Run](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/1.png)
+
 * Press NewGame at the bottom left.
+
 * Select the number of players from the drop down menu
+![New Game](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/2.png)
+
 * The current players countries are highlighted in green, and the number of troops in each country is shown on the country.
+![New Game](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/3.png)
+
 * Your options are Attack, PassTurn, QuitGame
   * Attack: To attack a country:
+![Attack](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/4.png)
     * Press the Attack button
     * Press on one of the countries you own to select the attacking country (The countries you may attack with are highlighted in green)
     * Press on one of the countries, that are directly neighbouring the country you would like to attack from, in order to initiate an attack on them. (You may not attack your countries highlighted in green)
     * Select the number of troops you would like to attack with.
+    ![Troops](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/5.png)
+
     * You may not attack with a country that only has 1 troop(You always must have 1 troop left to defend!)
     * The result of the attack will be in the text field at the bottom.
     * If you won the attack, the troops that survived the attack, will now move over to the country you have just defeated, and that country will now be highlighted green, as it was added to your conquered countries.
