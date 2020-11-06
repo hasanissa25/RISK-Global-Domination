@@ -20,24 +20,6 @@ We will also skip the phase of drawing cards and using them to receive more armi
 But for the rest we will stick with the official rules, and the official Map and countries.
 The number of players ranges from 2 to 6, and the corresponding initial number of armies
 is 50, 35, 30, 25, and 20 respectively, depending on the number of players.
-The project is divided into 4 iterations, each ending with a milestone corresponding to
-deliverables that will be graded. You will be able to use the TA feedback from iteration i
-for iteration i+1. 
-
-## Project Milestone 1: (Friday Oct 23rd)
-
-A text-based playable version of the game, i.e., players should be able to
-play the game via the console using the keyboard. There should be a command to print
-the state of the Map (i.e., which player is in which country and with how many armies), a
-command to decide which country to attack from which country, and a command to pass
-your turn to the next player. Events such as the outcome of an attack, whose turn it is to
-play, the elimination of a player, etc. should be printed to the console when applicable.
-Also required, the UML modeling of the problem domain (class diagrams with complete
-variable and method signatures, and sequence diagrams for important scenarios), detailed
-description of the choice of data structures and relevant operations: you are providing an
-initial design and implementation for the Model part of the MVC. Do not worry about
-any GUI yet.
-Deliverables: readme file + code (source + executable in a jar file) + UML diagrams + documentation, all in one zip file.
 
 ## Documentation 
 
