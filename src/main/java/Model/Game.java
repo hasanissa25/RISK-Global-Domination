@@ -30,6 +30,8 @@ public class Game {
     private Country attackingCountry;
     private int countryInitialNumberOfTroops;
     private Country defendingCountry;
+    private Country moveCountry;
+    private Country destinationCountry;
     private boolean randomlyAllocateTroopsOnGameStart = false;
 
     public Game() {
@@ -194,6 +196,22 @@ public class Game {
         this.defendingCountry = defendingCountry;
     }
 
+    public Country getMovingCountry() {
+        return moveCountry;
+    }
+
+    public void setMovingCountry(Country moveCountry) {
+        this.moveCountry = moveCountry;
+    }
+
+    public Country getDestinationCountry() {
+        return destinationCountry;
+    }
+
+    public void setDestinationCountry(Country destinationCountry) {
+        this.destinationCountry = destinationCountry;
+    }
+
     /**
      * Checks the syntax of the command passed, and makes sure it is Attack followed by AttackingCountry DefendingCountry #OfTroopsAttacking
      * Ensures that the AttackingCountry is owned by the current player, the DefendingCountry is a neighbour of his, and that he has atleast 1 troop left in the country
@@ -312,6 +330,20 @@ public class Game {
         return result;
     }
 
+    private void moveAlgorithm(int numberOfTroopsMoving,Country moveCountry, Country destinationCountry) {
+        /**
+         * @author John Afolayan
+         * Moves troops from source country to destination country.
+         *
+         */
+        if (moveCountry.getNumberOfTroops()>1) {
+            for (int i = 0; i < numberOfTroopsMoving; i++) {
+                destinationCountry.incrementNumberOfTroops();
+                moveCountry.decrementNumberOfTroops();
+            }
+        }
+    }
+
     private List<Integer> checkOutcomeOfBattle(List<Integer> attackersDiceResults, List<Integer> defendersDiceResults) {
         List<Integer> troopsLost = new ArrayList<>();
         int troopsLostFromAttacker = 0;
@@ -407,6 +439,84 @@ public class Game {
 
     private boolean checkNumberOfTroopsAttacking(String attackCountryName, int numberOfTroopsAttacking) {
         if (this.getCurrentPlayer().getACountry(attackCountryName).getNumberOfTroops() <= numberOfTroopsAttacking) {
+            return false;
+
+        }
+        return true;
+    }
+
+    /**
+     * @author John Afolayan
+     *
+     * Checks the syntax of the command passed, and makes sure Move is followed by SourceCountry DestinationCountry #OfTroopsMoved
+     * Ensures that the SourceCountry is owned by the current player, the DestinationCountry is also owned by the current player, and that he has atleast 1 troop left in the country
+     *
+     * Credit to Hasan for initiateAttack() and similar methods, the following methods use the same logic but to move troops around.
+     */
+    public boolean initiateMove(Command command) {
+        if (!checkMoveCommandSyntax(command)) {
+            System.out.println("Move syntax error ");
+            return false;
+        }
+
+        String moveCountryName = command.getSecondWord().toLowerCase();
+        setMovingCountry(myMap.getCountryByName(moveCountryName));
+
+
+        if (!checkMoveCountry(moveCountry)) {
+            System.out.println("Check move failed");
+            return false;
+        }
+
+        String destinationCountryName = command.getThirdWord();
+        setDestinationCountry(myMap.getCountryByName(destinationCountryName));
+        if (!checkDestinationCountry(moveCountry, destinationCountry)) {
+            System.out.println("Check destination failed");
+            return false;
+        }
+
+        int numberOfTroopsMoving = command.getFourthWord();
+        if (checkNumberOfTroopsMoving(moveCountryName, numberOfTroopsMoving)) {
+            moveAlgorithm(numberOfTroopsMoving, moveCountry, destinationCountry);
+
+        }
+        update();
+        return true;
+    }
+
+    private boolean checkMoveCommandSyntax(Command command) {
+        if (!command.hasSecondWord()) {
+            return false;
+        }
+        if (!command.hasThirdWord()) {
+            return false;
+        }
+        if (!command.hasFourthWord()) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkMoveCountry(Country moveCountry) {
+        if (moveCountry == null) {
+            return false;
+        }
+        if (this.getCurrentPlayer().getMyCountries().contains(moveCountry)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkDestinationCountry(Country moveCountry, Country destinationCountry) {
+        if (destinationCountry == null) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkNumberOfTroopsMoving(String moveCountryName, int numberOfTroopsMoving) {
+        if (this.getCurrentPlayer().getACountry(moveCountryName).getNumberOfTroops() <= numberOfTroopsMoving) {
             return false;
 
         }

@@ -22,9 +22,14 @@ public class Controller implements ActionListener {
     boolean attackInitiatedFlag = false;
     boolean attackingCountrySetFlag = false;
     boolean requestNumberOfTroopsFlag = false;
+    boolean requestNumberOfTroopsToMove = false;
     boolean attackCommandFlag = false;
+    boolean moveInitiated = false;
+    boolean movingCountrySetFlag = false;
+    boolean moveCommandFlag = false;
     String attackingCountry = "";
-    String targetedCountry = "";
+    String destinationCountry = "";
+    String movingCountry = "";
     int numberOfTroops;
 
     public Controller(Game gameModel, View gameView) {
@@ -39,7 +44,7 @@ public class Controller implements ActionListener {
         When an action is performed on the view, the controller handles it, based on the specific type of action.
         NewGame: Initialize the model with the provided number of players, and create the map, starting a new game
 
-        Attack: Begin formulating the attack command, asking the user for the Attacking country, the target country, and the numer of troops attacking.
+        Attack: Begin formulating the attack command, asking the user for the Attacking country, the target country, and the nubmer of troops attacking.
         Attack is done using state based algorithm, where the current state is determined by the level of input provided by the user. If the user has selected the attack button,
         they are in the attack initiated state, and the game is waiting for the attacking country to be selected, in order to enter the attacking country state.
         When the user selects the attacking country, the game is now in the wait for target country to be selected state. Then its the choose number of troops state.
@@ -74,7 +79,8 @@ public class Controller implements ActionListener {
                 goToTheBottomOfTextField();
                 break;
             case "Move":
-                gameView.setFeedbackArea("Move has been called! This feature is not implemented yet!\n");
+                gameView.setFeedbackArea("Move has been called! Please click the country belonging to you (Highlighted in Green), which you would like to move troops from. \n");
+                moveInitiated = true;
                 goToTheBottomOfTextField();
                 break;
             case "QuitGame":
@@ -109,8 +115,8 @@ public class Controller implements ActionListener {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
                         if (entry.getValue().equals(e.getSource())) {
                             if (gameModel.getMyMap().areNeighbours(attackingCountry, entry.getKey()) & !(gameModel.getMyMap().ownedBySamePlayer(attackingCountry, entry.getKey()))) {
-                                this.targetedCountry = entry.getKey();
-                                gameView.setFeedbackArea("You are initiating an attack from " + attackingCountry + " which is targeting " + targetedCountry + " !\n");
+                                this.destinationCountry = entry.getKey();
+                                gameView.setFeedbackArea("You are initiating an attack from " + attackingCountry + " which is targeting " + destinationCountry + " !\n");
                                 goToTheBottomOfTextField();
                                 attackingCountrySetFlag = false;
                                 attackInitiatedFlag = false;
@@ -119,7 +125,7 @@ public class Controller implements ActionListener {
                             } else {
                                 gameView.setFeedbackArea("You may only attack countries that are directly neighbouring the attacking country that do not belong to you!\n");
                                 this.attackingCountry = "";
-                                this.targetedCountry = "";
+                                this.destinationCountry = "";
                                 attackingCountrySetFlag = false;
                                 attackInitiatedFlag = false;
                                 goToTheBottomOfTextField();
@@ -151,12 +157,78 @@ public class Controller implements ActionListener {
                     attackCommandFlag = true;
                 }
                 if (attackCommandFlag) {
-                    gameView.setFeedbackArea("Attacking country: " + attackingCountry + ", Target country: " + targetedCountry + ", Number of troops: " + numberOfTroops + ".\n");
+                    gameView.setFeedbackArea("Attacking country: " + attackingCountry + ", Target country: " + destinationCountry + ", Number of troops: " + numberOfTroops + ".\n");
                     goToTheBottomOfTextField();
-                    Command attackCommand = new Command("attack", attackingCountry, targetedCountry, Integer.toString(numberOfTroops));
+                    Command attackCommand = new Command("attack", attackingCountry, destinationCountry, Integer.toString(numberOfTroops));
                     gameModel.initiateAttack(attackCommand);
                     gameView.setFeedbackArea("Result: " + gameModel.getResult() + "\n");
                     attackCommandFlag = false;
+                }
+                if (moveInitiated) {
+                    for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
+                        if (entry.getValue().equals(e.getSource())) {
+                            if (gameModel.getCurrentPlayer().isOneOfMyCountries(entry.getKey())) {
+                                this.movingCountry = entry.getKey();
+                                gameView.setFeedbackArea("You are moving troops from " + movingCountry + ". Please choose the destination country you want to move to.\n");
+                                goToTheBottomOfTextField();
+                                this.moveInitiated = false;
+                                this.movingCountrySetFlag = true;
+                                break;
+                            } else {
+                                gameView.setFeedbackArea("You may only move troops from your owned countries highlighted in green!\n");
+                                goToTheBottomOfTextField();
+                                this.movingCountry = "";
+                                moveInitiated = false;
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                }
+                if (movingCountrySetFlag) {
+                    for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
+                        if (entry.getValue().equals(e.getSource())) {
+                            if (gameModel.getMyMap().ownedBySamePlayer(movingCountry, entry.getKey())) {
+                                this.destinationCountry = entry.getKey();
+                                gameView.setFeedbackArea("You are moving troops from " + movingCountry + " to: " + destinationCountry + " !\n");
+                                goToTheBottomOfTextField();
+                                movingCountrySetFlag = false;
+                                moveInitiated = false;
+                                requestNumberOfTroopsToMove = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (requestNumberOfTroopsToMove) {
+                    List<Integer> optionList = new ArrayList<Integer>();
+                    int numberOfTroops = gameModel.getMyMap().getCountryByName(movingCountry).getNumberOfTroops();
+                    if (numberOfTroops == 1 || numberOfTroops == 0) {
+                        gameView.setFeedbackArea("You do not have enough troops in this country to move around!\n");
+                        break;
+                    }
+                    for (int i = 1; i < numberOfTroops; i++) {
+                        optionList.add(i);
+                    }
+                    Object[] options = optionList.toArray();
+                    Object value = JOptionPane.showInputDialog(null,
+                            "How many troops would you like to move?",
+                            "Choose the number of troops you would like to move",
+                            JOptionPane.QUESTION_MESSAGE,
+                            null,
+                            options,
+                            options[0]);
+                    this.numberOfTroops = (Integer) value;
+                    requestNumberOfTroopsToMove = false;
+                    moveCommandFlag = true;
+                }
+                if (moveCommandFlag) {
+                    gameView.setFeedbackArea("Move country: " + movingCountry + ", Destination country: " + destinationCountry + ", Number of troops being moved: " + numberOfTroops + ".\n");
+                    goToTheBottomOfTextField();
+                    Command moveCommand = new Command("move", movingCountry, destinationCountry, Integer.toString(numberOfTroops));
+                    gameModel.initiateMove(moveCommand);
+                    gameView.setFeedbackArea(Integer.toString(numberOfTroops) + " troop(s) moved from " + movingCountry + " to " + destinationCountry + ".\n");
+                    moveCommandFlag = false;
                 }
         }
     }
