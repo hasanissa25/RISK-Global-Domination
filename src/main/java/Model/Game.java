@@ -471,7 +471,6 @@ public class Game {
         String destinationCountryName = command.getThirdWord();
         setDestinationCountry(myMap.getCountryByName(destinationCountryName));
         if (!checkDestinationCountry(moveCountry, destinationCountry)) {
-            System.out.println("Check destination failed");
             return false;
         }
 
@@ -512,7 +511,14 @@ public class Game {
         if (destinationCountry == null) {
             return false;
         }
-        return true;
+        if (this.getCurrentPlayer().getNeighbours(myMap, moveCountry).contains(destinationCountry)) {
+            if (!moveCountry.getPlayer().equals(destinationCountry.getPlayer())) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean checkNumberOfTroopsMoving(String moveCountryName, int numberOfTroopsMoving) {

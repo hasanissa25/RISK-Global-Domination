@@ -3,7 +3,7 @@ package Model;
 import java.util.Objects;
 
 /**
- * @author      Hasan Issa
+ * @author Hasan Issa
  *
  * This is the Country object which knows the occupying player, and the number of currently occupying troops.
  */

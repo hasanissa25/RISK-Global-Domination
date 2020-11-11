@@ -37,10 +37,10 @@ public class View extends JFrame implements ModelUpdateListener {
     JButton attackButton;
     JButton passTurnButton;
     JButton quitButton;
+    JButton moveButton;
     ArrayList<JButton> listOfCommandButtons;
     ArrayList<CircleButton> listOfCountryButtons;
     JTextArea feedbackArea;
-    JButton moveButton;
     Map<String, CircleButton> mapOfButtons = new HashMap<>();
     CircleButton alaska;
     CircleButton alberta;
@@ -401,6 +401,10 @@ public class View extends JFrame implements ModelUpdateListener {
 
     public JButton getNewGameButton() {
         return newGameButton;
+    }
+
+    public JButton getMoveButton() {
+        return moveButton;
     }
 
     public int numberOfPlayersRequest() {
