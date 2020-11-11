@@ -40,9 +40,9 @@ public class Game {
         this.currentPlayerIndex = 0;
     }
 
-    public static void main(String[] args) {
-        Game game = new Game();
-    }
+    //public static void main(String[] args) {
+      //  Game game = new Game();
+    //}
 
 
     public void setRandomlyAllocateTroopsOnGameStart(boolean randomlyAllocateTroopsOnGameStart) {

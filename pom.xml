@@ -56,7 +56,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                Model.Game
+                                View.View
                             </mainClass>
                         </manifest>
                     </archive>

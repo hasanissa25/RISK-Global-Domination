@@ -11,7 +11,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -465,9 +468,10 @@ public class View extends JFrame implements ModelUpdateListener {
         public mapPanel() {
             this.setSize(1150, 760);
             try {
-                BufferedImage loadedImage = ImageIO.read(new File(this.getClass().getResource("../riskMap.png").toURI()));
+                InputStream iS = this.getClass().getClassLoader().getResourceAsStream("riskMap.png");
+                BufferedImage loadedImage = ImageIO.read(iS);
                 image = loadedImage.getScaledInstance(1100, 600, Image.SCALE_DEFAULT);
-            } catch (IOException | URISyntaxException ex) {
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
