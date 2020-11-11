@@ -15,7 +15,7 @@ public class CommandWords
 {
 
     private static final String[] validCommands = {
-            "map","attack", "pass","quit"
+            "map","attack", "move", "pass","quit"
     };
     public void printCommands(){
     }
