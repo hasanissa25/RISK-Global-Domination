@@ -207,6 +207,7 @@ public class Controller implements ActionListener {
                     int numberOfTroops = gameModel.getMyMap().getCountryByName(sourceCountry).getNumberOfTroops();
                     if (numberOfTroops == 1 || numberOfTroops == 0) {
                         gameView.setFeedbackArea("You do not have enough troops in this country to move around!\n");
+                        gameView.getMoveButton().setEnabled(true);
                         break;
                     }
                     else if (!gameModel.getMyMap().areNeighbours(sourceCountry,destinationCountry)) {
@@ -244,4 +245,3 @@ public class Controller implements ActionListener {
         gameView.getFeedbackArea().getCaret().setDot(Integer.MAX_VALUE);
     }
 }
-
