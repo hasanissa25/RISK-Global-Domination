@@ -186,6 +186,7 @@ public class Controller implements ActionListener {
                     }
                     break;
                 }
+
                 if (sourceCountrySetFlag) {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
                         if (entry.getValue().equals(e.getSource())) {
