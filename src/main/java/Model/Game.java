@@ -232,7 +232,6 @@ public class Game {
             System.out.println("Check attack failed");
             return false;
         }
-        System.out.println("Attacking country owned by player " + attackingCountry.getPlayer().getPlayerNumber());
 
         String defenceCountryName = command.getThirdWord();
         setDefendingCountry(myMap.getCountryByName(defenceCountryName));
@@ -240,7 +239,6 @@ public class Game {
             System.out.println("Check defence failed");
             return false;
         }
-        System.out.println("Defending country owned by player " + defendingCountry.getPlayer().getPlayerNumber());
 
         int numberOfTroopsAttacking = command.getFourthWord();
         if (checkNumberOfTroopsAttacking(attackCountryName, numberOfTroopsAttacking)) {
@@ -545,4 +543,36 @@ public class Game {
     }
 
 
+    public String aiAlgorithm() {
+        Random random = new Random();
+        int randomNumber;
+        String aiMove="";
+        for(int i=0; i<10;i++){
+            randomNumber = random.nextInt(currentPlayer.getMyCountries().size());
+            Country attackingCountry=currentPlayer.getMyCountries().get(randomNumber);
+            if(attackingCountry.getNumberOfTroops()>1){
+                String attackingCountryName=attackingCountry.getName();
+                System.out.println("the attacking country is : "+ attackingCountryName+" which has "+ attackingCountry.getNumberOfTroops()+" troops");
+                List<Country> possibleTargets;
+                possibleTargets=myMap.getCountryNeighbours(attackingCountry);
+                String targetedCountryName="";
+                for (Country possibleTarget : possibleTargets) {
+                    System.out.println("currently checking the possible targets, possible target: "+possibleTarget.getName()+" owned by player; "+possibleTarget.getPlayer().getPlayerNumber()+" with current player  "+ currentPlayer.getPlayerNumber());
+                    if(possibleTarget.getPlayer().getPlayerNumber() != currentPlayer.getPlayerNumber()){
+                        System.out.println("Successfully found a possible target");
+                        targetedCountryName=possibleTarget.getName();
+                        break;
+                    }
+                }
+                System.out.println("The target country is :"+targetedCountryName);
+                String numberOfTroops=""+(attackingCountry.getNumberOfTroops()-1);
+                System.out.println("The number of troops attacking are:"+numberOfTroops);
+                initiateAttack(new Command("attack",attackingCountryName,targetedCountryName,numberOfTroops));
+                if(targetedCountryName!="") {
+                    aiMove = aiMove + "The AI for player " +currentPlayer.getPlayerNumber()+ " decided to use " + attackingCountryName + " to attack " + targetedCountryName + " with " + numberOfTroops + " troops\n";
+                }
+            }
+        }
+        return aiMove;
+    }
 }

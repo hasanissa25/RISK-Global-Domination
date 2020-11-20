@@ -31,7 +31,8 @@ public class Controller implements ActionListener {
     String destinationCountry = "";
     String sourceCountry = "";
     int numberOfTroops;
-
+    int numberOfPlayers;
+    int numberOfAIPlayers;
     public Controller(Game gameModel, View gameView) {
         this.gameModel = gameModel;
         this.gameView = gameView;
@@ -56,7 +57,8 @@ public class Controller implements ActionListener {
          */
         switch (e.getActionCommand()) {
             case "NewGame":
-                int numberOfPlayers = gameView.numberOfPlayersRequest();
+                numberOfPlayers = gameView.numberOfPlayersRequest();
+                numberOfAIPlayers= gameView.numberOfAIPlayersRequest(numberOfPlayers);
                 gameModel.setRandomlyAllocateTroopsOnGameStart(true);
                 gameModel.initializePlayers(numberOfPlayers);
                 gameView.unlockButtons();
@@ -75,9 +77,16 @@ public class Controller implements ActionListener {
             case "PassTurn":
                 gameView.setFeedbackArea("Pass Turn has been called\n");
                 gameModel.passTurn();
-                gameView.getMoveButton().setEnabled(true);
-                gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in green!\n");
-                goToTheBottomOfTextField();
+                while(gameModel.getCurrentPlayer().getPlayerNumber()>(numberOfPlayers-numberOfAIPlayers)){
+                    String aiMove=gameModel.aiAlgorithm();
+                    gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " This player is controlled by AI!\n");
+                    gameView.setFeedbackArea(aiMove);
+                    gameModel.passTurn();
+                    goToTheBottomOfTextField();
+                }
+                    gameView.getMoveButton().setEnabled(true);
+                    gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in green!\n");
+                    goToTheBottomOfTextField();
                 break;
             case "Move":
                 gameView.setFeedbackArea("Move has been called! Please click the country belonging to you (Highlighted in Green), which you would like to move troops from. \n");
