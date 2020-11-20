@@ -173,6 +173,7 @@ public class Controller implements ActionListener {
                     gameModel.initiateAttack(attackCommand);
                     gameView.setFeedbackArea("Result: " + gameModel.getResult() + "\n");
                     attackCommandFlag = false;
+                    gameView.getMoveButton().setEnabled(true);
                 }
                 if (moveInitiated) {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
@@ -205,7 +206,6 @@ public class Controller implements ActionListener {
                                 goToTheBottomOfTextField();
                                 sourceCountrySetFlag = false;
                                 moveInitiated = false;
-                                gameView.getMoveButton().setEnabled(false);
                                 requestNumberOfTroopsToMove = true;
                                 break;
                             }
@@ -238,6 +238,7 @@ public class Controller implements ActionListener {
                             options[0]);
                     this.numberOfTroops = (Integer) value;
                     requestNumberOfTroopsToMove = false;
+
                     moveCommandFlag = true;
                 }
                 if (moveCommandFlag) {
@@ -245,6 +246,7 @@ public class Controller implements ActionListener {
                     goToTheBottomOfTextField();
                     Command moveCommand = new Command("move", sourceCountry, destinationCountry, Integer.toString(numberOfTroops));
                     gameModel.initiateMove(moveCommand);
+                    gameView.getMoveButton().setEnabled(false);
                     gameView.setFeedbackArea(Integer.toString(numberOfTroops) + " troop(s) moved from " + sourceCountry + " to " + destinationCountry + ".\n");
                     moveCommandFlag = false;
                 }

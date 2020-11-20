@@ -240,7 +240,7 @@ public class View extends JFrame implements ModelUpdateListener {
         listOfCommandButtons = new ArrayList<JButton>();
         listOfCommandButtons.add(attackButton);
         listOfCommandButtons.add(passTurnButton);
-        listOfCommandButtons.add(moveButton);
+        //listOfCommandButtons.add(moveButton);
         listOfCommandButtons.add(quitButton);
         listOfCommandButtons.add(newGameButton);
 
@@ -371,6 +371,7 @@ public class View extends JFrame implements ModelUpdateListener {
     private void initialize(Controller gameController) {
         for (JButton button : listOfCommandButtons) {
             button.addActionListener(gameController);
+            moveButton.addActionListener(gameController);
         }
         for (CircleButton button : listOfCountryButtons) {
             button.addActionListener(gameController);
