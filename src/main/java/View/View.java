@@ -371,12 +371,11 @@ public class View extends JFrame implements ModelUpdateListener {
     private void initialize(Controller gameController) {
         for (JButton button : listOfCommandButtons) {
             button.addActionListener(gameController);
-            moveButton.addActionListener(gameController);
         }
         for (CircleButton button : listOfCountryButtons) {
             button.addActionListener(gameController);
         }
-
+        moveButton.addActionListener(gameController);
     }
 
     @Deprecated
