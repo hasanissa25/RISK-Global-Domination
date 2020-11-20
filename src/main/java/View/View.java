@@ -110,7 +110,17 @@ public class View extends JFrame implements ModelUpdateListener {
                 choices[0]);
         return s;
     }
-
+    static int askUserAboutAI(Integer[] choices) {
+        Integer s = (Integer) JOptionPane.showInputDialog(
+                null,
+                "How many AI controlled players would you like to set?",
+                "Select the number of AI players!",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                choices,
+                choices[0]);
+        return s;
+    }
     public void Initialize() {
         //Initialize the View
         JFrame myFrame = new JFrame("RISK");
@@ -410,6 +420,15 @@ public class View extends JFrame implements ModelUpdateListener {
     public int numberOfPlayersRequest() {
         Integer[] choices = new Integer[]{2, 3, 4, 5, 6};
         int choice = askUser(choices);
+        return choice;
+
+    }
+    public int numberOfAIPlayersRequest(int numberOfPlayers) {
+        Integer[] choices = new Integer[numberOfPlayers-1];
+        for (int i = 0; i < (numberOfPlayers-1); i++) {
+            choices[i]=i+1;
+        }
+        int choice = askUserAboutAI(choices);
         return choice;
 
     }
