@@ -246,7 +246,6 @@ public class Controller implements ActionListener {
                     goToTheBottomOfTextField();
                     Command moveCommand = new Command("move", sourceCountry, destinationCountry, Integer.toString(numberOfTroops));
                     gameModel.initiateMove(moveCommand);
-                    gameView.getMoveButton().setEnabled(false);
                     gameView.setFeedbackArea(Integer.toString(numberOfTroops) + " troop(s) moved from " + sourceCountry + " to " + destinationCountry + ".\n");
                     moveCommandFlag = false;
                 }
