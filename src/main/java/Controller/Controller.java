@@ -25,12 +25,16 @@ public class Controller implements ActionListener {
     boolean requestNumberOfTroopsToMove = false;
     boolean attackCommandFlag = false;
     boolean moveInitiated = false;
+    boolean bonusTroopsFlag = false;
     boolean sourceCountrySetFlag = false;
     boolean moveCommandFlag = false;
     String attackingCountry = "";
     String destinationCountry = "";
     String sourceCountry = "";
+    String countryToAllocateTroopsTo ="";
     int numberOfTroops;
+    int bonusTroops;
+    int currentNumberOfBonusTroopsToPlace;
     int numberOfPlayers;
     int numberOfAIPlayers;
     public Controller(Game gameModel, View gameView) {
@@ -64,6 +68,12 @@ public class Controller implements ActionListener {
                 gameView.unlockButtons();
                 gameView.setFeedbackArea("A game has been started with " + numberOfPlayers + " players.\nEach player is allocated " + gameModel.calculateTroops(numberOfPlayers) + " initial troops that will be randomly assigned." + "\nCurrently turn of: Player " + gameModel.getCurrentPlayer().getPlayerNumber() + ". Your countries are shown in green!\n");
                 gameView.getNewGameButton().setEnabled(false);
+
+
+                initialRequestBonusTroopsAllocation();
+                this.bonusTroopsFlag=true;
+
+
                 break;
             case "Attack":
                 if (attackInitiatedFlag) {
@@ -77,16 +87,22 @@ public class Controller implements ActionListener {
             case "PassTurn":
                 gameView.setFeedbackArea("Pass Turn has been called\n");
                 gameModel.passTurn();
+                gameView.getMoveButton().setEnabled(false);
+
                 while(gameModel.getCurrentPlayer().getPlayerNumber()>(numberOfPlayers-numberOfAIPlayers)){
+                    String aiAllocateBonusTroops= gameModel.aiAllocateBonusTroops();
                     String aiMove=gameModel.aiAlgorithm();
                     gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " This player is controlled by AI!\n");
+                    gameView.setFeedbackArea(aiAllocateBonusTroops);
                     gameView.setFeedbackArea(aiMove);
+
                     gameModel.passTurn();
                     goToTheBottomOfTextField();
                 }
-                    gameView.getMoveButton().setEnabled(true);
                     gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in green!\n");
                     goToTheBottomOfTextField();
+                    initialRequestBonusTroopsAllocation();
+                    this.bonusTroopsFlag=true;
                 break;
             case "Move":
                 gameView.setFeedbackArea("Move has been called! Please click the country belonging to you (Highlighted in Green), which you would like to move troops from. \n");
@@ -99,6 +115,42 @@ public class Controller implements ActionListener {
                 gameModel.quitGame();
                 break;
             default:
+
+
+                if(bonusTroopsFlag){
+                    while (this.bonusTroops>0){
+                        for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
+                            if (entry.getValue().equals(e.getSource())) {
+                                if (gameModel.getCurrentPlayer().isOneOfMyCountries(entry.getKey())) {
+                                    this.countryToAllocateTroopsTo = entry.getKey();
+                                    gameModel.getMyMap().getCountryByName(countryToAllocateTroopsTo).addTroops(currentNumberOfBonusTroopsToPlace);
+                                    gameView.setFeedbackArea("You added " +currentNumberOfBonusTroopsToPlace  + " to "+ countryToAllocateTroopsTo+ "\n");
+                                    this.bonusTroops=this.bonusTroops-currentNumberOfBonusTroopsToPlace;
+                                    goToTheBottomOfTextField();
+                                    gameModel.update();
+                                    if(this.bonusTroops==0){
+                                        bonusTroopsFlag=false;
+                                    }else{
+                                        requestBonusTroopsAllocation();
+                                    }
+                                    break;
+                                } else {
+                                    gameView.setFeedbackArea("You may only add troops to countries that you own highlighted in green!\n");
+                                    goToTheBottomOfTextField();
+                                    this.countryToAllocateTroopsTo = "";
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+
+
+
+
+
+
                 if (attackInitiatedFlag) {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
                         if (entry.getValue().equals(e.getSource())) {
@@ -196,7 +248,6 @@ public class Controller implements ActionListener {
                     }
                     break;
                 }
-
                 if (sourceCountrySetFlag) {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
                         if (entry.getValue().equals(e.getSource())) {
@@ -252,6 +303,17 @@ public class Controller implements ActionListener {
         }
     }
 
+    private void initialRequestBonusTroopsAllocation() {
+        this.bonusTroops = gameView.bonusTroops();
+        this.currentNumberOfBonusTroopsToPlace = gameView.numberOfBonusTroopsRequest();
+        gameView.setFeedbackArea("Select a country to allocate the " + currentNumberOfBonusTroopsToPlace + " bonus troops to.\n");
+        goToTheBottomOfTextField();
+    }
+    private void requestBonusTroopsAllocation() {
+        this.currentNumberOfBonusTroopsToPlace = gameView.numberOfBonusTroopsRequest(this.bonusTroops);
+        gameView.setFeedbackArea("Select a country to allocate the " + currentNumberOfBonusTroopsToPlace + " bonus troops to.\n");
+        goToTheBottomOfTextField();
+    }
     private void goToTheBottomOfTextField() {
         gameView.getFeedbackArea().getCaret().setDot(Integer.MAX_VALUE);
     }
