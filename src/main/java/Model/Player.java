@@ -82,7 +82,12 @@ public class Player {
     }
 
     public int bonusTerritoryTroops(){
-        int bonus = myCountries.size() / 3;
+        int bonus=0;
+        if(myCountries.size()<=11){
+            bonus=3;
+        }else{
+            bonus= myCountries.size() / 3;
+        }
         return bonus;
     }
 

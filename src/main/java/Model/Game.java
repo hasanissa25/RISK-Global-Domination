@@ -81,7 +81,7 @@ public class Game {
         update();
     }
 
-    private void update() {
+    public void update() {
         if (this.viewer != null)
             this.viewer.modelUpdated();
     }
@@ -586,5 +586,19 @@ public class Game {
             }
         }
         return aiMove;
+    }
+    public String aiAllocateBonusTroops() {
+        String allocation="";
+        Random random = new Random();
+
+        int aiPlayerBonusTroops= currentPlayer.totalBonusTroops();
+
+        int randomCountryIndex;
+        randomCountryIndex = random.nextInt(currentPlayer.getMyCountries().size());
+
+        currentPlayer.getMyCountries().get(randomCountryIndex).addTroops(aiPlayerBonusTroops);
+
+        allocation+="AI decided to add his "+aiPlayerBonusTroops+" bonus troops to "+ currentPlayer.getMyCountries().get(randomCountryIndex).getName()+"\n";
+        return allocation;
     }
 }

@@ -133,6 +133,17 @@ public class View extends JFrame implements ModelUpdateListener {
                 choices[0]);
         return s;
     }
+    int askUserAboutBonusTroops(Integer[] choices, int maxNumberOfBonuses) {
+        Integer s = (Integer) JOptionPane.showInputDialog(
+                null,
+                "You have " + maxNumberOfBonuses + " bonus troops. How many bonus troops would you like to allocate?",
+                "Select the number of bonus troops!",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                choices,
+                choices[0]);
+        return s;
+    }
 
     public void Initialize() {
         //Initialize the View
@@ -450,7 +461,7 @@ public class View extends JFrame implements ModelUpdateListener {
         return gameModel.getCurrentPlayer().totalBonusTroops();
     }
 
-    public int numberOfBonusTroopsRequest(int bonusTroops) {
+    public int numberOfBonusTroopsRequest() {
         Integer[] choices = new Integer[gameModel.getCurrentPlayer().totalBonusTroops()];
         for (int i = 0; i < (gameModel.getCurrentPlayer().totalBonusTroops()); i++) {
             choices[i]=i+1;
@@ -458,7 +469,14 @@ public class View extends JFrame implements ModelUpdateListener {
         int choice = askUserAboutBonusTroops(choices);
         return choice;
     }
-
+    public int numberOfBonusTroopsRequest(int numberOfMaxTroops) {
+        Integer[] choices = new Integer[numberOfMaxTroops];
+        for (int i = 0; i < numberOfMaxTroops; i++) {
+            choices[i]=i+1;
+        }
+        int choice = askUserAboutBonusTroops(choices,numberOfMaxTroops);
+        return choice;
+    }
     public JButton getAttackButton() {
         return attackButton;
     }

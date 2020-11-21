@@ -39,6 +39,9 @@ public class Country {
         this.player = player;
     }
 
+    public void addTroops(int numberOfTroops){
+        this.numberOfTroops+=numberOfTroops;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
