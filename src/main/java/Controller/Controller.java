@@ -25,12 +25,15 @@ public class Controller implements ActionListener {
     boolean requestNumberOfTroopsToMove = false;
     boolean attackCommandFlag = false;
     boolean moveInitiated = false;
+    boolean passInitiatedFlag = false;
     boolean sourceCountrySetFlag = false;
     boolean moveCommandFlag = false;
     String attackingCountry = "";
     String destinationCountry = "";
     String sourceCountry = "";
     int numberOfTroops;
+    int bonusTroops;
+    int numberOfBonusTroops;
     int numberOfPlayers;
     int numberOfAIPlayers;
     public Controller(Game gameModel, View gameView) {
@@ -77,6 +80,12 @@ public class Controller implements ActionListener {
             case "PassTurn":
                 gameView.setFeedbackArea("Pass Turn has been called\n");
                 gameModel.passTurn();
+                passInitiatedFlag = true;
+                /* I TRIED PUTTING THIS PART INSIDE if(passInitiatedFlag) but it wouldn't execute even though I set it to true *//*
+                this.bonusTroops = gameView.bonusTroops();
+                this.numberOfBonusTroops = gameView.numberOfBonusTroopsRequest(bonusTroops);
+                gameView.setFeedbackArea("Select your destination country which you'd like to move your " + numberOfBonusTroops + " bonus troops to.");*/
+
                 while(gameModel.getCurrentPlayer().getPlayerNumber()>(numberOfPlayers-numberOfAIPlayers)){
                     String aiMove=gameModel.aiAlgorithm();
                     gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " This player is controlled by AI!\n");
@@ -174,6 +183,12 @@ public class Controller implements ActionListener {
                     gameView.setFeedbackArea("Result: " + gameModel.getResult() + "\n");
                     attackCommandFlag = false;
                     gameView.getMoveButton().setEnabled(true);
+                }
+                if (passInitiatedFlag) {
+                    this.bonusTroops = gameView.bonusTroops();
+                    this.numberOfBonusTroops = gameView.numberOfBonusTroopsRequest(bonusTroops);
+                    gameView.setFeedbackArea("Select your destination country which you'd like to move your " + numberOfBonusTroops + " bonus troops to.");
+                    passInitiatedFlag = false;
                 }
                 if (moveInitiated) {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {

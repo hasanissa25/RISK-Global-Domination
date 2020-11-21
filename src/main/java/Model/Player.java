@@ -16,6 +16,7 @@ public class Player {
     private List<Country> myCountries;
     private List<Country> myPossibleTargets;
     private Map theMap;
+    private int bonusTroops;
 
     private int totalNumberOftroops;
 
@@ -78,6 +79,40 @@ public class Player {
 
     public List<Country> getNeighbours(Map myMap, Country country) {
         return myMap.getCountryNeighbours(country);
+    }
+
+    public int bonusTerritoryTroops(){
+        int bonus = myCountries.size() / 3;
+        return bonus;
+    }
+
+    public int bonusContinentTroops(){
+        int bonus = 0;
+        for(int i=0; i<myCountries.size(); i++){
+            if((myCountries.contains("Alaska")) && (myCountries.contains("northwestTerritory")) && (myCountries.contains("Greenland")) && (myCountries.contains("Alberta")) && (myCountries.contains("Quebec")) && (myCountries.contains("westernUnitedStates")) && (myCountries.contains("easternUnitedStates")) && (myCountries.contains("centralAmerica"))){
+                bonus +=5;
+            }
+            else if((myCountries.contains("Iceland")) && (myCountries.contains("Scandinavia")) && (myCountries.contains("SouthernEurope")) && (myCountries.contains("NorthernEurope")) && (myCountries.contains("WesternEurope")) && (myCountries.contains("greatBritain")) && (myCountries.contains("Ukraine"))){
+                bonus +=5;
+            }
+            else if((myCountries.contains("MiddleEast")) && (myCountries.contains("India")) && (myCountries.contains("Kazakhstan")) && (myCountries.contains("China")) && (myCountries.contains("Siam")) && (myCountries.contains("Irkutsk")) && (myCountries.contains("Japan")) && (myCountries.contains("Mongolia")) && (myCountries.contains("Kamchatka")) && (myCountries.contains("Siberia")) && (myCountries.contains("Yakutsk")) && (myCountries.contains("Ural"))){
+                bonus +=7;
+            }
+            else if((myCountries.contains("Argentina")) && (myCountries.contains("Peru")) && (myCountries.contains("Brazil")) && (myCountries.contains("Venezuela"))){
+                bonus +=3;
+            }
+            else if((myCountries.contains("EastAfrica")) && (myCountries.contains("Congo")) && (myCountries.contains("SouthAfrica")) && (myCountries.contains("Egypt")) && (myCountries.contains("Madagascar")) && (myCountries.contains("NorthAfrica"))){
+                bonus +=3;
+            }
+            else if((myCountries.contains("EasternAustralia")) && (myCountries.contains("WesternAustralia")) && (myCountries.contains("NewGuinea")) && (myCountries.contains("Indonesia"))){
+                bonus +=3;
+            }
+        }
+        return bonus;
+    }
+
+    public int totalBonusTroops(){
+        return bonusTerritoryTroops() + bonusContinentTroops();
     }
 
     @Override

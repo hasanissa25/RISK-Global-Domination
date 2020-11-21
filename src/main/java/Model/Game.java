@@ -4,6 +4,7 @@ import Game.Command;
 import Game.Parser;
 import Game.UtilArray;
 
+import javax.swing.*;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -342,6 +343,18 @@ public class Game {
         }
     }
 
+    private void chooseBonusTroops(Integer[] choices) {
+        Integer s = (Integer) JOptionPane.showInputDialog(
+                null,
+                "You have " + getCurrentPlayer().totalBonusTroops() + " bonus troops. Please choose the amount and destination country you want to move them to.\n",
+                "Select the number of AI players!",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                choices,
+                choices[0]);
+        //return s;
+    }
+
     private List<Integer> checkOutcomeOfBattle(List<Integer> attackersDiceResults, List<Integer> defendersDiceResults) {
         List<Integer> troopsLost = new ArrayList<>();
         int troopsLostFromAttacker = 0;
@@ -475,7 +488,6 @@ public class Game {
         int numberOfTroopsMoving = command.getFourthWord();
         if (checkNumberOfTroopsMoving(moveCountryName, numberOfTroopsMoving)) {
             moveAlgorithm(numberOfTroopsMoving, moveCountry, destinationCountry);
-
         }
         update();
         return true;
