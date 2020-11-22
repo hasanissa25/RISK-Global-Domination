@@ -55,8 +55,15 @@ public class Game {
     }
 
     public void passTurn() {
-        this.currentPlayerIndex = (this.currentPlayerIndex == (this.numberOfPlayers - 1)) ? 0 : this.currentPlayerIndex + 1;
-        this.currentPlayer = this.players.get(this.currentPlayerIndex);
+        int totalSizeOfListOfPlayers=players.size();
+
+        if(currentPlayerIndex+1 == totalSizeOfListOfPlayers){
+            currentPlayerIndex=0;
+        }else{
+            currentPlayerIndex++;
+        }
+        //this.currentPlayerIndex = (this.currentPlayerIndex == (this.numberOfPlayers - 1)) ? 0 : this.currentPlayerIndex + 1;
+        currentPlayer = players.get(currentPlayerIndex);
         update();
     }
 
@@ -230,14 +237,12 @@ public class Game {
 
 
         if (!checkAttackCountry(attackingCountry)) {
-            System.out.println("Check attack failed");
             return false;
         }
 
         String defenceCountryName = command.getThirdWord();
         setDefendingCountry(myMap.getCountryByName(defenceCountryName));
         if (!checkDefenceCountry(attackingCountry, defendingCountry)) {
-            System.out.println("Check defence failed");
             return false;
         }
 
@@ -300,31 +305,41 @@ public class Game {
             attackingCountry.getPlayer().setTotalNumberOftroops(attackingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsAttacking - currentNumberOfAttackingTroops));
             defendingCountry.getPlayer().setTotalNumberOftroops(defendingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsDefending - currentNumberOfDefendingTroops));
             newTurn();
-            if (attackingCountry.getPlayer().getTotalNumberOftroops() == 0) {
+   /*         if (attackingCountry.getPlayer().getTotalNumberOftroops() <= 0) {
                 players.remove(attackingCountry.getPlayer());
+                this.numberOfPlayers=this.numberOfPlayers-1;
+                System.out.println(attackingCountry.getPlayer().getPlayerNumber()+ "was removed in currentNumberOfAttackingTroops <= 0, attacking side");
             }
-            if (defendingCountry.getPlayer().getTotalNumberOftroops() == 0) {
+            if (defendingCountry.getPlayer().getTotalNumberOftroops() <= 0) {
                 players.remove(defendingCountry.getPlayer());
-            }
+                this.numberOfPlayers=this.numberOfPlayers-1;
+                System.out.println(defendingCountry.getPlayer().getPlayerNumber()+"was removed in currentNumberOfAttackingTroops <= 0, defending side");
+            }*/
         }
         if (currentNumberOfDefendingTroops <= 0) {
             this.result = "Congratulations! You have won the attack!\nThe attacker lost " + (numberOfTroopsAttacking - currentNumberOfAttackingTroops) + " troops during the attack, and the defender lost " + (numberOfTroopsDefending - currentNumberOfDefendingTroops) + " troops.\n";
-            this.attackingCountry.getPlayer().setTotalNumberOftroops((attackingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsAttacking - currentNumberOfAttackingTroops)));
-            this.getDefendingCountry().getPlayer().setTotalNumberOftroops(defendingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsDefending - currentNumberOfDefendingTroops));
-            this.getDefendingCountry().getPlayer().getMyCountries().remove(this.getDefendingCountry());
-            this.getAttackingCountry().getPlayer().getMyCountries().add(this.getDefendingCountry());
-            this.getDefendingCountry().setPlayer(currentPlayer);
-            this.getDefendingCountry().setNumberOfTroops(currentNumberOfAttackingTroops);
-            this.getAttackingCountry().setNumberOfTroops(countryInitialNumberOfTroops - numberOfTroopsAttacking);
+            attackingCountry.getPlayer().setTotalNumberOftroops((attackingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsAttacking - currentNumberOfAttackingTroops)));
+            defendingCountry.getPlayer().setTotalNumberOftroops(defendingCountry.getPlayer().getTotalNumberOftroops() - (numberOfTroopsDefending - currentNumberOfDefendingTroops));
+            defendingCountry.getPlayer().getMyCountries().remove(defendingCountry);
+            attackingCountry.getPlayer().getMyCountries().add(defendingCountry);
+            defendingCountry.setPlayer(currentPlayer);
+            defendingCountry.setNumberOfTroops(currentNumberOfAttackingTroops);
+            attackingCountry.setNumberOfTroops(countryInitialNumberOfTroops - numberOfTroopsAttacking);
             newTurn();
-            if (this.getAttackingCountry().getPlayer().getTotalNumberOftroops() == 0) {
-                players.remove(this.getAttackingCountry().getPlayer());
-                System.out.println("Player "+this.getAttackingCountry().getPlayer().getPlayerNumber()+" has been removed" );
+/*            if (attackingCountry.getPlayer().getTotalNumberOftroops() <= 0) {
+                players.remove(attackingCountry.getPlayer());
+                this.numberOfPlayers=this.numberOfPlayers-1;
+                System.out.println(attackingCountry.getPlayer().getPlayerNumber()+ "was removed in currentNumberOfDefendingTroops <= 0, attacking side");
             }
-            if (this.getDefendingCountry().getPlayer().getTotalNumberOftroops() == 0) {
-                players.remove(this.getDefendingCountry().getPlayer());
-                System.out.println("Player "+this.getDefendingCountry().getPlayer().getPlayerNumber()+" has been removed" );
-            }
+            if (defendingCountry.getPlayer().getTotalNumberOftroops() <= 0) {
+                players.remove(defendingCountry.getPlayer());
+                this.numberOfPlayers=this.numberOfPlayers-1;
+                System.out.println(defendingCountry.getPlayer().getPlayerNumber()+" was removed in currentNumberOfDefendingTroops <= 0, defending side" );
+            }*/
+        }
+        for (Player player : players) {
+            if(player.getMyCountries().size()==0) players.remove(player);
+            numberOfPlayers--;
         }
         return result;
     }
@@ -466,7 +481,6 @@ public class Game {
      */
     public boolean initiateMove(Command command) {
         if (!checkMoveCommandSyntax(command)) {
-            System.out.println("Move syntax error ");
             return false;
         }
 
@@ -475,7 +489,6 @@ public class Game {
 
 
         if (!checkMoveCountry(moveCountry)) {
-            System.out.println("Check move failed");
             return false;
         }
 
@@ -564,21 +577,16 @@ public class Game {
             Country attackingCountry=currentPlayer.getMyCountries().get(randomNumber);
             if(attackingCountry.getNumberOfTroops()>1){
                 String attackingCountryName=attackingCountry.getName();
-                System.out.println("the attacking country is : "+ attackingCountryName+" which has "+ attackingCountry.getNumberOfTroops()+" troops");
                 List<Country> possibleTargets;
                 possibleTargets=myMap.getCountryNeighbours(attackingCountry);
                 String targetedCountryName="";
                 for (Country possibleTarget : possibleTargets) {
-                    System.out.println("currently checking the possible targets, possible target: "+possibleTarget.getName()+" owned by player; "+possibleTarget.getPlayer().getPlayerNumber()+" with current player  "+ currentPlayer.getPlayerNumber());
                     if(possibleTarget.getPlayer().getPlayerNumber() != currentPlayer.getPlayerNumber()){
-                        System.out.println("Successfully found a possible target");
                         targetedCountryName=possibleTarget.getName();
                         break;
                     }
                 }
-                System.out.println("The target country is :"+targetedCountryName);
                 String numberOfTroops=""+(attackingCountry.getNumberOfTroops()-1);
-                System.out.println("The number of troops attacking are:"+numberOfTroops);
                 initiateAttack(new Command("attack",attackingCountryName,targetedCountryName,numberOfTroops));
                 if(targetedCountryName!="") {
                     aiMove = aiMove + "The AI for player " +currentPlayer.getPlayerNumber()+ " decided to use " + attackingCountryName + " to attack " + targetedCountryName + " with " + numberOfTroops + " troops\n";
