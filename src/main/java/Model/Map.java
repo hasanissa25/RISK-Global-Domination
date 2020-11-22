@@ -7,12 +7,12 @@ import org.jgrapht.graph.SimpleGraph;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 /**
- * @author      Hasan Issa
- *
+ * @author Hasan Issa
+ * <p>
  * This is the Map object of our Risk world, which we represent as a Graph
  * Every Country is a Vertex, which has neighbouring countries connected to its Edges.
- *
  */
 public class Map {
     private Graph<Country, DefaultEdge> mapGraph;
@@ -21,6 +21,7 @@ public class Map {
     public Set<Country> getAllCountries() {
         return listOfCountries;
     }
+
     public Country getCountryByName(String CountryName) {
         for (Country c : listOfCountries) {
             if (c.getName().toLowerCase().equals(CountryName.toLowerCase())) {
@@ -29,14 +30,15 @@ public class Map {
         }
         return null;
     }
+
     public List<Country> getCountryNeighbours(Country country) {
         List<Country> neighbours = new ArrayList<Country>();
         if (listOfCountries.contains(country)) {
             for (DefaultEdge e : mapGraph.edgesOf(country)) {
-                if(!mapGraph.getEdgeSource(e).equals(country)) {
+                if (!mapGraph.getEdgeSource(e).equals(country)) {
                     neighbours.add(mapGraph.getEdgeSource(e));
                 }
-                if(!mapGraph.getEdgeTarget(e).equals(country)) {
+                if (!mapGraph.getEdgeTarget(e).equals(country)) {
                     neighbours.add(mapGraph.getEdgeTarget(e));
                 }
             }
@@ -44,20 +46,25 @@ public class Map {
         neighbours.remove(country);
         return neighbours;
     }
-    public boolean areNeighbours(String firtCountryName,String secondCountryName){
-        if(getCountryNeighbours(getCountryByName(firtCountryName)).contains(getCountryByName(secondCountryName))) return true;
+
+    public boolean areNeighbours(String firtCountryName, String secondCountryName) {
+        if (getCountryNeighbours(getCountryByName(firtCountryName)).contains(getCountryByName(secondCountryName)))
+            return true;
         else return false;
     }
-    public boolean ownedBySamePlayer(String firstCountry, String secondCountry){
-        if(getCountryByName(firstCountry).getPlayer()==getCountryByName(secondCountry).getPlayer())   return true;
+
+    public boolean ownedBySamePlayer(String firstCountry, String secondCountry) {
+        if (getCountryByName(firstCountry).getPlayer() == getCountryByName(secondCountry).getPlayer()) return true;
         else return false;
     }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer();
         listOfCountries.forEach(x -> sb.append(x + "\n"));
         return sb.toString();
     }
+
     public Map() {
         this.mapGraph = new SimpleGraph<>(DefaultEdge.class);
         Country Alaska = new Country("Alaska");
@@ -236,5 +243,36 @@ public class Map {
         mapGraph.addEdge(SouthernEurope, Ukraine);
         listOfCountries = mapGraph.vertexSet();
 
+    }
+
+    public boolean pathBetweenSourceAndDestination(Country theSourceCountry, Country theDestinationCountry, int currentLengthAway, int currentPlayer, List<Country> visitedCountries) {
+        //Start at the source country
+        //Get the source neighbours owned by the same player that owns the source country
+        //Is the destination in one of those neighbours?
+        //replace source with the first neighbour owned by the same player, repeat the algorithm until the destination is in the neighbours
+        if (currentLengthAway >= 15) {
+            return false;
+        } else if (theSourceCountry.equals(theDestinationCountry)) {
+            return true;
+        } else if (theSourceCountry.getPlayer().getPlayerNumber() == currentPlayer) {
+
+            if(visitedCountries==null) {
+                visitedCountries = new ArrayList<>();
+                visitedCountries.add(theSourceCountry);
+            } else if(visitedCountries.contains(theSourceCountry)) return false;
+            else {
+                visitedCountries.add(theSourceCountry);
+            }
+
+            currentLengthAway++;
+            for (Country countryNeighbour : getCountryNeighbours(theSourceCountry)) {
+                boolean result = false;
+                result = pathBetweenSourceAndDestination(countryNeighbour, theDestinationCountry, currentLengthAway, currentPlayer, visitedCountries);
+                if(result) return true;
+            }
+            return  false;
+        } else {
+            return false;
+        }
     }
 }

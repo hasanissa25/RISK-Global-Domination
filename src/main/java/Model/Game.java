@@ -481,6 +481,7 @@ public class Game {
 
         int numberOfTroopsMoving = command.getFourthWord();
         if (checkNumberOfTroopsMoving(moveCountryName, numberOfTroopsMoving)) {
+            System.out.println("Number of troops: "+numberOfTroopsMoving+ " source country; "+moveCountry+ " destination country: "+destinationCountry);
             moveAlgorithm(numberOfTroopsMoving, moveCountry, destinationCountry);
         }
         update();
