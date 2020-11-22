@@ -88,31 +88,31 @@ public class Player {
         }else{
             bonus= myCountries.size() / 3;
         }
+        System.out.println("The current bonus out of number of territories is :"+bonus);
         return bonus;
     }
 
     public int bonusContinentTroops(){
         int bonus = 0;
-        for(int i=0; i<myCountries.size(); i++){
-            if((myCountries.contains("Alaska")) && (myCountries.contains("northwestTerritory")) && (myCountries.contains("Greenland")) && (myCountries.contains("Alberta")) && (myCountries.contains("Quebec")) && (myCountries.contains("westernUnitedStates")) && (myCountries.contains("easternUnitedStates")) && (myCountries.contains("centralAmerica"))){
+            if((isOneOfMyCountries("Alaska")) && (isOneOfMyCountries("northwestTerritory")) && (isOneOfMyCountries("Greenland")) && (isOneOfMyCountries("Alberta")) && (isOneOfMyCountries("Quebec")) && (isOneOfMyCountries("westernUnitedStates")) && (isOneOfMyCountries("easternUnitedStates")) && (isOneOfMyCountries("centralAmerica"))){
                 bonus +=5;
             }
-            else if((myCountries.contains("Iceland")) && (myCountries.contains("Scandinavia")) && (myCountries.contains("SouthernEurope")) && (myCountries.contains("NorthernEurope")) && (myCountries.contains("WesternEurope")) && (myCountries.contains("greatBritain")) && (myCountries.contains("Ukraine"))){
+            if((isOneOfMyCountries("Iceland")) && (isOneOfMyCountries("Scandinavia")) && (isOneOfMyCountries("SouthernEurope")) && (isOneOfMyCountries("NorthernEurope")) && (isOneOfMyCountries("WesternEurope")) && (isOneOfMyCountries("greatBritain")) && (isOneOfMyCountries("Ukraine"))){
                 bonus +=5;
             }
-            else if((myCountries.contains("MiddleEast")) && (myCountries.contains("India")) && (myCountries.contains("Kazakhstan")) && (myCountries.contains("China")) && (myCountries.contains("Siam")) && (myCountries.contains("Irkutsk")) && (myCountries.contains("Japan")) && (myCountries.contains("Mongolia")) && (myCountries.contains("Kamchatka")) && (myCountries.contains("Siberia")) && (myCountries.contains("Yakutsk")) && (myCountries.contains("Ural"))){
+            if((isOneOfMyCountries("MiddleEast")) && (isOneOfMyCountries("India")) && (isOneOfMyCountries("Kazakhstan")) && (isOneOfMyCountries("China")) && (isOneOfMyCountries("Siam")) && (isOneOfMyCountries("Irkutsk")) && (isOneOfMyCountries("Japan")) && (isOneOfMyCountries("Mongolia")) && (isOneOfMyCountries("Kamchatka")) && (isOneOfMyCountries("Siberia")) && (isOneOfMyCountries("Yakutsk")) && (isOneOfMyCountries("Ural"))){
                 bonus +=7;
             }
-            else if((myCountries.contains("Argentina")) && (myCountries.contains("Peru")) && (myCountries.contains("Brazil")) && (myCountries.contains("Venezuela"))){
+            if((isOneOfMyCountries("Argentina")) && (isOneOfMyCountries("Peru")) && (isOneOfMyCountries("Brazil")) && (isOneOfMyCountries("Venezuela"))){
+                bonus +=2;
+            }
+            if((isOneOfMyCountries("EastAfrica")) && (isOneOfMyCountries("Congo")) && (isOneOfMyCountries("SouthAfrica")) && (isOneOfMyCountries("Egypt")) && (isOneOfMyCountries("Madagascar")) && (isOneOfMyCountries("NorthAfrica"))){
                 bonus +=3;
             }
-            else if((myCountries.contains("EastAfrica")) && (myCountries.contains("Congo")) && (myCountries.contains("SouthAfrica")) && (myCountries.contains("Egypt")) && (myCountries.contains("Madagascar")) && (myCountries.contains("NorthAfrica"))){
-                bonus +=3;
+            if((isOneOfMyCountries("EasternAustralia")) && (isOneOfMyCountries("WesternAustralia")) && (isOneOfMyCountries("NewGuinea")) && (isOneOfMyCountries("Indonesia"))){
+                bonus +=2;
             }
-            else if((myCountries.contains("EasternAustralia")) && (myCountries.contains("WesternAustralia")) && (myCountries.contains("NewGuinea")) && (myCountries.contains("Indonesia"))){
-                bonus +=3;
-            }
-        }
+        System.out.println("The bonus out of continents held is :"+bonus);
         return bonus;
     }
 

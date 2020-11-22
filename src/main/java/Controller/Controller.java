@@ -68,12 +68,9 @@ public class Controller implements ActionListener {
                 gameView.unlockButtons();
                 gameView.setFeedbackArea("A game has been started with " + numberOfPlayers + " players.\nEach player is allocated " + gameModel.calculateTroops(numberOfPlayers) + " initial troops that will be randomly assigned." + "\nCurrently turn of: Player " + gameModel.getCurrentPlayer().getPlayerNumber() + ". Your countries are shown in green!\n");
                 gameView.getNewGameButton().setEnabled(false);
-
-
+                System.out.println("The current player: "+gameModel.getCurrentPlayer().getPlayerNumber()+" has the following countries "+gameModel.getCurrentPlayer().getMyCountries());
                 initialRequestBonusTroopsAllocation();
                 this.bonusTroopsFlag=true;
-
-
                 break;
             case "Attack":
                 if (attackInitiatedFlag) {
@@ -88,19 +85,18 @@ public class Controller implements ActionListener {
                 gameView.setFeedbackArea("Pass Turn has been called\n");
                 gameModel.passTurn();
                 gameView.getMoveButton().setEnabled(false);
-
                 while(gameModel.getCurrentPlayer().getPlayerNumber()>(numberOfPlayers-numberOfAIPlayers)){
                     String aiAllocateBonusTroops= gameModel.aiAllocateBonusTroops();
                     String aiMove=gameModel.aiAlgorithm();
                     gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " This player is controlled by AI!\n");
                     gameView.setFeedbackArea(aiAllocateBonusTroops);
                     gameView.setFeedbackArea(aiMove);
-
-                    gameModel.passTurn();
+                    gameModel.passTurn( );
                     goToTheBottomOfTextField();
                 }
                     gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in green!\n");
                     goToTheBottomOfTextField();
+                    System.out.println("the current player right now is "+gameModel.getCurrentPlayer().getPlayerNumber()+ "who has the following countries: "+gameModel.getCurrentPlayer().getMyCountries());
                     initialRequestBonusTroopsAllocation();
                     this.bonusTroopsFlag=true;
                 break;
@@ -115,8 +111,6 @@ public class Controller implements ActionListener {
                 gameModel.quitGame();
                 break;
             default:
-
-
                 if(bonusTroopsFlag){
                     while (this.bonusTroops>0){
                         for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
@@ -145,12 +139,6 @@ public class Controller implements ActionListener {
                         break;
                     }
                 }
-
-
-
-
-
-
                 if (attackInitiatedFlag) {
                     for (Map.Entry<String, CircleButton> entry : gameView.getMapOfButtons().entrySet()) {
                         if (entry.getValue().equals(e.getSource())) {
