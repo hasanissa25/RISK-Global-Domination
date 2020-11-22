@@ -88,7 +88,6 @@ public class Player {
         }else{
             bonus= myCountries.size() / 3;
         }
-        System.out.println("The current bonus out of number of territories is :"+bonus);
         return bonus;
     }
 
@@ -112,7 +111,6 @@ public class Player {
             if((isOneOfMyCountries("EasternAustralia")) && (isOneOfMyCountries("WesternAustralia")) && (isOneOfMyCountries("NewGuinea")) && (isOneOfMyCountries("Indonesia"))){
                 bonus +=2;
             }
-        System.out.println("The bonus out of continents held is :"+bonus);
         return bonus;
     }
 

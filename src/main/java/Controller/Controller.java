@@ -68,7 +68,6 @@ public class Controller implements ActionListener {
                 gameView.unlockButtons();
                 gameView.setFeedbackArea("A game has been started with " + numberOfPlayers + " players.\nEach player is allocated " + gameModel.calculateTroops(numberOfPlayers) + " initial troops that will be randomly assigned." + "\nCurrently turn of: Player " + gameModel.getCurrentPlayer().getPlayerNumber() + ". Your countries are shown in green!\n");
                 gameView.getNewGameButton().setEnabled(false);
-                System.out.println("The current player: "+gameModel.getCurrentPlayer().getPlayerNumber()+" has the following countries "+gameModel.getCurrentPlayer().getMyCountries());
                 initialRequestBonusTroopsAllocation();
                 this.bonusTroopsFlag=true;
                 break;
@@ -96,7 +95,6 @@ public class Controller implements ActionListener {
                 }
                     gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in green!\n");
                     goToTheBottomOfTextField();
-                    System.out.println("the current player right now is "+gameModel.getCurrentPlayer().getPlayerNumber()+ "who has the following countries: "+gameModel.getCurrentPlayer().getMyCountries());
                     initialRequestBonusTroopsAllocation();
                     this.bonusTroopsFlag=true;
                 break;
