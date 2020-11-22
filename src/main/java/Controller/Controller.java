@@ -2,6 +2,7 @@ package Controller;
 
 import Game.Command;
 import Model.Game;
+import Model.Player;
 import View.CircleButton;
 import View.View;
 
@@ -37,6 +38,8 @@ public class Controller implements ActionListener {
     int currentNumberOfBonusTroopsToPlace;
     int numberOfPlayers;
     int numberOfAIPlayers;
+    int initialNumberOfPlayers;
+
     public Controller(Game gameModel, View gameView) {
         this.gameModel = gameModel;
         this.gameView = gameView;
@@ -61,7 +64,8 @@ public class Controller implements ActionListener {
          */
         switch (e.getActionCommand()) {
             case "NewGame":
-                numberOfPlayers = gameView.numberOfPlayersRequest();
+                initialNumberOfPlayers=gameView.numberOfPlayersRequest();
+                numberOfPlayers = initialNumberOfPlayers;
                 numberOfAIPlayers= gameView.numberOfAIPlayersRequest(numberOfPlayers);
                 gameModel.setRandomlyAllocateTroopsOnGameStart(true);
                 gameModel.initializePlayers(numberOfPlayers);
@@ -84,13 +88,20 @@ public class Controller implements ActionListener {
                 gameView.setFeedbackArea("Pass Turn has been called\n");
                 gameModel.passTurn();
                 gameView.getMoveButton().setEnabled(false);
-                while(gameModel.getCurrentPlayer().getPlayerNumber()>(numberOfPlayers-numberOfAIPlayers)){
+                while(gameModel.getCurrentPlayer().getPlayerNumber()>(initialNumberOfPlayers-numberOfAIPlayers)){
                     String aiAllocateBonusTroops= gameModel.aiAllocateBonusTroops();
                     String aiMove=gameModel.aiAlgorithm();
                     gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " This player is controlled by AI!\n");
                     gameView.setFeedbackArea(aiAllocateBonusTroops);
                     gameView.setFeedbackArea(aiMove);
+                    Player currentPlayer= gameModel.getCurrentPlayer();
                     gameModel.passTurn( );
+                    Player afterPassPlayer= gameModel.getCurrentPlayer();
+                    if(currentPlayer.getPlayerNumber()==afterPassPlayer.getPlayerNumber()){
+                        JOptionPane.showMessageDialog(gameView, "Player "+afterPassPlayer.getPlayerNumber()+" has won the game!");
+                        gameView.finishGame();
+                        break;
+                    }
                     goToTheBottomOfTextField();
                 }
                     gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in green!\n");

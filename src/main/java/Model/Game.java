@@ -57,12 +57,11 @@ public class Game {
     public void passTurn() {
         int totalSizeOfListOfPlayers=players.size();
 
-        if(currentPlayerIndex+1 == totalSizeOfListOfPlayers){
+        if(currentPlayerIndex+1 >= totalSizeOfListOfPlayers){
             currentPlayerIndex=0;
         }else{
             currentPlayerIndex++;
         }
-        //this.currentPlayerIndex = (this.currentPlayerIndex == (this.numberOfPlayers - 1)) ? 0 : this.currentPlayerIndex + 1;
         currentPlayer = players.get(currentPlayerIndex);
         update();
     }
@@ -316,9 +315,12 @@ public class Game {
             attackingCountry.setNumberOfTroops(countryInitialNumberOfTroops - numberOfTroopsAttacking);
             newTurn();
         }
-        for (Player player : players) {
-            if(player.getMyCountries().size()==0) players.remove(player);
-            numberOfPlayers--;
+        for(int i=0; i<numberOfPlayers;i++){
+            if(players.get(i).getMyCountries().size()==0){
+                viewer.announceElimination(players.get(i).getPlayerNumber());
+                players.remove(i);
+                numberOfPlayers--;
+            }
         }
         return result;
     }

@@ -414,7 +414,11 @@ public class View extends JFrame implements ModelUpdateListener {
             button.setEnabled(true);
         }
     }
-
+    public void lockButtons() {
+        for (JButton button : listOfCommandButtons) {
+            button.setEnabled(false);
+        }
+    }
     @Deprecated
     private void updateCountriesTroops(Model.Map map) {
         map.getAllCountries().forEach(country -> {
@@ -524,6 +528,22 @@ public class View extends JFrame implements ModelUpdateListener {
             b.setBackground(Color.GREEN);
         });
         this.repaint(0);
+    }
+
+    @Override
+    public void gameOver() {
+        lockButtons();
+        newGameButton.setEnabled(true);
+        JOptionPane.showMessageDialog(this, "You have been eliminated! Starting a new game!");
+    }
+
+    @Override
+    public void announceElimination(int playerNumber) {
+        JOptionPane.showMessageDialog(this, "Player "+playerNumber+" has been eliminated!");
+    }
+    public void finishGame(){
+        JOptionPane.showMessageDialog(this, "Thank you for playing, the game will now exit!");
+        System.exit(0);
     }
 
     /*
