@@ -1,6 +1,7 @@
 package Controller;
 
 import Game.Command;
+import Model.Country;
 import Model.Game;
 import Model.Player;
 import View.CircleButton;
@@ -262,17 +263,23 @@ public class Controller implements ActionListener {
                 }
                 if (requestNumberOfTroopsToMove) {
                     List<Integer> optionList = new ArrayList<Integer>();
+                    Country theSourceCountry=gameModel.getMyMap().getCountryByName(sourceCountry);
+                    Country theDestinationCountry=gameModel.getMyMap().getCountryByName(destinationCountry);
                     int numberOfTroops = gameModel.getMyMap().getCountryByName(sourceCountry).getNumberOfTroops();
                     if (numberOfTroops == 1 || numberOfTroops == 0) {
                         gameView.setFeedbackArea("You do not have enough troops in this country to move around!\n");
                         gameView.getMoveButton().setEnabled(true);
                         break;
                     }
-                    else if (!gameModel.getMyMap().areNeighbours(sourceCountry,destinationCountry)) {
+                    if(!gameModel.getMyMap().pathBetweenSourceAndDestination(theSourceCountry,theDestinationCountry,0, gameModel.getCurrentPlayer().getPlayerNumber(), null)){
+                        gameView.setFeedbackArea("There is no path between these two countries that you may take!\n");
+                        break;
+                    }
+                   /* else if (!gameModel.getMyMap().areNeighbours(sourceCountry,destinationCountry)) {
                         gameView.setFeedbackArea("You may only move troops to neighbouring countries which you own!\n");
                         gameView.getMoveButton().setEnabled(true);
                         break;
-                    }
+                    }*/
                     for (int i = 1; i < numberOfTroops; i++) {
                         optionList.add(i);
                     }
@@ -292,9 +299,9 @@ public class Controller implements ActionListener {
                 if (moveCommandFlag) {
                     gameView.setFeedbackArea("Move country: " + sourceCountry + ", Destination country: " + destinationCountry + ", Number of troops being moved: " + numberOfTroops + ".\n");
                     goToTheBottomOfTextField();
-                    Command moveCommand = new Command("move", sourceCountry, destinationCountry, Integer.toString(numberOfTroops));
+                    Command moveCommand = new Command("move", sourceCountry, destinationCountry, ""+numberOfTroops);
                     gameModel.initiateMove(moveCommand);
-                    gameView.setFeedbackArea(Integer.toString(numberOfTroops) + " troop(s) moved from " + sourceCountry + " to " + destinationCountry + ".\n");
+                    gameView.setFeedbackArea(numberOfTroops + " troop(s) moved from " + sourceCountry + " to " + destinationCountry + ".\n");
                     moveCommandFlag = false;
                 }
         }
