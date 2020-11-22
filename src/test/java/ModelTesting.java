@@ -73,7 +73,6 @@ public class ModelTesting {
         Country c1 = currentPlayer.getMyCountries().get(0);
         Country c2 = game.getMyMap().getCountryNeighbours(c1).get(0);
         if(c1.getPlayer().getPlayerNumber() == c2.getPlayer().getPlayerNumber()) {
-            System.out.println("same player");
             return;
         }
         Command c = new Command("attack", c1.getName(), c2.getName(), "1");
@@ -81,7 +80,6 @@ public class ModelTesting {
         int country2Troops = c2.getNumberOfTroops();
         game.initiateAttack(c);
         String s = "C1=" + country1Troops + ", C2=" + country2Troops + "\n" + c1 + "\n" + c2 + "\n";
-        System.out.println(s);
         if(country1Troops == 1) {
             assertEquals(country1Troops, c1.getNumberOfTroops());
             assertEquals(country2Troops, c2.getNumberOfTroops());
