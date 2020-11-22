@@ -475,13 +475,8 @@ public class Game {
 
         String destinationCountryName = command.getThirdWord();
         setDestinationCountry(myMap.getCountryByName(destinationCountryName));
-        if (!checkDestinationCountry(moveCountry, destinationCountry)) {
-            return false;
-        }
-
         int numberOfTroopsMoving = command.getFourthWord();
         if (checkNumberOfTroopsMoving(moveCountryName, numberOfTroopsMoving)) {
-            System.out.println("Number of troops: "+numberOfTroopsMoving+ " source country; "+moveCountry+ " destination country: "+destinationCountry);
             moveAlgorithm(numberOfTroopsMoving, moveCountry, destinationCountry);
         }
         update();
@@ -510,20 +505,6 @@ public class Game {
         } else {
             return false;
         }
-    }
-
-    private boolean checkDestinationCountry(Country moveCountry, Country destinationCountry) {
-        if (destinationCountry == null) {
-            return false;
-        }
-        if (this.getCurrentPlayer().getNeighbours(myMap, moveCountry).contains(destinationCountry)) {
-            if (!moveCountry.getPlayer().equals(destinationCountry.getPlayer())) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean checkNumberOfTroopsMoving(String moveCountryName, int numberOfTroopsMoving) {
