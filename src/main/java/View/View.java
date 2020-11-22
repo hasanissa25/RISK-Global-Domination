@@ -125,7 +125,7 @@ public class View extends JFrame implements ModelUpdateListener {
         int askUserAboutBonusTroops(Integer[] choices) {
         Integer s = (Integer) JOptionPane.showInputDialog(
                 null,
-                "You have " + gameModel.getCurrentPlayer().totalBonusTroops() + " bonus troops. How many bonus troops would you like to move?",
+                "You have " + gameModel.getCurrentPlayer().totalBonusTroops() + " bonus troops. How many bonus troops would you like to currently allocate?",
                 "Select the number of bonus troops!",
                 JOptionPane.PLAIN_MESSAGE,
                 null,
