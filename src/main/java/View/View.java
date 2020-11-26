@@ -36,6 +36,8 @@ public class View extends JFrame implements ModelUpdateListener {
     JButton newGameButton;
     JButton attackButton;
     JButton passTurnButton;
+    JButton saveButton;
+    JButton continueButton;
     JButton quitButton;
     JButton moveButton;
     ArrayList<JButton> listOfCommandButtons;
@@ -256,6 +258,8 @@ public class View extends JFrame implements ModelUpdateListener {
         newGameButton = new JButton("NewGame");
         attackButton = new JButton("Attack");
         passTurnButton = new JButton("PassTurn");
+        saveButton = new JButton("SaveGame");
+        continueButton = new JButton("ContinueGame");
         quitButton = new JButton("QuitGame");
         moveButton = new JButton("Move");
         attackButton.setEnabled(false);
@@ -265,6 +269,8 @@ public class View extends JFrame implements ModelUpdateListener {
         listOfCommandButtons.add(attackButton);
         listOfCommandButtons.add(passTurnButton);
         //listOfCommandButtons.add(moveButton);
+        listOfCommandButtons.add(saveButton);
+        listOfCommandButtons.add(continueButton);
         listOfCommandButtons.add(quitButton);
         listOfCommandButtons.add(newGameButton);
 
@@ -281,14 +287,20 @@ public class View extends JFrame implements ModelUpdateListener {
         menuPanel.add(centerPanel, BorderLayout.CENTER);
         centerPanel.add(attackButton, BorderLayout.CENTER);
         centerPanel.add(moveButton, BorderLayout.EAST);
-        menuPanel.add(passTurnButton, BorderLayout.EAST);
-        menuPanel.add(quitButton, BorderLayout.SOUTH);
+        centerPanel.add(passTurnButton, BorderLayout.EAST);
+        centerPanel.add(quitButton, BorderLayout.SOUTH);
+
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout((new BorderLayout()));
+        menuPanel.add(southPanel, BorderLayout.AFTER_LAST_LINE);
+        southPanel.add(saveButton, BorderLayout.CENTER);
+        southPanel.add(continueButton, BorderLayout.EAST);
         root.add(menuPanel, BorderLayout.SOUTH);
 
         //Initialization of the frame
         this.setVisible(true);
         this.setResizable(false);
-        this.setSize(1150, 750);
+        this.setSize(1150, 780);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
