@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,8 @@ import java.util.Random;
  * It contains the map of all Countries and their neighbours.
  * It has viewers who are notified and updated, when the model has made changes.
  */
+
+@XmlRootElement
 public class Game {
     public String result;
     private Parser parser;
@@ -30,7 +33,7 @@ public class Game {
     private ModelUpdateListener viewer;
     private int numberOfPlayers;
     private int initialNumberOfTroops;
-    private Map myMap = new Map();
+    private Map myMap;
     private Country attackingCountry;
     private int countryInitialNumberOfTroops;
     private Country defendingCountry;
@@ -40,14 +43,16 @@ public class Game {
 
     public Game() {
         this.myMap = new Map();
+        this.myMap.importFromXmlFile("defaultMap.xml");
         parser = new Parser();
         this.currentPlayerIndex = 0;
     }
 
-    //public static void main(String[] args) {
-      //  Game game = new Game();
-    //}
 
+/*    public static void main(String[] args) {
+        Game g= new Game();
+        g.exportToXmlFile(g.getMyMap().toXML(),"test.txt");
+    }*/
 
     public void setRandomlyAllocateTroopsOnGameStart(boolean randomlyAllocateTroopsOnGameStart) {
         this.randomlyAllocateTroopsOnGameStart = randomlyAllocateTroopsOnGameStart;
@@ -619,4 +624,5 @@ public class Game {
         }
         return xml;
     }
+
 }

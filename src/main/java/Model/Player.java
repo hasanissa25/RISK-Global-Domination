@@ -93,24 +93,31 @@ public class Player {
 
     public int bonusContinentTroops(){
         int bonus = 0;
-            if((isOneOfMyCountries("Alaska")) && (isOneOfMyCountries("northwestTerritory")) && (isOneOfMyCountries("Greenland")) && (isOneOfMyCountries("Alberta")) && (isOneOfMyCountries("Quebec")) && (isOneOfMyCountries("westernUnitedStates")) && (isOneOfMyCountries("easternUnitedStates")) && (isOneOfMyCountries("centralAmerica"))){
+        if((isOneOfMyCountries("Alaska")) && (isOneOfMyCountries("northwestTerritory")) && (isOneOfMyCountries("Greenland")) && (isOneOfMyCountries("Alberta")) && (isOneOfMyCountries("Quebec")) && (isOneOfMyCountries("westernUnitedStates")) && (isOneOfMyCountries("easternUnitedStates")) && (isOneOfMyCountries("centralAmerica"))){
                 bonus +=5;
+                System.out.println("North america");
             }
-            if((isOneOfMyCountries("Iceland")) && (isOneOfMyCountries("Scandinavia")) && (isOneOfMyCountries("SouthernEurope")) && (isOneOfMyCountries("NorthernEurope")) && (isOneOfMyCountries("WesternEurope")) && (isOneOfMyCountries("greatBritain")) && (isOneOfMyCountries("Ukraine"))){
+        if((isOneOfMyCountries("Iceland")) && (isOneOfMyCountries("Scandinavia")) && (isOneOfMyCountries("SouthernEurope")) && (isOneOfMyCountries("NorthernEurope")) && (isOneOfMyCountries("WesternEurope")) && (isOneOfMyCountries("GreatBritain")) && (isOneOfMyCountries("Ukraine"))){
                 bonus +=5;
+                System.out.println("Europe");
             }
-            if((isOneOfMyCountries("MiddleEast")) && (isOneOfMyCountries("India")) && (isOneOfMyCountries("Kazakhstan")) && (isOneOfMyCountries("China")) && (isOneOfMyCountries("Siam")) && (isOneOfMyCountries("Irkutsk")) && (isOneOfMyCountries("Japan")) && (isOneOfMyCountries("Mongolia")) && (isOneOfMyCountries("Kamchatka")) && (isOneOfMyCountries("Siberia")) && (isOneOfMyCountries("Yakutsk")) && (isOneOfMyCountries("Ural"))){
+        if((isOneOfMyCountries("MiddleEast")) && (isOneOfMyCountries("India")) && (isOneOfMyCountries("Kazakhstan")) && (isOneOfMyCountries("China")) && (isOneOfMyCountries("Siam")) && (isOneOfMyCountries("Irkutsk")) && (isOneOfMyCountries("Japan")) && (isOneOfMyCountries("Mongolia")) && (isOneOfMyCountries("Kamchatka")) && (isOneOfMyCountries("Siberia")) && (isOneOfMyCountries("Yakutsk")) && (isOneOfMyCountries("Ural"))){
                 bonus +=7;
+                System.out.println("Asia");
             }
-            if((isOneOfMyCountries("Argentina")) && (isOneOfMyCountries("Peru")) && (isOneOfMyCountries("Brazil")) && (isOneOfMyCountries("Venezuela"))){
+        if((isOneOfMyCountries("Argentina")) && (isOneOfMyCountries("Peru")) && (isOneOfMyCountries("Brazil")) && (isOneOfMyCountries("Venezuela"))){
                 bonus +=2;
+                System.out.println("south america");
             }
-            if((isOneOfMyCountries("EastAfrica")) && (isOneOfMyCountries("Congo")) && (isOneOfMyCountries("SouthAfrica")) && (isOneOfMyCountries("Egypt")) && (isOneOfMyCountries("Madagascar")) && (isOneOfMyCountries("NorthAfrica"))){
+        if((isOneOfMyCountries("EastAfrica")) && (isOneOfMyCountries("Congo")) && (isOneOfMyCountries("SouthAfrica")) && (isOneOfMyCountries("Egypt")) && (isOneOfMyCountries("Madagascar")) && (isOneOfMyCountries("NorthAfrica"))){
                 bonus +=3;
+                System.out.println("africa");
             }
-            if((isOneOfMyCountries("EasternAustralia")) && (isOneOfMyCountries("WesternAustralia")) && (isOneOfMyCountries("NewGuinea")) && (isOneOfMyCountries("Indonesia"))){
+        if((isOneOfMyCountries("EasternAustralia")) && (isOneOfMyCountries("WesternAustralia")) && (isOneOfMyCountries("NewGuinea")) && (isOneOfMyCountries("Indonesia"))){
                 bonus +=2;
+                System.out.println("australia");
             }
+        System.out.println("The number of troops you are getting is :"+ bonus);
         return bonus;
     }
 
