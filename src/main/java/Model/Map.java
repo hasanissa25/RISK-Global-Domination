@@ -18,53 +18,6 @@ public class Map {
     private Graph<Country, DefaultEdge> mapGraph;
     private Set<Country> listOfCountries;
 
-    public Set<Country> getAllCountries() {
-        return listOfCountries;
-    }
-
-    public Country getCountryByName(String CountryName) {
-        for (Country c : listOfCountries) {
-            if (c.getName().toLowerCase().equals(CountryName.toLowerCase())) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    public List<Country> getCountryNeighbours(Country country) {
-        List<Country> neighbours = new ArrayList<Country>();
-        if (listOfCountries.contains(country)) {
-            for (DefaultEdge e : mapGraph.edgesOf(country)) {
-                if (!mapGraph.getEdgeSource(e).equals(country)) {
-                    neighbours.add(mapGraph.getEdgeSource(e));
-                }
-                if (!mapGraph.getEdgeTarget(e).equals(country)) {
-                    neighbours.add(mapGraph.getEdgeTarget(e));
-                }
-            }
-        }
-        neighbours.remove(country);
-        return neighbours;
-    }
-
-    public boolean areNeighbours(String firtCountryName, String secondCountryName) {
-        if (getCountryNeighbours(getCountryByName(firtCountryName)).contains(getCountryByName(secondCountryName)))
-            return true;
-        else return false;
-    }
-
-    public boolean ownedBySamePlayer(String firstCountry, String secondCountry) {
-        if (getCountryByName(firstCountry).getPlayer() == getCountryByName(secondCountry).getPlayer()) return true;
-        else return false;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer();
-        listOfCountries.forEach(x -> sb.append(x + "\n"));
-        return sb.toString();
-    }
-
     public Map() {
         this.mapGraph = new SimpleGraph<>(DefaultEdge.class);
         Country Alaska = new Country("Alaska");
@@ -243,6 +196,53 @@ public class Map {
         mapGraph.addEdge(SouthernEurope, Ukraine);
         listOfCountries = mapGraph.vertexSet();
 
+    }
+
+    public Set<Country> getAllCountries() {
+        return listOfCountries;
+    }
+
+    public Country getCountryByName(String CountryName) {
+        for (Country c : listOfCountries) {
+            if (c.getName().toLowerCase().equals(CountryName.toLowerCase())) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public List<Country> getCountryNeighbours(Country country) {
+        List<Country> neighbours = new ArrayList<Country>();
+        if (listOfCountries.contains(country)) {
+            for (DefaultEdge e : mapGraph.edgesOf(country)) {
+                if (!mapGraph.getEdgeSource(e).equals(country)) {
+                    neighbours.add(mapGraph.getEdgeSource(e));
+                }
+                if (!mapGraph.getEdgeTarget(e).equals(country)) {
+                    neighbours.add(mapGraph.getEdgeTarget(e));
+                }
+            }
+        }
+        neighbours.remove(country);
+        return neighbours;
+    }
+
+    public boolean areNeighbours(String firtCountryName, String secondCountryName) {
+        if (getCountryNeighbours(getCountryByName(firtCountryName)).contains(getCountryByName(secondCountryName)))
+            return true;
+        else return false;
+    }
+
+    public boolean ownedBySamePlayer(String firstCountry, String secondCountry) {
+        if (getCountryByName(firstCountry).getPlayer() == getCountryByName(secondCountry).getPlayer()) return true;
+        else return false;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer();
+        listOfCountries.forEach(x -> sb.append(x + "\n"));
+        return sb.toString();
     }
 
     public boolean pathBetweenSourceAndDestination(Country theSourceCountry, Country theDestinationCountry, int currentLengthAway, int currentPlayer, List<Country> visitedCountries) {

@@ -5,7 +5,10 @@ import Game.Parser;
 import Game.UtilArray;
 
 import javax.swing.*;
-import java.io.InputStream;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -571,5 +574,49 @@ public class Game {
 
         allocation+="AI decided to add his "+aiPlayerBonusTroops+" bonus troops to "+ currentPlayer.getMyCountries().get(randomCountryIndex).getName()+"\n";
         return allocation;
+    }
+    public void exportToXmlFile(String content,String filename){
+        Writer writer = null;
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(filename), "utf-8"));
+            writer.write(toXML());
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        // viewer.modelUpdated();
+
+    }
+    public void importFromXmlFile(String filename){
+        try {
+            JAXBContext context = JAXBContext.newInstance(Game.class);
+            Game xmlObjRead =  (Game) context.createUnmarshaller().unmarshal(new FileReader(filename));
+            this.players = xmlObjRead.getPlayers();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+           // viewer.modelUpdated();
+    }
+    public String toXML(){
+        String xml = "error converting to XML";
+        try {
+            JAXBContext context = JAXBContext.newInstance(Game.class);
+            Marshaller marshaller= context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            StringWriter stringWriter = new StringWriter();
+            marshaller.marshal(this, stringWriter);
+            xml = stringWriter.toString();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return xml;
     }
 }
