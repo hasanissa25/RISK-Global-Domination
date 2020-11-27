@@ -10,12 +10,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,8 +82,9 @@ public class View extends JFrame implements ModelUpdateListener {
     CircleButton SouthAfrica;
 
     public View(Game gameModel) {
-        Initialize();
         this.gameModel = gameModel;
+        Initialize();
+
     }
 
     public static void main(String[] args) {
@@ -155,7 +152,7 @@ public class View extends JFrame implements ModelUpdateListener {
         //The layered pane will have multiple layers in-order for us to overlay components
         JLayeredPane jLayeredPane = new JLayeredPane();
         jLayeredPane.setSize(1150, 750);
-        mapPanel mapPanel = new mapPanel();
+        mapPanel mapPanel = new mapPanel(this.gameModel.getMyMap().getMapBackgroundFileName());
         jLayeredPane.add(mapPanel, JLayeredPane.DEFAULT_LAYER);
 
         JPanel countryPanel = new JPanel();
@@ -552,10 +549,10 @@ public class View extends JFrame implements ModelUpdateListener {
     class mapPanel extends JPanel {
         private Image image;
 
-        public mapPanel() {
+        public mapPanel(String mapBackgroundFileName) {
             this.setSize(1150, 760);
             try {
-                InputStream iS = this.getClass().getClassLoader().getResourceAsStream("riskMap.png");
+                InputStream iS = this.getClass().getClassLoader().getResourceAsStream(mapBackgroundFileName);
                 BufferedImage loadedImage = ImageIO.read(iS);
                 image = loadedImage.getScaledInstance(1100, 600, Image.SCALE_DEFAULT);
             } catch (IOException ex) {
