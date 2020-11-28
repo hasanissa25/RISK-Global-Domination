@@ -105,6 +105,14 @@ public class Controller implements ActionListener {
                     }
                     goToTheBottomOfTextField();
                 }
+                Player thisCurrentPlayer= gameModel.getCurrentPlayer();
+                gameModel.passTurn( );
+                Player afterPassPlayer= gameModel.getCurrentPlayer();
+                if(thisCurrentPlayer.getPlayerNumber()==afterPassPlayer.getPlayerNumber()){
+                    JOptionPane.showMessageDialog(gameView, "Player "+afterPassPlayer.getPlayerNumber()+" has won the game!");
+                    gameView.finishGame();
+                    break;
+                }
                     gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in green!\n");
                     goToTheBottomOfTextField();
                     initialRequestBonusTroopsAllocation();

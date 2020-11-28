@@ -13,8 +13,7 @@ import java.util.Objects;
 @XmlRootElement
 public class Country {
 
-    public void setName(String name) {
-        this.name = name;
+    public Country() {
     }
 
     private String name;
@@ -23,11 +22,12 @@ public class Country {
 
     private Player player;
 
-    public Country(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Country() {
+    public Country(String name) {
+        this.name = name;
     }
 
     public String getName() {
