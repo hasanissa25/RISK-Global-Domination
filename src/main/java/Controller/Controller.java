@@ -71,7 +71,7 @@ public class Controller implements ActionListener {
                 gameModel.setRandomlyAllocateTroopsOnGameStart(true);
                 gameModel.initializePlayers(numberOfPlayers);
                 gameView.unlockButtons();
-                gameView.setFeedbackArea("A game has been started with " + numberOfPlayers + " players.\nEach player is allocated " + gameModel.calculateTroops(numberOfPlayers) + " initial troops that will be randomly assigned." + "\nCurrently turn of: Player " + gameModel.getCurrentPlayer().getPlayerNumber() + ". Your countries are shown in green!\n");
+                gameView.setFeedbackArea("A game has been started with " + numberOfPlayers + " players.\nEach player is allocated " + gameModel.calculateTroops(numberOfPlayers) + " initial troops that will be randomly assigned." + "\nCurrently turn of: Player " + gameModel.getCurrentPlayer().getPlayerNumber() + ". Your countries are shown in white!\n");
                 gameView.getNewGameButton().setEnabled(false);
                 initialRequestBonusTroopsAllocation();
                 this.bonusTroopsFlag=true;
@@ -87,6 +87,7 @@ public class Controller implements ActionListener {
                 break;
             case "PassTurn":
                 gameView.setFeedbackArea("Pass Turn has been called\n");
+                Player thisCurrentPlayer= gameModel.getCurrentPlayer();
                 gameModel.passTurn();
                 gameView.getMoveButton().setEnabled(false);
                 while(gameModel.getCurrentPlayer().getPlayerNumber()>(initialNumberOfPlayers-numberOfAIPlayers)){
@@ -105,10 +106,8 @@ public class Controller implements ActionListener {
                     }
                     goToTheBottomOfTextField();
                 }
-                Player thisCurrentPlayer= gameModel.getCurrentPlayer();
-                gameModel.passTurn( );
                 Player afterPassPlayer= gameModel.getCurrentPlayer();
-                if(thisCurrentPlayer.getPlayerNumber()==afterPassPlayer.getPlayerNumber()){
+                if((thisCurrentPlayer.getPlayerNumber()==afterPassPlayer.getPlayerNumber()) & (gameModel.getPlayers().size()==1)) {
                     JOptionPane.showMessageDialog(gameView, "Player "+afterPassPlayer.getPlayerNumber()+" has won the game!");
                     gameView.finishGame();
                     break;

@@ -3,129 +3,297 @@
     <mapBackgroundFileName>riskMap.png</mapBackgroundFileName>
     <Countries>
         <Country>
+            <coordinate>
+                <x>60</x>
+                <y>80</y>
+            </coordinate>
             <name>Alaska</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>156</x>
+                <y>131</y>
+            </coordinate>
             <name>Alberta</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>180</x>
+                <y>287</y>
+            </coordinate>
             <name>CentralAmerica</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>247</x>
+                <y>221</y>
+            </coordinate>
             <name>EasternUnitedStates</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>378</x>
+                <y>52</y>
+            </coordinate>
             <name>Greenland</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>173</x>
+                <y>85</y>
+            </coordinate>
             <name>NorthwestTerritory</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>237</x>
+                <y>148</y>
+            </coordinate>
             <name>Ontario</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>302</x>
+                <y>143</y>
+            </coordinate>
             <name>Quebec</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>160</x>
+                <y>205</y>
+            </coordinate>
             <name>WesternUnitedStates</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>266</x>
+                <y>500</y>
+            </coordinate>
             <name>Argentina</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>335</x>
+                <y>405</y>
+            </coordinate>
             <name>Brazil</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>230</x>
+                <y>405</y>
+            </coordinate>
             <name>Peru</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>260</x>
+                <y>320</y>
+            </coordinate>
             <name>Venezuela</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>451</x>
+                <y>181</y>
+            </coordinate>
             <name>GreatBritain</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>467</x>
+                <y>119</y>
+            </coordinate>
             <name>Iceland</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>544</x>
+                <y>194</y>
+            </coordinate>
             <name>NorthernEurope</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>556</x>
+                <y>110</y>
+            </coordinate>
             <name>Scandinavia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>557</x>
+                <y>256</y>
+            </coordinate>
             <name>SouthernEurope</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>645</x>
+                <y>167</y>
+            </coordinate>
             <name>Ukraine</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>465</x>
+                <y>264</y>
+            </coordinate>
             <name>WesternEurope</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>590</x>
+                <y>443</y>
+            </coordinate>
             <name>Congo</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>650</x>
+                <y>417</y>
+            </coordinate>
             <name>EastAfrica</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>578</x>
+                <y>339</y>
+            </coordinate>
             <name>Egypt</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>695</x>
+                <y>521</y>
+            </coordinate>
             <name>Madagascar</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>489</x>
+                <y>365</y>
+            </coordinate>
             <name>NorthAfrica</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>590</x>
+                <y>521</y>
+            </coordinate>
             <name>SouthAfrica</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>745</x>
+                <y>222</y>
+            </coordinate>
             <name>Kazakhstan</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>861</x>
+                <y>260</y>
+            </coordinate>
             <name>China</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>799</x>
+                <y>310</y>
+            </coordinate>
             <name>India</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>882</x>
+                <y>145</y>
+            </coordinate>
             <name>Irkutsk</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>1000</x>
+                <y>210</y>
+            </coordinate>
             <name>Japan</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>969</x>
+                <y>101</y>
+            </coordinate>
             <name>Kamchatka</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>676</x>
+                <y>308</y>
+            </coordinate>
             <name>MiddleEast</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>899</x>
+                <y>195</y>
+            </coordinate>
             <name>Mongolia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>896</x>
+                <y>344</y>
+            </coordinate>
             <name>Siam</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>817</x>
+                <y>108</y>
+            </coordinate>
             <name>Siberia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>755</x>
+                <y>141</y>
+            </coordinate>
             <name>Ural</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>896</x>
+                <y>73</y>
+            </coordinate>
             <name>Yakutsk</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>1044</x>
+                <y>520</y>
+            </coordinate>
             <name>EasternAustralia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>913</x>
+                <y>439</y>
+            </coordinate>
             <name>Indonesia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>1003</x>
+                <y>415</y>
+            </coordinate>
             <name>NewGuinea</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>952</x>
+                <y>520</y>
+            </coordinate>
             <name>WesternAustralia</name>
         </Country>
     </Countries>

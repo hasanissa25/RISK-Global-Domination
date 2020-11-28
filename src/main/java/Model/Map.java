@@ -257,6 +257,7 @@ public class Map {
     public static void main(String[] args) {
         Map m= new Map();
         Country c1 = new Country("testCountry1");
+        c1.setCoordinate(new Coordinate(55,66));
         Country c2 = new Country("testCountry2");
         m.setMapBackgroundFileName("testbackgroundpath");
         m.listOfCountries.add(c1);
