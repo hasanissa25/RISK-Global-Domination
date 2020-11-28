@@ -3,950 +3,712 @@
     <mapBackgroundFileName>riskMap.png</mapBackgroundFileName>
     <Countries>
         <Country>
+            <coordinate>
+                <x>60</x>
+                <y>80</y>
+            </coordinate>
             <name>Alaska</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>156</x>
+                <y>131</y>
+            </coordinate>
             <name>Alberta</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>180</x>
+                <y>287</y>
+            </coordinate>
             <name>CentralAmerica</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>247</x>
+                <y>221</y>
+            </coordinate>
             <name>EasternUnitedStates</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>378</x>
+                <y>52</y>
+            </coordinate>
             <name>Greenland</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>173</x>
+                <y>85</y>
+            </coordinate>
             <name>NorthwestTerritory</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>237</x>
+                <y>148</y>
+            </coordinate>
             <name>Ontario</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>302</x>
+                <y>143</y>
+            </coordinate>
             <name>Quebec</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>160</x>
+                <y>205</y>
+            </coordinate>
             <name>WesternUnitedStates</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>266</x>
+                <y>500</y>
+            </coordinate>
             <name>Argentina</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>335</x>
+                <y>405</y>
+            </coordinate>
             <name>Brazil</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>230</x>
+                <y>405</y>
+            </coordinate>
             <name>Peru</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>260</x>
+                <y>320</y>
+            </coordinate>
             <name>Venezuela</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>451</x>
+                <y>181</y>
+            </coordinate>
             <name>GreatBritain</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>467</x>
+                <y>119</y>
+            </coordinate>
             <name>Iceland</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>544</x>
+                <y>194</y>
+            </coordinate>
             <name>NorthernEurope</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>556</x>
+                <y>110</y>
+            </coordinate>
             <name>Scandinavia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>557</x>
+                <y>256</y>
+            </coordinate>
             <name>SouthernEurope</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>645</x>
+                <y>167</y>
+            </coordinate>
             <name>Ukraine</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>465</x>
+                <y>264</y>
+            </coordinate>
             <name>WesternEurope</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>590</x>
+                <y>443</y>
+            </coordinate>
             <name>Congo</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>650</x>
+                <y>417</y>
+            </coordinate>
             <name>EastAfrica</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>578</x>
+                <y>339</y>
+            </coordinate>
             <name>Egypt</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>695</x>
+                <y>521</y>
+            </coordinate>
             <name>Madagascar</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>489</x>
+                <y>365</y>
+            </coordinate>
             <name>NorthAfrica</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>590</x>
+                <y>521</y>
+            </coordinate>
             <name>SouthAfrica</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>745</x>
+                <y>222</y>
+            </coordinate>
             <name>Kazakhstan</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>861</x>
+                <y>260</y>
+            </coordinate>
             <name>China</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>799</x>
+                <y>310</y>
+            </coordinate>
             <name>India</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>882</x>
+                <y>145</y>
+            </coordinate>
             <name>Irkutsk</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>1000</x>
+                <y>210</y>
+            </coordinate>
             <name>Japan</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>969</x>
+                <y>101</y>
+            </coordinate>
             <name>Kamchatka</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>676</x>
+                <y>308</y>
+            </coordinate>
             <name>MiddleEast</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>899</x>
+                <y>195</y>
+            </coordinate>
             <name>Mongolia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>896</x>
+                <y>344</y>
+            </coordinate>
             <name>Siam</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>817</x>
+                <y>108</y>
+            </coordinate>
             <name>Siberia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>755</x>
+                <y>141</y>
+            </coordinate>
             <name>Ural</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>896</x>
+                <y>73</y>
+            </coordinate>
             <name>Yakutsk</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>1044</x>
+                <y>520</y>
+            </coordinate>
             <name>EasternAustralia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>913</x>
+                <y>439</y>
+            </coordinate>
             <name>Indonesia</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>1003</x>
+                <y>415</y>
+            </coordinate>
             <name>NewGuinea</name>
         </Country>
         <Country>
+            <coordinate>
+                <x>952</x>
+                <y>520</y>
+            </coordinate>
             <name>WesternAustralia</name>
         </Country>
     </Countries>
     <Neighbours>
         <Neighbour>
-            <firstCountry>
-                <name>Alberta</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternUnitedStates</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Alaska</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NorthwestTerritory</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Egypt</name>
-            </firstCountry>
-            <secondCountry>
-                <name>MiddleEast</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>WesternAustralia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NewGuinea</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>NorthernEurope</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ukraine</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Congo</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NorthAfrica</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Kazakhstan</name>
-            </firstCountry>
-            <secondCountry>
-                <name>MiddleEast</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Japan</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Mongolia</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Venezuela</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Brazil</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Kazakhstan</name>
-            </firstCountry>
-            <secondCountry>
-                <name>India</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>GreatBritain</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Scandinavia</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Greenland</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ontario</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>EastAfrica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Madagascar</name>
-            </secondCountry>
+            <CountrySourceID>Alberta</CountrySourceID>
+            <CountryDestinationID>WesternUnitedStates</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Kazakhstan</name>
-            </firstCountry>
-            <secondCountry>
-                <name>China</name>
-            </secondCountry>
+            <CountrySourceID>Alaska</CountrySourceID>
+            <CountryDestinationID>NorthwestTerritory</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Mongolia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Siberia</name>
-            </secondCountry>
+            <CountrySourceID>Egypt</CountrySourceID>
+            <CountryDestinationID>MiddleEast</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Ontario</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Quebec</name>
-            </secondCountry>
+            <CountrySourceID>WesternAustralia</CountrySourceID>
+            <CountryDestinationID>NewGuinea</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Indonesia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternAustralia</name>
-            </secondCountry>
+            <CountrySourceID>NorthernEurope</CountrySourceID>
+            <CountryDestinationID>Ukraine</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Irkutsk</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Mongolia</name>
-            </secondCountry>
+            <CountrySourceID>Congo</CountrySourceID>
+            <CountryDestinationID>NorthAfrica</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Irkutsk</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Siberia</name>
-            </secondCountry>
+            <CountrySourceID>Kazakhstan</CountrySourceID>
+            <CountryDestinationID>MiddleEast</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Indonesia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NewGuinea</name>
-            </secondCountry>
+            <CountrySourceID>Japan</CountrySourceID>
+            <CountryDestinationID>Mongolia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>NorthwestTerritory</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ontario</name>
-            </secondCountry>
+            <CountrySourceID>Venezuela</CountrySourceID>
+            <CountryDestinationID>Brazil</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Kazakhstan</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ukraine</name>
-            </secondCountry>
+            <CountrySourceID>Kazakhstan</CountrySourceID>
+            <CountryDestinationID>India</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>China</name>
-            </firstCountry>
-            <secondCountry>
-                <name>India</name>
-            </secondCountry>
+            <CountrySourceID>GreatBritain</CountrySourceID>
+            <CountryDestinationID>Scandinavia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>EasternAustralia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternAustralia</name>
-            </secondCountry>
+            <CountrySourceID>Greenland</CountrySourceID>
+            <CountryDestinationID>Ontario</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>GreatBritain</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternEurope</name>
-            </secondCountry>
+            <CountrySourceID>EastAfrica</CountrySourceID>
+            <CountryDestinationID>Madagascar</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Madagascar</name>
-            </firstCountry>
-            <secondCountry>
-                <name>SouthAfrica</name>
-            </secondCountry>
+            <CountrySourceID>Kazakhstan</CountrySourceID>
+            <CountryDestinationID>China</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Siberia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Yakutsk</name>
-            </secondCountry>
+            <CountrySourceID>Mongolia</CountrySourceID>
+            <CountryDestinationID>Siberia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Greenland</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Iceland</name>
-            </secondCountry>
+            <CountrySourceID>Ontario</CountrySourceID>
+            <CountryDestinationID>Quebec</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>EasternUnitedStates</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternUnitedStates</name>
-            </secondCountry>
+            <CountrySourceID>Indonesia</CountrySourceID>
+            <CountryDestinationID>WesternAustralia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>EasternAustralia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NewGuinea</name>
-            </secondCountry>
+            <CountrySourceID>Irkutsk</CountrySourceID>
+            <CountryDestinationID>Mongolia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>India</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Siam</name>
-            </secondCountry>
+            <CountrySourceID>Irkutsk</CountrySourceID>
+            <CountryDestinationID>Siberia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Alaska</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Kamchatka</name>
-            </secondCountry>
+            <CountrySourceID>Indonesia</CountrySourceID>
+            <CountryDestinationID>NewGuinea</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>EasternUnitedStates</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Quebec</name>
-            </secondCountry>
+            <CountrySourceID>NorthwestTerritory</CountrySourceID>
+            <CountryDestinationID>Ontario</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Kamchatka</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Yakutsk</name>
-            </secondCountry>
+            <CountrySourceID>Kazakhstan</CountrySourceID>
+            <CountryDestinationID>Ukraine</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Alberta</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ontario</name>
-            </secondCountry>
+            <CountrySourceID>China</CountrySourceID>
+            <CountryDestinationID>India</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>GreatBritain</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Iceland</name>
-            </secondCountry>
+            <CountrySourceID>EasternAustralia</CountrySourceID>
+            <CountryDestinationID>WesternAustralia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Iceland</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Scandinavia</name>
-            </secondCountry>
+            <CountrySourceID>GreatBritain</CountrySourceID>
+            <CountryDestinationID>WesternEurope</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>EasternUnitedStates</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ontario</name>
-            </secondCountry>
+            <CountrySourceID>Madagascar</CountrySourceID>
+            <CountryDestinationID>SouthAfrica</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Ontario</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternUnitedStates</name>
-            </secondCountry>
+            <CountrySourceID>Siberia</CountrySourceID>
+            <CountryDestinationID>Yakutsk</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Irkutsk</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Kamchatka</name>
-            </secondCountry>
+            <CountrySourceID>Greenland</CountrySourceID>
+            <CountryDestinationID>Iceland</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Congo</name>
-            </firstCountry>
-            <secondCountry>
-                <name>SouthAfrica</name>
-            </secondCountry>
+            <CountrySourceID>EasternUnitedStates</CountrySourceID>
+            <CountryDestinationID>WesternUnitedStates</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Japan</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Kamchatka</name>
-            </secondCountry>
+            <CountrySourceID>EasternAustralia</CountrySourceID>
+            <CountryDestinationID>NewGuinea</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>SouthernEurope</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternEurope</name>
-            </secondCountry>
+            <CountrySourceID>India</CountrySourceID>
+            <CountryDestinationID>Siam</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>EastAfrica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NorthAfrica</name>
-            </secondCountry>
+            <CountrySourceID>Alaska</CountrySourceID>
+            <CountryDestinationID>Kamchatka</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>EastAfrica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>SouthAfrica</name>
-            </secondCountry>
+            <CountrySourceID>EasternUnitedStates</CountrySourceID>
+            <CountryDestinationID>Quebec</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>MiddleEast</name>
-            </firstCountry>
-            <secondCountry>
-                <name>SouthernEurope</name>
-            </secondCountry>
+            <CountrySourceID>Kamchatka</CountrySourceID>
+            <CountryDestinationID>Yakutsk</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Indonesia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Siam</name>
-            </secondCountry>
+            <CountrySourceID>Alberta</CountrySourceID>
+            <CountryDestinationID>Ontario</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Congo</name>
-            </firstCountry>
-            <secondCountry>
-                <name>EastAfrica</name>
-            </secondCountry>
+            <CountrySourceID>GreatBritain</CountrySourceID>
+            <CountryDestinationID>Iceland</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>EastAfrica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>MiddleEast</name>
-            </secondCountry>
+            <CountrySourceID>Iceland</CountrySourceID>
+            <CountryDestinationID>Scandinavia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>NorthernEurope</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Scandinavia</name>
-            </secondCountry>
+            <CountrySourceID>EasternUnitedStates</CountrySourceID>
+            <CountryDestinationID>Ontario</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Alaska</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Alberta</name>
-            </secondCountry>
+            <CountrySourceID>Ontario</CountrySourceID>
+            <CountryDestinationID>WesternUnitedStates</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Venezuela</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Peru</name>
-            </secondCountry>
+            <CountrySourceID>Irkutsk</CountrySourceID>
+            <CountryDestinationID>Kamchatka</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>NorthAfrica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>SouthernEurope</name>
-            </secondCountry>
+            <CountrySourceID>Congo</CountrySourceID>
+            <CountryDestinationID>SouthAfrica</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>GreatBritain</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NorthernEurope</name>
-            </secondCountry>
+            <CountrySourceID>Japan</CountrySourceID>
+            <CountryDestinationID>Kamchatka</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Alberta</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NorthwestTerritory</name>
-            </secondCountry>
+            <CountrySourceID>SouthernEurope</CountrySourceID>
+            <CountryDestinationID>WesternEurope</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Kamchatka</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Mongolia</name>
-            </secondCountry>
+            <CountrySourceID>EastAfrica</CountrySourceID>
+            <CountryDestinationID>NorthAfrica</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>NorthernEurope</name>
-            </firstCountry>
-            <secondCountry>
-                <name>SouthernEurope</name>
-            </secondCountry>
+            <CountrySourceID>EastAfrica</CountrySourceID>
+            <CountryDestinationID>SouthAfrica</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Peru</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Brazil</name>
-            </secondCountry>
+            <CountrySourceID>MiddleEast</CountrySourceID>
+            <CountryDestinationID>SouthernEurope</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Egypt</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NorthAfrica</name>
-            </secondCountry>
+            <CountrySourceID>Indonesia</CountrySourceID>
+            <CountryDestinationID>Siam</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>CentralAmerica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternUnitedStates</name>
-            </secondCountry>
+            <CountrySourceID>Congo</CountrySourceID>
+            <CountryDestinationID>EastAfrica</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Brazil</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NorthAfrica</name>
-            </secondCountry>
+            <CountrySourceID>EastAfrica</CountrySourceID>
+            <CountryDestinationID>MiddleEast</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>China</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Siam</name>
-            </secondCountry>
+            <CountrySourceID>NorthernEurope</CountrySourceID>
+            <CountryDestinationID>Scandinavia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>SouthernEurope</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ukraine</name>
-            </secondCountry>
+            <CountrySourceID>Alaska</CountrySourceID>
+            <CountryDestinationID>Alberta</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Scandinavia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ukraine</name>
-            </secondCountry>
+            <CountrySourceID>Venezuela</CountrySourceID>
+            <CountryDestinationID>Peru</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Peru</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Argentina</name>
-            </secondCountry>
+            <CountrySourceID>NorthAfrica</CountrySourceID>
+            <CountryDestinationID>SouthernEurope</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Siberia</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ural</name>
-            </secondCountry>
+            <CountrySourceID>GreatBritain</CountrySourceID>
+            <CountryDestinationID>NorthernEurope</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Ural</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ukraine</name>
-            </secondCountry>
+            <CountrySourceID>Alberta</CountrySourceID>
+            <CountryDestinationID>NorthwestTerritory</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>NorthernEurope</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternEurope</name>
-            </secondCountry>
+            <CountrySourceID>Kamchatka</CountrySourceID>
+            <CountryDestinationID>Mongolia</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Greenland</name>
-            </firstCountry>
-            <secondCountry>
-                <name>NorthwestTerritory</name>
-            </secondCountry>
+            <CountrySourceID>NorthernEurope</CountrySourceID>
+            <CountryDestinationID>SouthernEurope</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Greenland</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Quebec</name>
-            </secondCountry>
+            <CountrySourceID>Peru</CountrySourceID>
+            <CountryDestinationID>Brazil</CountryDestinationID>
         </Neighbour>
         <Neighbour>
-            <firstCountry>
-                <name>Kazakhstan</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ural</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Brazil</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Argentina</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>China</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Siberia</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>CentralAmerica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Venezuela</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>China</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ural</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Irkutsk</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Yakutsk</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>NorthAfrica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>WesternEurope</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>Egypt</name>
-            </firstCountry>
-            <secondCountry>
-                <name>SouthernEurope</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>China</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Mongolia</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>EastAfrica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Egypt</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>India</name>
-            </firstCountry>
-            <secondCountry>
-                <name>MiddleEast</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>MiddleEast</name>
-            </firstCountry>
-            <secondCountry>
-                <name>Ukraine</name>
-            </secondCountry>
-        </Neighbour>
-        <Neighbour>
-            <firstCountry>
-                <name>CentralAmerica</name>
-            </firstCountry>
-            <secondCountry>
-                <name>EasternUnitedStates</name>
-            </secondCountry>
+            <CountrySourceID>Egypt</CountrySourceID>
+            <CountryDestinationID>NorthAfrica</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>CentralAmerica</CountrySourceID>
+            <CountryDestinationID>WesternUnitedStates</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Brazil</CountrySourceID>
+            <CountryDestinationID>NorthAfrica</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>China</CountrySourceID>
+            <CountryDestinationID>Siam</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>SouthernEurope</CountrySourceID>
+            <CountryDestinationID>Ukraine</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Scandinavia</CountrySourceID>
+            <CountryDestinationID>Ukraine</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Peru</CountrySourceID>
+            <CountryDestinationID>Argentina</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Siberia</CountrySourceID>
+            <CountryDestinationID>Ural</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Ural</CountrySourceID>
+            <CountryDestinationID>Ukraine</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>NorthernEurope</CountrySourceID>
+            <CountryDestinationID>WesternEurope</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Greenland</CountrySourceID>
+            <CountryDestinationID>NorthwestTerritory</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Greenland</CountrySourceID>
+            <CountryDestinationID>Quebec</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Kazakhstan</CountrySourceID>
+            <CountryDestinationID>Ural</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Brazil</CountrySourceID>
+            <CountryDestinationID>Argentina</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>China</CountrySourceID>
+            <CountryDestinationID>Siberia</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>CentralAmerica</CountrySourceID>
+            <CountryDestinationID>Venezuela</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>China</CountrySourceID>
+            <CountryDestinationID>Ural</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Irkutsk</CountrySourceID>
+            <CountryDestinationID>Yakutsk</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>NorthAfrica</CountrySourceID>
+            <CountryDestinationID>WesternEurope</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Egypt</CountrySourceID>
+            <CountryDestinationID>SouthernEurope</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>China</CountrySourceID>
+            <CountryDestinationID>Mongolia</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>EastAfrica</CountrySourceID>
+            <CountryDestinationID>Egypt</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>India</CountrySourceID>
+            <CountryDestinationID>MiddleEast</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>MiddleEast</CountrySourceID>
+            <CountryDestinationID>Ukraine</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>CentralAmerica</CountrySourceID>
+            <CountryDestinationID>EasternUnitedStates</CountryDestinationID>
         </Neighbour>
     </Neighbours>
     <Continents>
         <Continent>
             <continentName>NorthAmerica</continentName>
             <bonusForHoldingContinent>5</bonusForHoldingContinent>
-            <countriesInTheContinent>
-                <name>Alaska</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Alberta</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>CentralAmerica</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>EasternUnitedStates</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Greenland</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>NorthwestTerritory</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Ontario</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Quebec</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>WesternUnitedStates</name>
-            </countriesInTheContinent>
+            <countries>
+                <CountryID>Alaska</CountryID>
+                <CountryID>Alberta</CountryID>
+                <CountryID>CentralAmerica</CountryID>
+                <CountryID>EasternUnitedStates</CountryID>
+                <CountryID>Greenland</CountryID>
+                <CountryID>NorthwestTerritory</CountryID>
+                <CountryID>Ontario</CountryID>
+                <CountryID>Quebec</CountryID>
+                <CountryID>WesternUnitedStates</CountryID>
+            </countries>
         </Continent>
-
         <Continent>
             <continentName>Africa</continentName>
             <bonusForHoldingContinent>3</bonusForHoldingContinent>
-            <countriesInTheContinent>
-                <name>Congo</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>EastAfrica</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Egypt</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Madagascar</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>NorthAfrica</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>SouthAfrica</name>
-            </countriesInTheContinent>
+            <countries>
+                <CountryID>Congo</CountryID>
+                <CountryID>EastAfrica</CountryID>
+                <CountryID>Egypt</CountryID>
+                <CountryID>Madagascar</CountryID>
+                <CountryID>NorthAfrica</CountryID>
+                <CountryID>SouthAfrica</CountryID>
+            </countries>
         </Continent>
         <Continent>
             <continentName>SouthAmerica</continentName>
             <bonusForHoldingContinent>2</bonusForHoldingContinent>
-            <countriesInTheContinent>
-                <name>Argentina</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Brazil</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Peru</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Venezuela</name>
-            </countriesInTheContinent>
+            <countries>
+                <CountryID>Argentina</CountryID>
+                <CountryID>Brazil</CountryID>
+                <CountryID>Peru</CountryID>
+                <CountryID>Venezuela</CountryID>
+            </countries>
         </Continent>
-
         <Continent>
             <continentName>Europe</continentName>
             <bonusForHoldingContinent>5</bonusForHoldingContinent>
-            <countriesInTheContinent>
-                <name>GreatBritain</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Iceland</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>NorthernEurope</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Scandinavia</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>SouthernEurope</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Ukraine</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>WesternEurope</name>
-            </countriesInTheContinent>
+            <countries>
+                <CountryID>GreatBritain</CountryID>
+                <CountryID>Iceland</CountryID>
+                <CountryID>NorthernEurope</CountryID>
+                <CountryID>Scandinavia</CountryID>
+                <CountryID>SouthernEurope</CountryID>
+                <CountryID>Ukraine</CountryID>
+                <CountryID>WesternEurope</CountryID>
+            </countries>
         </Continent>
         <Continent>
             <continentName>Asia</continentName>
             <bonusForHoldingContinent>7</bonusForHoldingContinent>
-            <countriesInTheContinent>
-                <name>Kazakhstan</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>China</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>India</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Irkutsk</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Japan</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Kamchatka</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>MiddleEast</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Mongolia</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Siam</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Siberia</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Ural</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Yakutsk</name>
-            </countriesInTheContinent>
+            <countries>
+                <CountryID>Kazakhstan</CountryID>
+                <CountryID>China</CountryID>
+                <CountryID>India</CountryID>
+                <CountryID>Irkutsk</CountryID>
+                <CountryID>Japan</CountryID>
+                <CountryID>Kamchatka</CountryID>
+                <CountryID>MiddleEast</CountryID>
+                <CountryID>Mongolia</CountryID>
+                <CountryID>Siam</CountryID>
+                <CountryID>Siberia</CountryID>
+                <CountryID>Ural</CountryID>
+                <CountryID>Yakutsk</CountryID>
+            </countries>
         </Continent>
         <Continent>
             <continentName>Australia</continentName>
             <bonusForHoldingContinent>2</bonusForHoldingContinent>
-            <countriesInTheContinent>
-                <name>EasternAustralia</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>Indonesia</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>NewGuinea</name>
-            </countriesInTheContinent>
-            <countriesInTheContinent>
-                <name>WesternAustralia</name>
-            </countriesInTheContinent>
+            <countries>
+                <CountryID>EasternAustralia</CountryID>
+                <CountryID>Indonesia</CountryID>
+                <CountryID>NewGuinea</CountryID>
+                <CountryID>WesternAustralia</CountryID>
+            </countries>
         </Continent>
     </Continents>
 </map>

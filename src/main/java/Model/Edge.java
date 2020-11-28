@@ -1,5 +1,8 @@
 package Model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
@@ -38,6 +41,8 @@ public class Edge {
         return firstCountry;
     }
 
+    @XmlIDREF
+    @XmlElement(name="CountrySourceID")
     public void setFirstCountry(Country firstCountry) {
         this.firstCountry = firstCountry;
     }
@@ -46,6 +51,8 @@ public class Edge {
         return secondCountry;
     }
 
+    @XmlIDREF
+    @XmlElement(name="CountryDestinationID")
     public void setSecondCountry(Country secondCountry) {
         this.secondCountry = secondCountry;
     }

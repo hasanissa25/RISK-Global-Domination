@@ -1,6 +1,10 @@
 package Model;
 
+import sun.util.PreHashedMap;
+
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,9 +23,21 @@ public class Player {
     private int bonusTroops;
 
     private int totalNumberOftroops;
+    private Color colour;
+
+    private final static java.util.Map<Integer, Color> COLOUR_MAP = new HashMap<> ();
+    static {
+        COLOUR_MAP.put(1, Color.GREEN);
+        COLOUR_MAP.put(2, Color.RED);
+        COLOUR_MAP.put(3, Color.CYAN);
+        COLOUR_MAP.put(4, Color.YELLOW);
+        COLOUR_MAP.put(5, Color.pink);
+        COLOUR_MAP.put(6, Color.magenta);
+    }
 
     public Player(int playerID, int startingNumberOfTroops,Map map) {
         this.playerNumber = playerID;
+        this.colour = COLOUR_MAP.get(playerID);
         this.undeployedTroops = startingNumberOfTroops;
         this.myCountries = new ArrayList<>();
         this.myPossibleTargets = new ArrayList<>();
@@ -94,10 +110,10 @@ public class Player {
 
     public int bonusContinentTroops(){
         int bonus = 0;
-        ArrayList<Continent> listOfContinents= theMap.getListOfContinents();
+        List<Continent> listOfContinents= theMap.getListOfContinents();
         for (int i = 0; i < listOfContinents.size() ; i++) {
             boolean containsCountries=false;
-            ArrayList<Country> countriesInContinent= listOfContinents.get(i).getCountriesInTheContinent();
+            List<Country> countriesInContinent= listOfContinents.get(i).getCountriesInTheContinent();
             for (Country country : countriesInContinent) {
                 if(isOneOfMyCountries(country.getName())){
                     containsCountries=true;
@@ -150,4 +166,11 @@ public class Player {
     }
 
 
+    public Color getColour() {
+        return this.colour;
+    }
+
+    public void setColour(Color colour) {
+        this.colour = colour;
+    }
 }

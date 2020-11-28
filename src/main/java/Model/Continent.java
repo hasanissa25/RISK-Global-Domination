@@ -1,17 +1,23 @@
 package Model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @XmlRootElement
 public class Continent {
     String continentName;
     int bonusForHoldingContinent;
-    ArrayList<Country> countriesInTheContinent;
+    List<Country> countriesInTheContinent;
 
     public Continent() {
+    }
+
+    public Continent(String continentName, int bonusForHoldingContinent, List<Country> countriesInTheContinent) {
+        this.continentName = continentName;
+        this.bonusForHoldingContinent = bonusForHoldingContinent;
+        this.countriesInTheContinent = countriesInTheContinent;
     }
 
     public Continent(String ContinentName) {
@@ -34,11 +40,14 @@ public class Continent {
         this.bonusForHoldingContinent = bonusForHoldingContinent;
     }
 
-    public ArrayList<Country> getCountriesInTheContinent() {
+    public List<Country> getCountriesInTheContinent() {
         return countriesInTheContinent;
     }
 
-    public void setCountriesInTheContinent(ArrayList<Country> countriesInTheContinent) {
+    @XmlElementWrapper(name = "countries")
+    @XmlElement(name = "CountryID")
+    @XmlIDREF
+    public void setCountriesInTheContinent(List<Country> countriesInTheContinent) {
         this.countriesInTheContinent = countriesInTheContinent;
     }
 

@@ -1,5 +1,6 @@
 package Model;
 
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Objects;
@@ -13,29 +14,42 @@ import java.util.Objects;
 @XmlRootElement
 public class Country {
 
-    public Country() {
-    }
-
     private String name;
-
     private int numberOfTroops;
-
     private Player player;
+    private Coordinate coordinate;
 
-    public void setName(String name) {
-        this.name = name;
+    public Country() {
     }
 
     public Country(String name) {
         this.name = name;
     }
 
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
     public String getName() {
         return name;
     }
 
+    @XmlID
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getNumberOfTroops() {
         return numberOfTroops;
+    }
+
+    @XmlTransient
+    public void setNumberOfTroops(int numberOfTroops) {
+        this.numberOfTroops = numberOfTroops;
     }
 
     public void incrementNumberOfTroops() {
@@ -44,11 +58,6 @@ public class Country {
 
     public void decrementNumberOfTroops() {
         numberOfTroops--;
-    }
-
-    @XmlTransient
-    public void setNumberOfTroops(int numberOfTroops) {
-        this.numberOfTroops = numberOfTroops;
     }
 
     public Player getPlayer() {
@@ -69,8 +78,8 @@ public class Country {
         if (o == null || getClass() != o.getClass()) return false;
         Country country = (Country) o;
         return getName().equals(country.getName()
-        // ) && getPlayer().equals(country.getPlayer()
-                );
+                // ) && getPlayer().equals(country.getPlayer()
+        );
     }
 
     @Override
