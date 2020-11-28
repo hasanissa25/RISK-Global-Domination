@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -28,28 +29,54 @@ public class Map {
 
     @XmlTransient
     private Graph<Country, DefaultEdge> mapGraph;
-
     private Set<Edge> listOfEdges;
-
     private Set<Country> listOfCountries;
     private String mapBackgroundFileName;
-
-    public ArrayList<Continent> getContinents() {
-        return continents;
-    }
-    @XmlElementWrapper(name="Continents")
-    @XmlElement(name="Continent")
-    public void setContinents(ArrayList<Continent> continents) {
-        this.continents = continents;
-    }
-
-    private ArrayList<Continent> continents;
+    private ArrayList<Continent> listOfContinents;
 
     public Map() {
+       /* this.mapGraph = new SimpleGraph<>(DefaultEdge.class);
+
+        Country SouthernEurope= new Country("SouthernEurope");
+        Country Scandinavia= new Country("Scandinavia");
+        Country Ukraine= new Country("Ukraine");
+
+        listOfContinents= new ArrayList<>();
+        Continent myContinent= new Continent();
+        myContinent.setContinentName("Big Boy Continent");
+        ArrayList<Country> countriesInTestContinent= new ArrayList<>();
+        countriesInTestContinent.add(SouthernEurope);
+        countriesInTestContinent.add(Scandinavia);
+        countriesInTestContinent.add(Ukraine);
+
+        myContinent.setCountriesInTheContinent(countriesInTestContinent);
+        listOfContinents.add(myContinent);
+
+        mapGraph.addVertex(SouthernEurope);
+        mapGraph.addVertex(Scandinavia);
+        mapGraph.addVertex(Ukraine);
+
+        mapGraph.addEdge(Scandinavia, Ukraine);
+        mapGraph.addEdge(SouthernEurope, Ukraine);
+
+        listOfCountries = mapGraph.vertexSet();
+
+        listOfEdges= new HashSet<>();
+        for (DefaultEdge listOfEdge : mapGraph.edgeSet()) {
+            listOfEdges.add(new Edge(mapGraph.getEdgeSource(listOfEdge),mapGraph.getEdgeTarget(listOfEdge)));
+        }*/
     }
+
+    public ArrayList<Continent> getListOfContinents() { return listOfContinents; }
 
     public Set<Edge> getListOfEdges() {
         return listOfEdges;
+    }
+
+    @XmlElementWrapper(name="Continents")
+    @XmlElement(name="Continent")
+    public void setListOfContinents(ArrayList<Continent> listOfContinents) {
+        this.listOfContinents = listOfContinents;
     }
 
     @XmlElementWrapper(name="Neighbours")
@@ -58,9 +85,20 @@ public class Map {
         this.listOfEdges = listOfEdges;
     }
 
+    @XmlElementWrapper(name = "Countries")
+    @XmlElement(name="Country")
+    public void setListOfCountries(Set<Country> listOfCountries) {
+        this.listOfCountries = listOfCountries;
+    }
+    @XmlElement(name = "mapBackgroundFileName")
+    public void setMapBackgroundFileName(String mapBackgroundFileName) {
+        this.mapBackgroundFileName = mapBackgroundFileName;
+    }
+
     public Graph<Country, DefaultEdge> getMapGraph() {
         return mapGraph;
     }
+
     @XmlTransient
     public void setMapGraph(Graph<Country, DefaultEdge> mapGraph) {
         this.mapGraph = mapGraph;
@@ -68,11 +106,6 @@ public class Map {
 
     public Set<Country> getListOfCountries() {
         return listOfCountries;
-    }
-    @XmlElementWrapper(name = "Countries")
-    @XmlElement(name="Country")
-    public void setListOfCountries(Set<Country> listOfCountries) {
-        this.listOfCountries = listOfCountries;
     }
 
     public Set<Country> getAllCountries() {
@@ -115,10 +148,22 @@ public class Map {
         else return false;
     }
 
-    @Override
+/*    @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer();
         listOfCountries.forEach(x -> sb.append(x + "\n"));
+        return sb.toString();
+    }*/
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Map{");
+        sb.append("mapGraph=").append(mapGraph);
+        sb.append(", listOfEdges=").append(listOfEdges);
+        sb.append(", listOfCountries=").append(listOfCountries);
+        sb.append(", mapBackgroundFileName='").append(mapBackgroundFileName).append('\'');
+        sb.append(", listOfContinents=").append(listOfContinents);
+        sb.append('}');
         return sb.toString();
     }
 
@@ -166,19 +211,6 @@ public class Map {
         }
         return xml;
     }
-    public void importFromXmlFile(String filename){
-        try {
-            JAXBContext context = JAXBContext.newInstance(Map.class);
-            Map xmlObjRead =  (Map) context.createUnmarshaller().unmarshal(this.getClass().getClassLoader().getResourceAsStream(filename));
-            this.listOfCountries= xmlObjRead.getListOfCountries();
-            this.listOfEdges=xmlObjRead.getListOfEdges();
-            this.mapBackgroundFileName = xmlObjRead.mapBackgroundFileName;
-            this.continents=xmlObjRead.getContinents();
-            this.initMap();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void initMap() {
         this.mapGraph = new SimpleGraph<>(DefaultEdge.class);
@@ -196,19 +228,44 @@ public class Map {
         });
     }
 
-    public static void main(String[] args) {
-        Map m= new Map();
-        m.importFromXmlFile("defaultMap.xml");
-        System.out.println(m);
-        System.out.println(m.getContinents().toString());
-    }
-
     public String getMapBackgroundFileName() {
         return mapBackgroundFileName;
     }
 
-    @XmlElement(name = "mapBackgroundFileName")
-    public void setMapBackgroundFileName(String mapBackgroundFileName) {
-        this.mapBackgroundFileName = mapBackgroundFileName;
+/*    public static void main(String[] args) {
+        Map m= new Map();
+        m.importFromXmlFile("defaultMap.xml");
+        System.out.println(m.getListOfContinents().toString());
+        //System.out.println(m);
+    }*/
+
+    public void importFromXmlFile(String filename){
+        try {
+            JAXBContext context = JAXBContext.newInstance(Map.class);
+            Map xmlObjRead =  (Map) context.createUnmarshaller().unmarshal(this.getClass().getClassLoader().getResourceAsStream(filename));
+            this.listOfCountries= xmlObjRead.getListOfCountries();
+            this.listOfEdges=xmlObjRead.getListOfEdges();
+            this.mapBackgroundFileName = xmlObjRead.mapBackgroundFileName;
+            this.listOfContinents = xmlObjRead.getListOfContinents();
+            this.initMap();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+    public void exportToXmlFile(String content,String filename){
+        Writer writer = null;
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(filename), "utf-8"));
+            writer.write(toXML());
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

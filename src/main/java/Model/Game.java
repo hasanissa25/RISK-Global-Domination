@@ -125,7 +125,7 @@ public class Game {
     private void createPlayers(int numberOfPlayers, int initialNumberOfTroops) {
         players = new ArrayList<Player>();
         for (int i = 1; i <= numberOfPlayers; i++) {
-            players.add(new Player(i, initialNumberOfTroops));
+            players.add(new Player(i, initialNumberOfTroops,myMap));
         }
     }
 
@@ -580,7 +580,7 @@ public class Game {
         allocation+="AI decided to add his "+aiPlayerBonusTroops+" bonus troops to "+ currentPlayer.getMyCountries().get(randomCountryIndex).getName()+"\n";
         return allocation;
     }
-    public void exportToXmlFile(String content,String filename){
+   /* public void exportToXmlFile(String content,String filename){
         Writer writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(
@@ -624,5 +624,5 @@ public class Game {
         }
         return xml;
     }
-
+*/
 }
