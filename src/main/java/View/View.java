@@ -87,15 +87,6 @@ public class View extends JFrame implements ModelUpdateListener {
 
     }
 
-    public static void main(String[] args) {
-
-        Game gameModel = new Game();
-        View gameView = new View(gameModel);
-        gameModel.setViewer(gameView);
-        Controller gameController = new Controller(gameModel, gameView);
-        gameView.initialize(gameController);
-    }
-
     static int askUser(Integer[] choices) {
         Integer s = (Integer) JOptionPane.showInputDialog(
                 null,
@@ -566,4 +557,14 @@ public class View extends JFrame implements ModelUpdateListener {
             graphics.drawImage(image, 0, 0, this);
         }
     }
+
+    public static void main(String[] args) {
+
+        Game gameModel = new Game();
+        View gameView = new View(gameModel);
+        gameModel.setViewer(gameView);
+        Controller gameController = new Controller(gameModel, gameView);
+        gameView.initialize(gameController);
+    }
+
 }

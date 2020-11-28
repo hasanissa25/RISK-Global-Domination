@@ -12,10 +12,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Hasan Issa
@@ -32,10 +29,14 @@ public class Map {
     private Set<Edge> listOfEdges;
     private Set<Country> listOfCountries;
     private String mapBackgroundFileName;
-    private ArrayList<Continent> listOfContinents;
+    private List<Continent> listOfContinents;
 
     public Map() {
-       /* this.mapGraph = new SimpleGraph<>(DefaultEdge.class);
+        listOfEdges = new HashSet<>();
+        listOfContinents = new ArrayList<>();
+        listOfCountries = new HashSet<>();
+
+    /* this.mapGraph = new SimpleGraph<>(DefaultEdge.class);
 
         Country SouthernEurope= new Country("SouthernEurope");
         Country Scandinavia= new Country("Scandinavia");
@@ -67,7 +68,7 @@ public class Map {
         }*/
     }
 
-    public ArrayList<Continent> getListOfContinents() { return listOfContinents; }
+    public List<Continent> getListOfContinents() { return listOfContinents; }
 
     public Set<Edge> getListOfEdges() {
         return listOfEdges;
@@ -75,7 +76,7 @@ public class Map {
 
     @XmlElementWrapper(name="Continents")
     @XmlElement(name="Continent")
-    public void setListOfContinents(ArrayList<Continent> listOfContinents) {
+    public void setListOfContinents(List<Continent> listOfContinents) {
         this.listOfContinents = listOfContinents;
     }
 
@@ -90,7 +91,7 @@ public class Map {
     public void setListOfCountries(Set<Country> listOfCountries) {
         this.listOfCountries = listOfCountries;
     }
-    @XmlElement(name = "mapBackgroundFileName")
+    @XmlElement(name = "mapBackgroundFileName", nillable = true)
     public void setMapBackgroundFileName(String mapBackgroundFileName) {
         this.mapBackgroundFileName = mapBackgroundFileName;
     }
@@ -212,42 +213,26 @@ public class Map {
         return xml;
     }
 
-    private void initMap() {
+    private void initMap(Map mapFromConfigFile) {
         this.mapGraph = new SimpleGraph<>(DefaultEdge.class);
-        this.listOfCountries.forEach(x -> this.mapGraph.addVertex(new Country(x.getName())));
-        this.listOfEdges.forEach(x -> {
-            Country c1 = null, c2 = null;
-            for (Country c : listOfCountries) {
-                if(c.equals(x.firstCountry)) {
-                    c1 = c;
-                } else if (c.equals(x.secondCountry)) {
-                    c2 = c;
-                }
-            }
-            this.mapGraph.addEdge(c1, c2);
-        });
+        this.listOfCountries = mapFromConfigFile.listOfCountries;
+        this.listOfCountries.forEach(x -> this.mapGraph.addVertex(x));
+        this.listOfEdges = mapFromConfigFile.listOfEdges;
+        this.listOfEdges.forEach(x -> this.mapGraph.addEdge(x.firstCountry, x.secondCountry));
+
+        this.mapBackgroundFileName = mapFromConfigFile.mapBackgroundFileName;
+        this.listOfContinents = mapFromConfigFile.getListOfContinents();
     }
 
     public String getMapBackgroundFileName() {
         return mapBackgroundFileName;
     }
 
-/*    public static void main(String[] args) {
-        Map m= new Map();
-        m.importFromXmlFile("defaultMap.xml");
-        System.out.println(m.getListOfContinents().toString());
-        //System.out.println(m);
-    }*/
-
     public void importFromXmlFile(String filename){
         try {
             JAXBContext context = JAXBContext.newInstance(Map.class);
-            Map xmlObjRead =  (Map) context.createUnmarshaller().unmarshal(this.getClass().getClassLoader().getResourceAsStream(filename));
-            this.listOfCountries= xmlObjRead.getListOfCountries();
-            this.listOfEdges=xmlObjRead.getListOfEdges();
-            this.mapBackgroundFileName = xmlObjRead.mapBackgroundFileName;
-            this.listOfContinents = xmlObjRead.getListOfContinents();
-            this.initMap();
+            Map mapFromConfigFile =  (Map) context.createUnmarshaller().unmarshal(this.getClass().getClassLoader().getResourceAsStream(filename));
+            this.initMap(mapFromConfigFile);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -267,5 +252,19 @@ public class Map {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Map m= new Map();
+        Country c1 = new Country("testCountry1");
+        Country c2 = new Country("testCountry2");
+        m.setMapBackgroundFileName("testbackgroundpath");
+        m.listOfCountries.add(c1);
+        m.listOfCountries.add(c2);
+        m.listOfEdges.add(new Edge(c1, c2));
+        m.listOfContinents.add(new Continent("testContinent", 10, Arrays.asList(c1,c2)));
+        m.exportToXmlFile(m.toXML(), "defaultMap.xml");
+//        System.out.println(m.getListOfContinents().toString());
+//        System.out.println(m);
     }
 }

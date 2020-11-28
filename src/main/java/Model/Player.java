@@ -94,10 +94,10 @@ public class Player {
 
     public int bonusContinentTroops(){
         int bonus = 0;
-        ArrayList<Continent> listOfContinents= theMap.getListOfContinents();
+        List<Continent> listOfContinents= theMap.getListOfContinents();
         for (int i = 0; i < listOfContinents.size() ; i++) {
             boolean containsCountries=false;
-            ArrayList<Country> countriesInContinent= listOfContinents.get(i).getCountriesInTheContinent();
+            List<Country> countriesInContinent= listOfContinents.get(i).getCountriesInTheContinent();
             for (Country country : countriesInContinent) {
                 if(isOneOfMyCountries(country.getName())){
                     containsCountries=true;
