@@ -43,7 +43,7 @@ public class Game {
 
     public Game() {
         this.myMap = new Map();
-        this.myMap.importFromXmlFile("defaultMap.xml");
+        this.myMap.importFromXmlFile("Default-Map.xml");
         parser = new Parser();
         this.currentPlayerIndex = 0;
     }
@@ -579,6 +579,11 @@ public class Game {
 
         allocation+="AI decided to add his "+aiPlayerBonusTroops+" bonus troops to "+ currentPlayer.getMyCountries().get(randomCountryIndex).getName()+"\n";
         return allocation;
+    }
+
+    public void setMap(String customMapChoice) {
+        this.myMap.importFromXmlFile(customMapChoice);
+
     }
    /* public void exportToXmlFile(String content,String filename){
         Writer writer = null;

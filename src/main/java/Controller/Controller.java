@@ -40,7 +40,7 @@ public class Controller implements ActionListener {
     int numberOfPlayers;
     int numberOfAIPlayers;
     int initialNumberOfPlayers;
-
+    String customMapChoice;
     public Controller(Game gameModel, View gameView) {
         this.gameModel = gameModel;
         this.gameView = gameView;
@@ -65,6 +65,10 @@ public class Controller implements ActionListener {
          */
         switch (e.getActionCommand()) {
             case "NewGame":
+                customMapChoice= gameView.customMapRequest();
+                gameModel.setMap(customMapChoice);
+
+                gameView.generateMapButtons();
                 initialNumberOfPlayers=gameView.numberOfPlayersRequest();
                 numberOfPlayers = initialNumberOfPlayers;
                 numberOfAIPlayers= gameView.numberOfAIPlayersRequest(numberOfPlayers);

@@ -9,13 +9,15 @@ import Model.ModelUpdateListener;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author      Hasan Issa
@@ -37,6 +39,9 @@ public class View extends JFrame implements ModelUpdateListener {
     ArrayList<JButton> listOfCommandButtons;
     JTextArea feedbackArea;
     Map<String, CircleButton> mapOfButtons = new HashMap<>();
+    JPanel countryPanel;
+    mapPanel mapPanel;
+    private Controller gameController;
 
     public View(Game gameModel) {
         this.gameModel = gameModel;
@@ -52,8 +57,18 @@ public class View extends JFrame implements ModelUpdateListener {
         Controller gameController = new Controller(gameModel, gameView);
         gameView.initialize(gameController);
     }
-
-    static int askUser(Integer[] choices) {
+    static String askUserChoiceOfMap(String[] choices) {
+        String s = (String) JOptionPane.showInputDialog(
+                null,
+                "Which Map would you like to play on?",
+                "Select the map!",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                choices,
+                choices[0]);
+        return s;
+    }
+    static int askUserNumberOfPlayers(Integer[] choices) {
         Integer s = (Integer) JOptionPane.showInputDialog(
                 null,
                 "How many players are playing today?",
@@ -102,26 +117,45 @@ public class View extends JFrame implements ModelUpdateListener {
     public void Initialize() {
         //Initialize the View
         JFrame myFrame = new JFrame("RISK");
+
+
         Container root = getContentPane();
         root.setLayout(new BorderLayout());
 
         //The layered pane will have multiple layers in-order for us to overlay components
         JLayeredPane jLayeredPane = new JLayeredPane();
         jLayeredPane.setSize(1150, 750);
-        mapPanel mapPanel = new mapPanel(this.gameModel.getMyMap().getMapBackgroundFileName());
+        mapPanel = new mapPanel();
         jLayeredPane.add(mapPanel, JLayeredPane.DEFAULT_LAYER);
+/*        mapPanel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("x:"+ e.getX()+" y: "+e.getY());
+            }
 
-        JPanel countryPanel = new JPanel();
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });*/
+        countryPanel = new JPanel();
         countryPanel.setSize(1150, 750);
         countryPanel.setOpaque(false);
         countryPanel.setLayout(null);
-
-        this.gameModel.getMyMap().getAllCountries().forEach(country -> {
-            CircleButton countryCircleButton = new CircleButton("", country.getCoordinate().getX(), country.getCoordinate().getY());
-            countryPanel.add(countryCircleButton);
-            mapOfButtons.put(country.getName(), countryCircleButton);
-        });
-
         jLayeredPane.add(countryPanel, JLayeredPane.POPUP_LAYER);
         root.add(jLayeredPane, BorderLayout.CENTER);
 
@@ -168,10 +202,22 @@ public class View extends JFrame implements ModelUpdateListener {
 
     }
 
+    public void generateMapButtons() {
+        this.mapPanel.setMapPicture(this.gameModel.getMyMap().getMapBackgroundFileName());
+        this.gameModel.getMyMap().getAllCountries().forEach(country -> {
+            CircleButton countryCircleButton = new CircleButton("", country.getCoordinate().getX(), country.getCoordinate().getY());
+            this.countryPanel.add(countryCircleButton);
+            mapOfButtons.put(country.getName(), countryCircleButton);
+        });
+        mapOfButtons.values().forEach(circleButton -> circleButton.addActionListener(gameController));
+
+    }
+
     private void initialize(Controller gameController) {
         listOfCommandButtons.forEach(commandButton -> commandButton.addActionListener(gameController));
         mapOfButtons.values().forEach(circleButton -> circleButton.addActionListener(gameController));
         moveButton.addActionListener(gameController);
+        this.gameController=gameController;
     }
 
     @Deprecated
@@ -219,7 +265,7 @@ public class View extends JFrame implements ModelUpdateListener {
 
     public int numberOfPlayersRequest() {
         Integer[] choices = new Integer[]{2, 3, 4, 5, 6};
-        int choice = askUser(choices);
+        int choice = askUserNumberOfPlayers(choices);
         return choice;
 
     }
@@ -317,13 +363,24 @@ public class View extends JFrame implements ModelUpdateListener {
         System.exit(0);
     }
 
+    public String customMapRequest() {
+            String[] choices = new String[]{"Default-Map.xml", "Custom-Map.xml"};
+            String choice = askUserChoiceOfMap(choices);
+            return choice;
+
+        }
+
     /*
      * The map panel is the Image of the Risk world that we will be overlaying the components over.
      */
     class mapPanel extends JPanel {
         private Image image;
 
-        public mapPanel(String mapBackgroundFileName) {
+        public mapPanel() {
+
+        }
+
+        public void setMapPicture(String mapBackgroundFileName) {
             this.setSize(1150, 760);
             try {
                 InputStream iS = this.getClass().getClassLoader().getResourceAsStream(mapBackgroundFileName);
