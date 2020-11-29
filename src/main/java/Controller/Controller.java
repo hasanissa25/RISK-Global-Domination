@@ -82,10 +82,10 @@ public class Controller implements ActionListener {
                 break;
             case "Attack":
                 if (attackInitiatedFlag) {
-                    gameView.setFeedbackArea("Please click a country that belongs to you (Highlighted in Green), to initiate an attack from it. \n");
+                    gameView.setFeedbackArea("Please click a country that belongs to you (Highlighted in White), to initiate an attack from it. \n");
                     goToTheBottomOfTextField();
                 } else
-                    gameView.setFeedbackArea("Attack has been called! Please Select one of your countries (Highlighted in Green), that you would like to initiate an attack from.\n");
+                    gameView.setFeedbackArea("Attack has been called! Please Select one of your countries (Highlighted in White), that you would like to initiate an attack from.\n");
                 goToTheBottomOfTextField();
                 attackInitiatedFlag = true;
                 break;
