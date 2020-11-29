@@ -122,7 +122,7 @@ public class Controller implements ActionListener {
                     this.bonusTroopsFlag=true;
                 break;
             case "Move":
-                gameView.setFeedbackArea("Move has been called! Please click the country belonging to you (Highlighted in Green), which you would like to move troops from. \n");
+                gameView.setFeedbackArea("Move has been called! Please click the country belonging to you (Highlighted in White), which you would like to move troops from. \n");
                 moveInitiated = true;
                 goToTheBottomOfTextField();
                 break;
@@ -150,7 +150,7 @@ public class Controller implements ActionListener {
                                     }
                                     break;
                                 } else {
-                                    gameView.setFeedbackArea("You may only add troops to countries that you own highlighted in green!\n");
+                                    gameView.setFeedbackArea("You may only add troops to countries that you own highlighted in White!\n");
                                     goToTheBottomOfTextField();
                                     this.countryToAllocateTroopsTo = "";
                                     break;
@@ -171,7 +171,7 @@ public class Controller implements ActionListener {
                                 this.attackingCountrySetFlag = true;
                                 break;
                             } else {
-                                gameView.setFeedbackArea("You may only initiate attacks from your owned countries highlighted in green!\n");
+                                gameView.setFeedbackArea("You may only initiate attacks from your owned countries highlighted in White!\n");
                                 goToTheBottomOfTextField();
                                 this.attackingCountry = "";
                                 attackInitiatedFlag = false;
@@ -247,7 +247,7 @@ public class Controller implements ActionListener {
                                 this.sourceCountrySetFlag = true;
                                 break;
                             } else {
-                                gameView.setFeedbackArea("You may only move troops from your owned countries highlighted in green!\n");
+                                gameView.setFeedbackArea("You may only move troops from your owned countries highlighted in White!\n");
                                 goToTheBottomOfTextField();
                                 this.sourceCountry = "";
                                 moveInitiated = false;

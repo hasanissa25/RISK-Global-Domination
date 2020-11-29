@@ -194,10 +194,6 @@ public class Game {
         return initialNumberOfTroops;
     }
 
-    public Country getAttackingCountry() {
-        return attackingCountry;
-    }
-
     public void setAttackingCountry(Country attackingCountry) {
         this.attackingCountry = attackingCountry;
         this.countryInitialNumberOfTroops = attackingCountry.getNumberOfTroops();
@@ -211,17 +207,11 @@ public class Game {
         this.defendingCountry = defendingCountry;
     }
 
-    public Country getMovingCountry() {
-        return moveCountry;
-    }
 
     public void setMovingCountry(Country moveCountry) {
         this.moveCountry = moveCountry;
     }
 
-    public Country getDestinationCountry() {
-        return destinationCountry;
-    }
 
     public void setDestinationCountry(Country destinationCountry) {
         this.destinationCountry = destinationCountry;
@@ -347,17 +337,6 @@ public class Game {
         }
     }
 
-    private void chooseBonusTroops(Integer[] choices) {
-        Integer s = (Integer) JOptionPane.showInputDialog(
-                null,
-                "You have " + getCurrentPlayer().totalBonusTroops() + " bonus troops. Please choose the amount and destination country you want to move them to.\n",
-                "Select the number of AI players!",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                choices,
-                choices[0]);
-        //return s;
-    }
 
     private List<Integer> checkOutcomeOfBattle(List<Integer> attackersDiceResults, List<Integer> defendersDiceResults) {
         List<Integer> troopsLost = new ArrayList<>();

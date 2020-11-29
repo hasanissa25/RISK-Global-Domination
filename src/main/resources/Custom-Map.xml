@@ -599,6 +599,28 @@
             <CountrySourceID>CentralAmerica</CountrySourceID>
             <CountryDestinationID>UnitedStates</CountryDestinationID>
         </Neighbour>
+
+        <Neighbour>
+            <CountrySourceID>Indonesia</CountrySourceID>
+            <CountryDestinationID>WesternAustralia</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>Indonesia</CountrySourceID>
+            <CountryDestinationID>NewGuinea</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>WesternAustralia</CountrySourceID>
+            <CountryDestinationID>NewGuinea</CountryDestinationID>
+        </Neighbour>
+        <Neighbour>
+            <CountrySourceID>EasternAustralia</CountrySourceID>
+            <CountryDestinationID>NewGuinea</CountryDestinationID>
+        </Neighbour>
+
+        <Neighbour>
+            <CountrySourceID>EasternAustralia</CountrySourceID>
+            <CountryDestinationID>WesternAustralia</CountryDestinationID>
+        </Neighbour>
     </Neighbours>
     <Continents>
         <Continent>
