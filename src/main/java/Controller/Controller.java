@@ -136,12 +136,12 @@ public class Controller implements ActionListener {
             case "SaveGame":
                 gameView.setFeedbackArea("Saving game...\n");
                 goToTheBottomOfTextField();
-                gameModel.saveData();
+                gameModel.saveSerialize();
                 break;
             case "LoadGame":
                 gameView.setFeedbackArea("Loading game...\n");
                 goToTheBottomOfTextField();
-                gameModel.loadData();
+                gameModel.loadSerialize();
                 break;
             default:
                 if(bonusTroopsFlag){
@@ -326,9 +326,6 @@ public class Controller implements ActionListener {
                     gameModel.initiateMove(moveCommand);
                     gameView.setFeedbackArea(numberOfTroops + " troop(s) moved from " + sourceCountry + " to " + destinationCountry + ".\n");
                     moveCommandFlag = false;
-                }
-                if (saveInitiated) {
-                    //saveInitiated = false;
                 }
         }
     }

@@ -79,7 +79,6 @@ public class Country implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Country country = (Country) o;
         return getName().equals(country.getName()
-                // ) && getPlayer().equals(country.getPlayer()
         );
     }
 

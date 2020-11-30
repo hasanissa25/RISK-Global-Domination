@@ -3,9 +3,10 @@ package Model;
 import com.sun.xml.internal.txw2.annotation.XmlElement;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @XmlRootElement
-public class Coordinate {
+public class Coordinate implements Serializable {
     int x,y;
 
     public Coordinate() {

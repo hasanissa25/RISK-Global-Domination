@@ -22,7 +22,7 @@ import java.util.*;
  */
 
 @XmlRootElement
-public class Map {
+public class Map implements Serializable{
 
     @XmlTransient
     private Graph<Country, DefaultEdge> mapGraph;
@@ -254,18 +254,4 @@ public class Map {
         }
     }
 
-    public static void main(String[] args) {
-        Map m= new Map();
-        Country c1 = new Country("testCountry1");
-        c1.setCoordinate(new Coordinate(55,66));
-        Country c2 = new Country("testCountry2");
-        m.setMapBackgroundFileName("testbackgroundpath");
-        m.listOfCountries.add(c1);
-        m.listOfCountries.add(c2);
-        m.listOfEdges.add(new Edge(c1, c2));
-        m.listOfContinents.add(new Continent("testContinent", 10, Arrays.asList(c1,c2)));
-        m.exportToXmlFile(m.toXML(), "defaultMap.xml");
-//        System.out.println(m.getListOfContinents().toString());
-//        System.out.println(m);
-    }
 }

@@ -80,7 +80,6 @@ public class CircleButton extends JButton{
     }
     public void setColor(Color color) {
         this.color = color;
-        //this.repaint(0);
     }
     @Override
     public void paintComponent(Graphics g){

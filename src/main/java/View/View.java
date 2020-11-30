@@ -174,6 +174,8 @@ public class View extends JFrame implements ModelUpdateListener {
         attackButton.setEnabled(false);
         passTurnButton.setEnabled(false);
         moveButton.setEnabled(false);
+        loadButton.setEnabled(false);
+        saveButton.setEnabled(false);
         listOfCommandButtons = new ArrayList<JButton>();
         listOfCommandButtons.add(attackButton);
         listOfCommandButtons.add(passTurnButton);
