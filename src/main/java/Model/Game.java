@@ -335,6 +335,7 @@ public class Game implements Serializable {
             oos.writeObject(myMap);
             oos.writeObject(currentPlayer);
             oos.writeObject(currentPlayerIndex);
+            oos.writeObject(players);
             oos.flush();
             oos.close();
         } catch (Exception e) {
@@ -351,6 +352,9 @@ public class Game implements Serializable {
             this.currentPlayer=myCurrentPlayer;
             int myCurrentPlayerIndex= (int) ois.readObject();
             this.currentPlayerIndex=myCurrentPlayerIndex;
+            ArrayList<Player> myPlayers= (ArrayList<Player>) ois.readObject();
+            this.players=myPlayers;
+
             ois.close();
         } catch (Exception e) {
             System.out.println(e);
