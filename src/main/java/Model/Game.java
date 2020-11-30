@@ -45,7 +45,6 @@ public class Game implements Serializable {
     private List<Player> loadedPlayers;
     public Game() {
         this.myMap = new Map();
-        this.myMap.importFromXmlFile("Default-Map.xml");
         parser = new Parser();
         this.currentPlayerIndex = 0;
     }

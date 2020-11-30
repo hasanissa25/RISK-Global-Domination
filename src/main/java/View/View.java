@@ -129,7 +129,7 @@ public class View extends JFrame implements ModelUpdateListener {
         jLayeredPane.setSize(1150, 750);
         mapPanel = new mapPanel();
         jLayeredPane.add(mapPanel, JLayeredPane.DEFAULT_LAYER);
-/*        mapPanel.addMouseListener(new MouseListener() {
+        mapPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("x:"+ e.getX()+" y: "+e.getY());
@@ -153,7 +153,7 @@ public class View extends JFrame implements ModelUpdateListener {
             public void mouseExited(MouseEvent e) {
 
             }
-        });*/
+        });
         countryPanel = new JPanel();
         countryPanel.setSize(1150, 750);
         countryPanel.setOpaque(false);
@@ -379,7 +379,7 @@ public class View extends JFrame implements ModelUpdateListener {
     }
 
     public String customMapRequest() {
-            String[] choices = new String[]{"Default-Map.xml", "Custom-Map.xml"};
+            String[] choices = new String[]{"AmongUs.xml","OriginalMap.xml", "CustomMap.xml", };
             String choice = askUserChoiceOfMap(choices);
             return choice;
 
