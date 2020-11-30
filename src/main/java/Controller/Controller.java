@@ -138,8 +138,8 @@ public class Controller implements ActionListener {
                 goToTheBottomOfTextField();
                 gameModel.saveData();
                 break;
-            case "ContinueGame":
-                gameView.setFeedbackArea("Continue game...\n");
+            case "LoadGame":
+                gameView.setFeedbackArea("Loading game...\n");
                 goToTheBottomOfTextField();
                 gameModel.loadData();
                 break;

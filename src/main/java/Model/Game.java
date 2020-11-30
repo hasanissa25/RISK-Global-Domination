@@ -329,6 +329,10 @@ public class Game implements Serializable {
     return fileName = JOptionPane.showInputDialog("Enter .txt file name");
     }
 
+    public void write(){
+
+    }
+
     public void saveData() {
         /**
          * @author John Afolayan

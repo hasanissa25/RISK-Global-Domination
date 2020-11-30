@@ -35,7 +35,7 @@ public class View extends JFrame implements ModelUpdateListener {
     JButton attackButton;
     JButton passTurnButton;
     JButton saveButton;
-    JButton continueButton;
+    JButton loadButton;
     JButton quitButton;
     JButton moveButton;
     ArrayList<JButton> listOfCommandButtons;
@@ -168,7 +168,7 @@ public class View extends JFrame implements ModelUpdateListener {
         attackButton = new JButton("Attack");
         passTurnButton = new JButton("PassTurn");
         saveButton = new JButton("SaveGame");
-        continueButton = new JButton("ContinueGame");
+        loadButton = new JButton("LoadGame");
         quitButton = new JButton("QuitGame");
         moveButton = new JButton("Move");
         attackButton.setEnabled(false);
@@ -181,7 +181,7 @@ public class View extends JFrame implements ModelUpdateListener {
         listOfCommandButtons.add(quitButton);
         listOfCommandButtons.add(newGameButton);
         listOfCommandButtons.add(saveButton);
-        listOfCommandButtons.add(continueButton);
+        listOfCommandButtons.add(loadButton);
 
 
         feedbackArea = new JTextArea("Welcome to Risk! Please press New Game in order to start!\n");
@@ -204,7 +204,7 @@ public class View extends JFrame implements ModelUpdateListener {
         southPanel.setLayout((new BorderLayout()));
         menuPanel.add(southPanel, BorderLayout.AFTER_LAST_LINE);
         southPanel.add(saveButton, BorderLayout.CENTER);
-        southPanel.add(continueButton, BorderLayout.EAST);
+        southPanel.add(loadButton, BorderLayout.EAST);
         root.add(menuPanel, BorderLayout.SOUTH);
 
         //Initialization of the frame
