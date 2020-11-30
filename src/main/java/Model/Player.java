@@ -3,6 +3,7 @@ package Model;
 import sun.util.PreHashedMap;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Objects;
  * This is the player object denoted by a playerNumber. The player knows the countries they own, and the possible targets they can choose to attack.
  * They know how many troops they have to deploy for later on milestones when players start receiving troops throughout the game.
  */
-public class Player {
+public class Player implements Serializable {
     private int playerNumber;
     private int undeployedTroops;
     private List<Country> myCountries;

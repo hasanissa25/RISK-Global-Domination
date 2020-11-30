@@ -4,10 +4,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Objects;
 
 @XmlRootElement
-public class Edge {
+public class Edge implements Serializable {
     Country firstCountry;
     Country secondCountry;
 

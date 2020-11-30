@@ -34,6 +34,8 @@ public class View extends JFrame implements ModelUpdateListener {
     JButton newGameButton;
     JButton attackButton;
     JButton passTurnButton;
+    JButton saveButton;
+    JButton loadButton;
     JButton quitButton;
     JButton moveButton;
     ArrayList<JButton> listOfCommandButtons;
@@ -165,17 +167,23 @@ public class View extends JFrame implements ModelUpdateListener {
         newGameButton = new JButton("NewGame");
         attackButton = new JButton("Attack");
         passTurnButton = new JButton("PassTurn");
+        saveButton = new JButton("SaveGame");
+        loadButton = new JButton("LoadGame");
         quitButton = new JButton("QuitGame");
         moveButton = new JButton("Move");
         attackButton.setEnabled(false);
         passTurnButton.setEnabled(false);
         moveButton.setEnabled(false);
+        loadButton.setEnabled(false);
+        saveButton.setEnabled(false);
         listOfCommandButtons = new ArrayList<JButton>();
         listOfCommandButtons.add(attackButton);
         listOfCommandButtons.add(passTurnButton);
         //listOfCommandButtons.add(moveButton);
         listOfCommandButtons.add(quitButton);
         listOfCommandButtons.add(newGameButton);
+        listOfCommandButtons.add(saveButton);
+        listOfCommandButtons.add(loadButton);
 
 
         feedbackArea = new JTextArea("Welcome to Risk! Please press New Game in order to start!\n");
@@ -192,6 +200,13 @@ public class View extends JFrame implements ModelUpdateListener {
         centerPanel.add(moveButton, BorderLayout.EAST);
         menuPanel.add(passTurnButton, BorderLayout.EAST);
         menuPanel.add(quitButton, BorderLayout.SOUTH);
+        root.add(menuPanel, BorderLayout.SOUTH);
+
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout((new BorderLayout()));
+        menuPanel.add(southPanel, BorderLayout.AFTER_LAST_LINE);
+        southPanel.add(saveButton, BorderLayout.CENTER);
+        southPanel.add(loadButton, BorderLayout.EAST);
         root.add(menuPanel, BorderLayout.SOUTH);
 
         //Initialization of the frame

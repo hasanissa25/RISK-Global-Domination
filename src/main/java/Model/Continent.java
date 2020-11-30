@@ -1,12 +1,13 @@
 package Model;
 
 import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @XmlRootElement
-public class Continent {
+public class Continent implements Serializable {
     String continentName;
     int bonusForHoldingContinent;
     List<Country> countriesInTheContinent;

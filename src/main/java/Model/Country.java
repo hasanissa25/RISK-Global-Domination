@@ -3,6 +3,7 @@ package Model;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Objects;
  */
 
 @XmlRootElement
-public class Country {
+public class Country implements Serializable {
 
     private String name;
     private int numberOfTroops;
@@ -78,7 +79,6 @@ public class Country {
         if (o == null || getClass() != o.getClass()) return false;
         Country country = (Country) o;
         return getName().equals(country.getName()
-                // ) && getPlayer().equals(country.getPlayer()
         );
     }
 

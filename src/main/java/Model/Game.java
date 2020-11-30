@@ -5,6 +5,7 @@ import Game.Parser;
 import Game.UtilArray;
 
 import javax.swing.*;
+import java.io.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -24,7 +25,7 @@ import java.util.Random;
  */
 
 @XmlRootElement
-public class Game {
+public class Game implements Serializable {
     public String result;
     private Parser parser;
     private Player currentPlayer;
@@ -40,7 +41,8 @@ public class Game {
     private Country moveCountry;
     private Country destinationCountry;
     private boolean randomlyAllocateTroopsOnGameStart = false;
-
+    private String fileName;
+    private List<Player> loadedPlayers;
     public Game() {
         this.myMap = new Map();
         this.myMap.importFromXmlFile("Default-Map.xml");
@@ -48,11 +50,6 @@ public class Game {
         this.currentPlayerIndex = 0;
     }
 
-
-/*    public static void main(String[] args) {
-        Game g= new Game();
-        g.exportToXmlFile(g.getMyMap().toXML(),"test.txt");
-    }*/
 
     public void setRandomlyAllocateTroopsOnGameStart(boolean randomlyAllocateTroopsOnGameStart) {
         this.randomlyAllocateTroopsOnGameStart = randomlyAllocateTroopsOnGameStart;
@@ -323,6 +320,57 @@ public class Game {
         return result;
     }
 
+    private String getFileName(){
+    return fileName = JOptionPane.showInputDialog("Enter a file name");
+    }
+
+    public void write(){
+
+    }
+
+    public void saveSerialize() {
+        try {
+            FileOutputStream fos = new FileOutputStream(getFileName());
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(myMap);
+            oos.writeObject(currentPlayer);
+            oos.writeObject(currentPlayerIndex);
+            oos.flush();
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public void loadSerialize() {
+        try {
+            FileInputStream fis = new FileInputStream(getFileName());
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Map myReadObject= (Map) ois.readObject();
+            this.myMap=myReadObject;
+            Player myCurrentPlayer= (Player) ois.readObject();
+            this.currentPlayer=myCurrentPlayer;
+            int myCurrentPlayerIndex= (int) ois.readObject();
+            this.currentPlayerIndex=myCurrentPlayerIndex;
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        viewer.modelUpdated();
+    }
+
+
+    /*private void setMyCountries(){
+        for (int i=0; i<getPlayers().size(); i++){
+            getPlayers().get(i).getMyCountries() = ;
+            getPlayers().get(i).getTotalNumberOftroops()
+
+        }
+    }*/
+
+    private void setMyPlayer(){
+
+    }
+
     private void moveAlgorithm(int numberOfTroopsMoving,Country moveCountry, Country destinationCountry) {
         /**
          * @author John Afolayan
@@ -564,49 +612,4 @@ public class Game {
         this.myMap.importFromXmlFile(customMapChoice);
 
     }
-   /* public void exportToXmlFile(String content,String filename){
-        Writer writer = null;
-        try {
-            writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(filename), "utf-8"));
-            writer.write(toXML());
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            try {
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        // viewer.modelUpdated();
-
-    }
-    public void importFromXmlFile(String filename){
-        try {
-            JAXBContext context = JAXBContext.newInstance(Game.class);
-            Game xmlObjRead =  (Game) context.createUnmarshaller().unmarshal(new FileReader(filename));
-            this.players = xmlObjRead.getPlayers();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-           // viewer.modelUpdated();
-    }
-    public String toXML(){
-        String xml = "error converting to XML";
-        try {
-            JAXBContext context = JAXBContext.newInstance(Game.class);
-            Marshaller marshaller= context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            StringWriter stringWriter = new StringWriter();
-            marshaller.marshal(this, stringWriter);
-            xml = stringWriter.toString();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-        return xml;
-    }
-*/
 }
