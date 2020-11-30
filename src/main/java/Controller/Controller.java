@@ -118,7 +118,7 @@ public class Controller implements ActionListener {
                     gameView.finishGame();
                     break;
                 }
-                    gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in green!\n");
+                    gameView.setFeedbackArea("Current turn of: Player " + (gameModel.getCurrentPlayer().getPlayerNumber()) + " Your countries are show in White!\n");
                     goToTheBottomOfTextField();
                     initialRequestBonusTroopsAllocation();
                     this.bonusTroopsFlag=true;
