@@ -26,6 +26,8 @@ public class Controller implements ActionListener {
     boolean requestNumberOfTroopsFlag = false;
     boolean requestNumberOfTroopsToMove = false;
     boolean attackCommandFlag = false;
+    boolean saveInitiated = false;
+    boolean loadInitiated = false;
     boolean moveInitiated = false;
     boolean bonusTroopsFlag = false;
     boolean sourceCountrySetFlag = false;
@@ -130,6 +132,16 @@ public class Controller implements ActionListener {
                 gameView.setFeedbackArea("Quit game has been called!\n");
                 goToTheBottomOfTextField();
                 gameModel.quitGame();
+                break;
+            case "SaveGame":
+                gameView.setFeedbackArea("Saving game...\n");
+                goToTheBottomOfTextField();
+                gameModel.saveData();
+                break;
+            case "ContinueGame":
+                gameView.setFeedbackArea("Continue game...\n");
+                goToTheBottomOfTextField();
+                gameModel.loadData();
                 break;
             default:
                 if(bonusTroopsFlag){
@@ -314,6 +326,9 @@ public class Controller implements ActionListener {
                     gameModel.initiateMove(moveCommand);
                     gameView.setFeedbackArea(numberOfTroops + " troop(s) moved from " + sourceCountry + " to " + destinationCountry + ".\n");
                     moveCommandFlag = false;
+                }
+                if (saveInitiated) {
+                    //saveInitiated = false;
                 }
         }
     }

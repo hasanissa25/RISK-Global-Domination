@@ -5,6 +5,7 @@ import Game.Parser;
 import Game.UtilArray;
 
 import javax.swing.*;
+import java.io.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -24,7 +25,7 @@ import java.util.Random;
  */
 
 @XmlRootElement
-public class Game {
+public class Game implements Serializable {
     public String result;
     private Parser parser;
     private Player currentPlayer;
@@ -40,6 +41,7 @@ public class Game {
     private Country moveCountry;
     private Country destinationCountry;
     private boolean randomlyAllocateTroopsOnGameStart = false;
+    private String fileName;
 
     public Game() {
         this.myMap = new Map();
@@ -321,6 +323,64 @@ public class Game {
             }
         }
         return result;
+    }
+
+    private String getFileName(){
+    return fileName = JOptionPane.showInputDialog("Enter .txt file name");
+    }
+
+    public void saveData() {
+        /**
+         * @author John Afolayan
+         * Saves game data
+         *
+         */
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(getFileName()));
+            for(int i=0; i<numberOfPlayers; i++ ){
+                bw.write("" + getPlayers().get(i).getMyCountries());
+                bw.newLine();
+                bw.write("" + getPlayers().get(i).getTotalNumberOftroops());
+            }
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        update();
+    }
+
+    public void loadData() {
+        /**
+         * @author John Afolayan
+         * Loads game data
+         *
+         */
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(getFileName()));
+            for(int i=0; i<numberOfPlayers; i++ ){
+                /*br.read("" + getPlayers().get(i).getMyCountries());
+                br.read("" + getPlayers().get(i).getTotalNumberOftroops());
+
+                br.close();*/
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    /*private void setMyCountries(){
+        for (int i=0; i<getPlayers().size(); i++){
+            getPlayers().get(i).getMyCountries() = ;
+            getPlayers().get(i).getTotalNumberOftroops()
+
+        }
+    }*/
+
+    private void setMyPlayer(){
+
     }
 
     private void moveAlgorithm(int numberOfTroopsMoving,Country moveCountry, Country destinationCountry) {
