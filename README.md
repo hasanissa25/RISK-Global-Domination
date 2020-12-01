@@ -24,7 +24,7 @@ is 50, 35, 30, 25, and 20 respectively, depending on the number of players.
 ## Documentation 
 
 ### UML Class Diagram
-![UML Class Diagram](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/Milestone2UML.jpg)
+![UML Class Diagram](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/UML4.png)
 
 ### Sequence Diagram
 ![Initialize Sequence Diagram ](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/InitializeSequence.jpeg)
