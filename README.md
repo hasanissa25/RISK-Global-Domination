@@ -143,6 +143,12 @@ Countries.
 * Press NewGame at the bottom left.
 
 * Choose the map you would like to play on.
+  * Among Us
+![Load Map](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/AmongUs.jpg)
+  * Custom Map
+![Load Map](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/CustomMap.jpg)
+  * Original Map
+![Load Map](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/OriginalMap.png)
 
 * Select the number of players from the drop down menu
 ![New Game](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/2.png)
