@@ -168,14 +168,11 @@ Countries.
     * You may not attack with a country that only has 1 troop(You always must have 1 troop left to defend!)
     * The result of the attack will be in the text field at the bottom.
     * If you won the attack, the troops that survived the attack, will now move over to the country you have just defeated, and that country will now be highlighted green, as it was added to your conquered countries.
+  * Move: Moves the given number of troops from one of your countries, to another one of your countries, as long as there is a path between them. 
   * Pass: Passes the turn from you to the next player. 
-    * Press the PassTurn button at the bottom right.
   * SaveGame: Saves the current state of the game.
-    * Press the SaveGame button at the bottom right.
   * LoadGame: Loads a previously saved state of the game. 
-    * Press the LoadGame button at the bottom right.
   * Quit: Exit the game.
-    * Press the QuitGame button at the bottom.
 
 ### JUnit Tests
 * Clone the project from GitHub as a Maven project: https://github.com/hasanissa25/SYSC3110-Risk-Group10.git
