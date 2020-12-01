@@ -97,6 +97,19 @@ Countries.
 * A Java program to remove an element from a specific index from an array.
 * In our situation, it handles removing a country from an array.
 
+#### Continent
+* Represents the continents in the map.
+* A continent is a collection of countries.
+* Holding a continent provides a bonus number of troops at the start of a new players turn.
+
+#### Coordinate
+* This class is an x and y coordinate that represents the position of a country on the map.
+
+#### Edge
+* A direct path between two countries, known as an “edge”.
+* An edge is used in graphs, to connect to the source vertex and the target vertex.
+* In our code, we are identifying countries that are neighbouring each other, by checking if they have an edge between them.
+
 ## The Readme
 
 ### The rest of the deliverbles
@@ -139,13 +152,15 @@ Countries.
 
 * Press NewGame at the bottom left.
 
+* Choose the map you would like to play on.
+
 * Select the number of players from the drop down menu
 ![New Game](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/2.png)
 
 * The current players countries are highlighted in green, and the number of troops in each country is shown on the country.
 ![New Game](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/3.png)
 
-* Your options are Attack, PassTurn, QuitGame
+* Your options are Attack, PassTurn, SaveGame, LoadGame, QuitGame
   * Attack: To attack a country:
 ![Attack](https://github.com/hasanissa25/SYSC3110-Risk-Group10/blob/master/4.png)
     * Press the Attack button
@@ -159,6 +174,10 @@ Countries.
     * If you won the attack, the troops that survived the attack, will now move over to the country you have just defeated, and that country will now be highlighted green, as it was added to your conquered countries.
   * Pass: Passes the turn from you to the next player. 
     * Press the PassTurn button at the bottom right.
+  * SaveGame: Saves the current state of the game.
+    * Press the SaveGame button at the bottom right.
+  * LoadGame: Loads a previously saved state of the game. 
+    * Press the LoadGame button at the bottom right.
   * Quit: Exit the game.
     * Press the QuitGame button at the bottom.
 
