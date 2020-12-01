@@ -129,22 +129,12 @@ Countries.
     * The view is the actual visual feel/look representation of our model. When the model is changed, the views represent those changes visually for the user to see and decide on his next action. The view does not change the model, but it changes its representation of the model. 
 
 ### The known issues 
-* Issues that have been handled from Milestone 1:
-  * We assume the attacking player always uses the maximum number of troops during the subsequent waves.(3 troops)
-  * We assume the attacking player does not move to the country after the battle for the first milestone.
-  * Currently, you can attack countries with 0 troops, as we have no implemented the Move function yet until the next milestones. That is when we will move into the country.
-* Issues that are yet to be handled from Milestone 1:
-  * We assume that defending players always use the maximum number of troops to defend their country every-time. (2 troops).
-* New issues that came with Milestone 2:
-  * Currently, after a successful attack, the attacker automatically takes over the defeated territory, and the surviving troops move over. The attacker does not have a choice in how many troops to move over, as the Move function has not been implemented yet, until Milestone 3.
+* At the end of the game, the game announces the winner, and exits.
 
 ### The roadmap ahead.
-* Tasks that we previously set that were accomplished this milestone:
-  * Transform the console version into an interactive GUI.
-  * Modify the attacking strategy:
-* Tasks that need to be accomplished by next milestone:
-  * Add the Move algorithm to allow players to move troops from one country to another before or after a battle.
-  * Add the ability to create custom maps.
+* Allow players to start a new game after the game is over and a winner is announced.
+* Add many more custom maps, and turn the current custom map creation into a GUI.
+* Transform the game into an online web application, and integrate multiplayer capability.
 
 ### User Manual
 * Run the JarFile, or run the View.View class.
