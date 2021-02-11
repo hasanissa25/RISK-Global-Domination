@@ -1,9 +1,7 @@
-# SYSC 3110 Project – RISK!
-# Group 10
+# RISK!
 
 #### Hasan [@hasanissa25](https://github.com/hasanissa25) - 100921446
 #### John Afolayan [@John-Afolayan](https://github.com/John-Afolayan)
-#### Temitayo Adegoke [@tayothegamer](https://github.com/tayothegamer)
 
 
 ## Project Kanban
